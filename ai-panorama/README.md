@@ -2,6 +2,14 @@
 
 这个文件夹放置林氏小龙虾 AI 推广全景图的独立页面。
 
+## 访问
+
+GitHub Pages 开启后，可通过以下地址访问：
+
+`https://crispyeung-ywj.github.io/AI-Knowledge-Base/`
+
+根目录会自动跳转到 `ai-panorama/`。
+
 ## 文件
 
 - `index.html`：可直接打开的单页工具。
