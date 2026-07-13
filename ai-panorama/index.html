@@ -34,7 +34,7 @@
           <p>用于切换各一级部门的价值链全景图。</p>
         </div>
         <div class="dept-grid" id="deptGrid"></div>
-        <div class="dept-note">业务数据统一在钉钉 AI 表格中维护；点击右上角“修改数据”进入表格。</div>
+        <div class="dept-note">业务数据统一在钉钉在线表格中维护；每个 Sheet 对应一个一级部门，点击右上角“修改数据”进入表格。</div>
       </aside>
 
       <section class="matrix-panel">
@@ -48,13 +48,13 @@
         <div class="legend">
           <div>
             <span class="pill"><span class="dot"></span>每格保留百分比与状态</span>
-            <span class="pill"><span class="dot" style="background:var(--teal)"></span>钉钉 AI 表格统一维护</span>
+            <span class="pill"><span class="dot" style="background:var(--teal)"></span>钉钉在线表格统一维护</span>
           </div>
-          <div>此页面用于全景展示和全部门 Excel 导出。</div>
+          <div>此页面仅用于全景查看和全部门 Excel 导出。</div>
         </div>
       </section>
     </div>
-    <div class="page-mark">维护源：钉钉 AI 表格；当前展示：最近同步的数据快照。</div>
+    <div class="page-mark">维护源：钉钉在线表格（一个 Sheet 对应一个一级部门）；当前展示：最近同步的数据快照。</div>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -62,7 +62,7 @@
   <script src="./app.js"></script>
   <script>
     document.getElementById("dingtalkEditBtn").addEventListener("click", function () {
-      window.open("https://docs.dingtalk.com/i/nodes/jb9Y4gmKWr7wlELAf4owGmQQVGXn6lpz", "_blank", "noopener");
+      window.open("https://alidocs.dingtalk.com/i/nodes/r1R7q3QmWe7OMEjXfNoQX734JxkXOEP2", "_blank", "noopener");
     });
   </script>
 </body>
