@@ -8,10 +8,11 @@
 </head>
 <body>
   <div class="toolbar">
-    <button id="editBtn">编辑</button>
-    <button id="saveBtn" class="primary">保存</button>
+    <button id="dingtalkEditBtn" class="primary">修改数据</button>
     <button id="exportBtn">导出全部门Excel</button>
-    <button id="importBtn">导入Excel</button>
+    <button id="editBtn" hidden>编辑</button>
+    <button id="saveBtn" hidden>保存</button>
+    <button id="importBtn" hidden>导入Excel</button>
     <input id="excelImport" type="file" accept=".xlsx,.xls">
     <span id="status" class="status">加载中...</span>
   </div>
@@ -33,7 +34,7 @@
           <p>用于切换各一级部门的价值链全景图。</p>
         </div>
         <div class="dept-grid" id="deptGrid"></div>
-        <div class="dept-note">编辑或导入后需点击“保存”才会写入数据库；刷新前未保存的内容会恢复。</div>
+        <div class="dept-note">业务数据统一在钉钉 AI 表格中维护；点击右上角“修改数据”进入表格。</div>
       </aside>
 
       <section class="matrix-panel">
@@ -47,17 +48,22 @@
         <div class="legend">
           <div>
             <span class="pill"><span class="dot"></span>每格保留百分比与状态</span>
-            <span class="pill"><span class="dot" style="background:var(--teal)"></span>保存后同步数据库</span>
+            <span class="pill"><span class="dot" style="background:var(--teal)"></span>钉钉 AI 表格统一维护</span>
           </div>
-          <div>导入 Excel 会按 sheet 名称更新对应部门，导入后仍需点击保存。</div>
+          <div>此页面用于全景展示和全部门 Excel 导出。</div>
         </div>
       </section>
     </div>
-    <div class="page-mark">数据源：ai-panorama/data.json；数据库接入后优先读取数据库。</div>
+    <div class="page-mark">维护源：钉钉 AI 表格；当前展示：最近同步的数据快照。</div>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="./config.js"></script>
   <script src="./app.js"></script>
+  <script>
+    document.getElementById("dingtalkEditBtn").addEventListener("click", function () {
+      window.open("https://docs.dingtalk.com/i/nodes/jb9Y4gmKWr7wlELAf4owGmQQVGXn6lpz", "_blank", "noopener");
+    });
+  </script>
 </body>
 </html>
