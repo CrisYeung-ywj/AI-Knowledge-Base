@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lovable 实操记录｜从注册到发布</title>
+  <style>
+    :root {
+      --green: #3AEFD0;
+      --blue: #00586D;
+      --ink: #12343d;
+      --muted: #62767d;
+      --bg: #eef8f7;
+      --surface: #ffffff;
+      --surface-2: #f5fbfa;
+      --line: #cfe3e2;
+      --shadow: 0 18px 48px rgba(0, 88, 109, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--bg); font: 14px/1.7 "Microsoft YaHei", "PingFang SC", Arial, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .topbar { position: fixed; inset: 0 0 auto 0; z-index: 50; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; color: #fff; background: rgba(0, 70, 88, .96); box-shadow: 0 8px 30px rgba(0, 39, 48, .16); }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .02em; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; color: #003945; border-radius: 11px; background: var(--green); }
+    .top-actions { display: flex; gap: 10px; }
+    .top-link { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid rgba(255,255,255,.28); border-radius: 10px; font-size: 12px; font-weight: 800; }
+    .top-link.primary { color: #003945; border-color: var(--green); background: var(--green); }
+    .sidebar { position: fixed; inset: 68px auto 0 0; z-index: 10; width: 254px; padding: 28px 18px; overflow: auto; border-right: 1px solid var(--line); background: rgba(245, 251, 250, .96); }
+    .toc-title { margin: 0 10px 14px; color: var(--muted); font-size: 11px; font-weight: 900; letter-spacing: .18em; }
+    .toc-link { display: flex; align-items: center; gap: 10px; min-height: 42px; margin: 4px 0; padding: 0 12px; border-radius: 11px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .toc-link b { display: grid; place-items: center; width: 25px; height: 25px; color: var(--blue); border-radius: 8px; background: rgba(58,239,208,.2); font-size: 10px; }
+    .toc-link:hover, .toc-link.active { color: #003945; background: var(--green); }
+    .toc-link.active b, .toc-link:hover b { background: rgba(255,255,255,.65); }
+    .side-note { margin: 24px 8px 0; padding: 14px; color: var(--muted); border: 1px solid var(--line); border-radius: 14px; background: #fff; font-size: 11px; }
+    main { margin-left: 254px; padding: 100px 44px 70px; }
+    .content { max-width: 1180px; margin: 0 auto; }
+    .hero { position: relative; overflow: hidden; padding: 38px 40px; color: #fff; border-radius: 24px; background: linear-gradient(125deg, #004b5e, #00728a); box-shadow: var(--shadow); }
+    .hero::after { content: ""; position: absolute; right: -80px; top: -110px; width: 330px; height: 330px; border-radius: 50%; background: rgba(58,239,208,.22); }
+    .eyebrow { margin: 0 0 10px; color: var(--green); font-size: 11px; font-weight: 900; letter-spacing: .16em; }
+    h1 { position: relative; z-index: 1; margin: 0; font-size: 36px; line-height: 1.25; }
+    .hero p { position: relative; z-index: 1; max-width: 800px; margin: 14px 0 0; color: #d4efee; }
+    .flow { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; margin: 18px 0 28px; }
+    .flow a { position: relative; padding: 13px 10px; text-align: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); font-size: 11px; font-weight: 800; }
+    .flow a:not(:last-child)::after { content: "→"; position: absolute; right: -9px; top: 50%; z-index: 2; color: var(--blue); transform: translateY(-50%); }
+    .step { scroll-margin-top: 88px; margin-top: 18px; padding: 26px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); box-shadow: 0 10px 30px rgba(0,88,109,.06); }
+    .step-head { display: grid; grid-template-columns: 42px 1fr auto; gap: 14px; align-items: center; margin-bottom: 18px; }
+    .step-no { display: grid; place-items: center; width: 42px; height: 42px; color: #003945; border-radius: 12px; background: var(--green); font-size: 13px; font-weight: 950; }
+    .step h2 { margin: 0; font-size: 21px; }
+    .step-tag { padding: 5px 9px; color: var(--blue); border-radius: 999px; background: rgba(58,239,208,.15); font-size: 10px; font-weight: 900; }
+    .original-text { margin: 0 0 16px 56px; color: var(--muted); }
+    .key-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px 56px; }
+    .key-list span { padding: 5px 9px; color: #075263; border: 1px solid #d4ebe7; border-radius: 999px; background: var(--surface-2); font-size: 11px; font-weight: 750; }
+    .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-left: 56px; }
+    .gallery.single { grid-template-columns: minmax(0, 1fr); }
+    figure { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #f7fbfb; }
+    .image-button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 0; background: #eaf4f3; cursor: zoom-in; }
+    .image-button img { display: block; width: 100%; height: auto; transition: transform .25s ease; }
+    .image-button:hover img { transform: scale(1.015); }
+    .zoom-hint { position: absolute; right: 10px; bottom: 10px; padding: 5px 8px; color: #003945; border-radius: 999px; background: rgba(58,239,208,.94); font-size: 10px; font-weight: 900; box-shadow: 0 3px 10px rgba(0,0,0,.12); }
+    figcaption { padding: 10px 12px; color: var(--muted); border-top: 1px solid var(--line); font-size: 11px; }
+    .result-link { display: inline-flex; align-items: center; min-height: 40px; margin: 0 0 16px 56px; padding: 0 14px; color: #003945; border-radius: 11px; background: var(--green); font-weight: 900; }
+    .source-note { margin-top: 22px; padding: 16px 18px; color: var(--muted); border-left: 4px solid var(--green); border-radius: 0 12px 12px 0; background: var(--surface); font-size: 12px; }
+    .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 34px; background: rgba(0, 25, 31, .88); }
+    .modal.open { display: flex; }
+    .modal-inner { position: relative; max-width: min(1500px, 96vw); max-height: 94vh; }
+    .modal img { display: block; max-width: 100%; max-height: 86vh; border-radius: 12px; box-shadow: 0 24px 80px rgba(0,0,0,.48); }
+    .modal-caption { margin-top: 10px; color: #d7f2ef; text-align: center; font-size: 12px; }
+    .modal-close { position: absolute; right: -12px; top: -12px; display: grid; place-items: center; width: 36px; height: 36px; color: #003945; border: 0; border-radius: 50%; background: var(--green); font-size: 20px; font-weight: 900; cursor: pointer; }
+    @media (max-width: 1000px) {
+      .sidebar { display: none; }
+      main { margin-left: 0; padding-inline: 24px; }
+      .flow { grid-template-columns: repeat(4, 1fr); }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">L</span><span>Lovable 实操记录</span></div>
+    <nav class="top-actions" aria-label="页面操作">
+      <a class="top-link" href="lovable-competitor-analysis.html">← 返回竞品分析</a>
+      <a class="top-link primary" href="https://lovable.dev/projects/84a9a506-ca07-483a-b7f0-dd60d17c4f7b" target="_blank" rel="noopener">打开 Lovable 项目 ↗</a>
+    </nav>
+  </header>
+
+  <aside class="sidebar" aria-label="实操步骤目录">
+    <p class="toc-title">PRACTICE STEPS</p>
+    <nav>
+      <a class="toc-link active" href="#step1"><b>01</b>注册登录</a>
+      <a class="toc-link" href="#step2"><b>02</b>选择构建模式</a>
+      <a class="toc-link" href="#step3"><b>03</b>审阅 Plan</a>
+      <a class="toc-link" href="#step4"><b>04</b>对话修改</a>
+      <a class="toc-link" href="#step5"><b>05</b>Approve</a>
+      <a class="toc-link" href="#step6"><b>06</b>首次开发</a>
+      <a class="toc-link" href="#step7"><b>07</b>Publish</a>
+      <a class="toc-link" href="#step8"><b>08</b>发布结果与数据库</a>
+    </nav>
+    <div class="side-note">截图均来自原始《实操过程》Word 文档。点击任意截图可放大，按 Esc 或点击遮罩可关闭。</div>
+  </aside>
+
+  <main>
+    <div class="content">
+      <section class="hero">
+        <p class="eyebrow">HANDS-ON RECORD · 2026-07-14</p>
+        <h1>从注册、Plan 到发布的完整实操</h1>
+        <p>本页面完整承载原 Word 文档中的文字与 14 张截图，保持原始步骤顺序。部分细节在静态截图中不可操作，可通过右上角直接进入 Lovable 项目核验。</p>
+      </section>
+
+      <nav class="flow" aria-label="流程总览">
+        <a href="#step1">注册登录</a><a href="#step2">模式选择</a><a href="#step3">Plan</a><a href="#step4">对话修改</a><a href="#step5">Approve</a><a href="#step6">Build</a><a href="#step7">Publish</a><a href="#step8">结果 / 数据库</a>
+      </nav>
+
+      <section class="step" id="step1">
+        <div class="step-head"><span class="step-no">01</span><h2>注册登录</h2><span class="step-tag">ACCOUNT</span></div>
+        <p class="original-text">原文：1、注册登录</p>
+        <div class="gallery single">
+          <figure><button class="image-button" data-caption="注册登录入口"><img src="assets/lovable-practice/01-login.png" alt="Lovable 注册登录界面"><span class="zoom-hint">点击放大</span></button><figcaption>支持 Google、GitHub、Apple 或邮箱方式登录。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step2">
+        <div class="step-head"><span class="step-no">02</span><h2>对话构建有两种模式</h2><span class="step-tag">INPUT</span></div>
+        <p class="original-text">原文：2、对话构建有两种模式</p>
+        <div class="key-list"><span>Plan：先规划再确认</span><span>Build：直接开始构建</span></div>
+        <div class="gallery single">
+          <figure><button class="image-button" data-caption="对话输入区的 Plan / Build 模式"><img src="assets/lovable-practice/02-build-modes.png" alt="Lovable Plan 与 Build 模式选择"><span class="zoom-hint">点击放大</span></button><figcaption>输入需求后，可从对话入口切换 Plan 或 Build。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step3">
+        <div class="step-head"><span class="step-no">03</span><h2>第一步会先计划，等待用户确认</h2><span class="step-tag">PLAN</span></div>
+        <p class="original-text">原文：计划包括：用户流程、数据实体、关键状态、页面 / 路由清单、技术要点、明确不做。</p>
+        <div class="key-list"><span>用户流程</span><span>数据实体</span><span>关键状态</span><span>页面 / 路由</span><span>技术要点</span><span>明确不做</span></div>
+        <div class="gallery single">
+          <figure><button class="image-button" data-caption="Plan 生成后等待用户确认"><img src="assets/lovable-practice/03-plan-review.png" alt="Lovable Plan 计划审阅页面"><span class="zoom-hint">点击放大</span></button><figcaption>右侧展示完整计划；用户可 Review、Skip 或 Approve。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step4">
+        <div class="step-head"><span class="step-no">04</span><h2>对话形式修改重写</h2><span class="step-tag">ITERATE</span></div>
+        <p class="original-text">原文：4、对话形式修改重写</p>
+        <div class="gallery single">
+          <figure><button class="image-button" data-caption="通过对话修改并重写 Plan"><img src="assets/lovable-practice/04-dialogue-rewrite.png" alt="Lovable 对话修改 Plan"><span class="zoom-hint">点击放大</span></button><figcaption>用户继续提出修改意见，计划内容随对话同步重写。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step5">
+        <div class="step-head"><span class="step-no">05</span><h2>没问题就点击 Approve</h2><span class="step-tag">APPROVE</span></div>
+        <p class="original-text">原文：5、没问题就点击【approve】</p>
+        <div class="gallery single">
+          <figure><button class="image-button" data-caption="确认 Plan 后点击 Approve"><img src="assets/lovable-practice/05-approve.png" alt="Lovable Approve 按钮"><span class="zoom-hint">点击放大</span></button><figcaption>批准计划后，Lovable 从规划阶段进入执行构建。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step6">
+        <div class="step-head"><span class="step-no">06</span><h2>完成首次开发</h2><span class="step-tag">BUILD</span></div>
+        <p class="original-text">原文：6、完成首次开发</p>
+        <div class="gallery">
+          <figure><button class="image-button" data-caption="前端效果：首次 Build 的可运行预览"><img src="assets/lovable-practice/06-first-build-preview.png" alt="Lovable 首次构建后的前端预览"><span class="zoom-hint">点击放大</span></button><figcaption>前端效果：在 Preview 中直接查看可运行页面。</figcaption></figure>
+          <figure><button class="image-button" data-caption="代码区：查看生成的工程代码"><img src="assets/lovable-practice/07-code-view.png" alt="Lovable 代码区"><span class="zoom-hint">点击放大</span></button><figcaption>代码区：查看项目文件结构与生成代码。</figcaption></figure>
+          <figure><button class="image-button" data-caption="系统内置可搭配的后台功能"><img src="assets/lovable-practice/08-backend-capabilities.png" alt="Lovable 后台能力"><span class="zoom-hint">点击放大</span></button><figcaption>系统内置可搭配的后台功能：支付、数据库、分析、Secrets 等。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step7">
+        <div class="step-head"><span class="step-no">07</span><h2>点击 Publish 发布</h2><span class="step-tag">PUBLISH</span></div>
+        <p class="original-text">原文：7、点击【Publish】发布</p>
+        <div class="gallery">
+          <figure><button class="image-button" data-caption="设置网站 URL"><img src="assets/lovable-practice/09-publish-url.png" alt="Lovable 发布 URL 设置"><span class="zoom-hint">点击放大</span></button><figcaption>设置网站 URL，并继续发布流程。</figcaption></figure>
+          <figure><button class="image-button" data-caption="设置网站可见范围"><img src="assets/lovable-practice/10-publish-visibility.png" alt="Lovable 发布可见范围"><span class="zoom-hint">点击放大</span></button><figcaption>设置 Public、Workspace only 或 Selected members。</figcaption></figure>
+          <figure><button class="image-button" data-caption="完善站点名称、描述与预览信息"><img src="assets/lovable-practice/11-site-information.png" alt="Lovable 站点信息设置"><span class="zoom-hint">点击放大</span></button><figcaption>补充站点标题、描述和社交分享预览信息。</figcaption></figure>
+          <figure><button class="image-button" data-caption="发布前检查与确认"><img src="assets/lovable-practice/12-publish-review.png" alt="Lovable 发布前检查"><span class="zoom-hint">点击放大</span></button><figcaption>复核 URL、Visibility、Website info 与 Security scan 后发布。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="step" id="step8">
+        <div class="step-head"><span class="step-no">08</span><h2>发布成功，获取可浏览地址</h2><span class="step-tag">RESULT</span></div>
+        <p class="original-text">原文：8、发布成功，获取可浏览的网页地址：https://craft-kit-preview.lovable.app/</p>
+        <a class="result-link" href="https://craft-kit-preview.lovable.app/" target="_blank" rel="noopener">打开已发布网页 ↗</a>
+        <div class="gallery">
+          <figure><button class="image-button" data-caption="发布后的可浏览网页"><img src="assets/lovable-practice/13-published-site.png" alt="Lovable 发布后的网页"><span class="zoom-hint">点击放大</span></button><figcaption>发布结果：获得可在浏览器访问的网页。</figcaption></figure>
+          <figure><button class="image-button" data-caption="其他：启用数据库"><img src="assets/lovable-practice/14-enable-database.png" alt="Lovable 启用数据库"><span class="zoom-hint">点击放大</span></button><figcaption>原文补充：其他－启用数据库。</figcaption></figure>
+        </div>
+      </section>
+
+      <p class="source-note">资料来源：工作区《实操过程》Word 文档。网页仅对原内容做结构化排版与截图说明，不替代实际产品操作；需查看动态交互时，请打开 Lovable 实操项目。</p>
+    </div>
+  </main>
+
+  <div class="modal" id="imageModal" role="dialog" aria-modal="true" aria-label="截图放大查看">
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+      <img id="modalImage" alt="放大的 Lovable 实操截图">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalCaption = document.getElementById('modalCaption');
+      const closeButton = document.getElementById('modalClose');
+      const openImage = button => {
+        const img = button.querySelector('img');
+        modalImage.src = img.src;
+        modalImage.alt = img.alt;
+        modalCaption.textContent = button.dataset.caption || img.alt;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        closeButton.focus();
+      };
+      const closeModal = () => {
+        modal.classList.remove('open');
+        modalImage.removeAttribute('src');
+        document.body.style.overflow = '';
+      };
+      document.querySelectorAll('.image-button').forEach(button => button.addEventListener('click', () => openImage(button)));
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+      addEventListener('keydown', event => { if (event.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+      const links = [...document.querySelectorAll('.toc-link')];
+      const sections = [...document.querySelectorAll('.step')];
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+        });
+      }, { rootMargin: '-18% 0px -68% 0px' });
+      sections.forEach(section => observer.observe(section));
+    })();
+  </script>
+</body>
+</html>
