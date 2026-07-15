@@ -37,9 +37,24 @@ function defaults(department, stage, row) {
   return { progress: value[0], status: value[1], description: value[2] };
 }
 
+function normalizeProgress(value) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    const percent = value >= 0 && value <= 1 ? value * 100 : value;
+    return String(Math.round(percent * 100) / 100) + "%";
+  }
+  const text = String(value ?? "").trim();
+  if (!text || text.includes("%")) return text;
+  if (/^\d+(\.\d+)?$/.test(text)) {
+    const number = Number(text);
+    const percent = number >= 0 && number <= 1 ? number * 100 : number;
+    return String(Math.round(percent * 100) / 100) + "%";
+  }
+  return text;
+}
+
 function splitLegacyStatus(value) {
   const text = String(value || "").trim();
-  const matched = text.match(/^(\d+%)\s*[｜|]?\s*(.*)$/);
+  const matched = text.match(/^(\d+(?:\.\d+)?%)\s*[｜|]?\s*(.*)$/);
   return matched ? { progress: matched[1], status: matched[2] || "待确认" } : { progress: "0%", status: text || "待确认" };
 }
 
@@ -48,7 +63,7 @@ function normalizeCell(value, department, stage, row) {
   if (value && typeof value === "object" && !Array.isArray(value)) {
     if (hasOwn(value, "progress") || hasOwn(value, "description")) {
       return {
-        progress: hasOwn(value, "progress") ? String(value.progress ?? "") : fallback.progress,
+        progress: hasOwn(value, "progress") ? normalizeProgress(value.progress) : fallback.progress,
         status: hasOwn(value, "status") ? String(value.status ?? "") : fallback.status,
         description: hasOwn(value, "description") ? String(value.description ?? "") : fallback.description
       };
@@ -378,7 +393,7 @@ function importStructuredSheet(department, table) {
       rows.push(row);
       stages.forEach((stage, stageIndex) => {
         cells[stage][row.id] = {
-          progress: String(table[rowIndex][stageIndex + 1] ?? "").trim(),
+          progress: normalizeProgress(table[rowIndex][stageIndex + 1]),
           status: String(table[rowIndex + 1][stageIndex + 1] ?? "").trim(),
           description: String(table[rowIndex + 2][stageIndex + 1] ?? "").trim()
         };
@@ -404,7 +419,7 @@ function importStructuredSheet(department, table) {
     department.rows.push(row);
     groups.forEach((group) => {
       department.cells[group.name][row.id] = {
-        progress: String(line[group.columns.进度] ?? "").trim(),
+        progress: normalizeProgress(line[group.columns.进度]),
         status: String(line[group.columns.状态] ?? "").trim(),
         description: String(line[group.columns.描述] ?? "").trim()
       };
