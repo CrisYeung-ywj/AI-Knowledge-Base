@@ -37,5 +37,11 @@ begin
 end;
 $$;
 
+insert into public.ai_panorama_versions (data, created_at)
+select data, coalesce(updated_at, now())
+from public.ai_panorama_data
+where id = 'default'
+  and not exists (select 1 from public.ai_panorama_versions);
+
 revoke all on function public.save_ai_panorama_version(jsonb) from public;
 grant execute on function public.save_ai_panorama_version(jsonb) to service_role;
