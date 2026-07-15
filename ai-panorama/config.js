@@ -1,6 +1,5 @@
 window.PANORAMA_API = {
-  // Vercel 域名创建后填入，例如：https://your-project.vercel.app/api/panorama
-  endpoint: ""
+  endpoint: "https://ai-knowledge-base-iota.vercel.app/api/panorama"
 };
 
 window.PANORAMA_DB = {
