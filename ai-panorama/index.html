@@ -8,13 +8,10 @@
 </head>
 <body>
   <div class="toolbar">
-    <button id="dingtalkEditBtn" class="primary">修改数据</button>
-    <button id="importBtn">导入Excel</button>
-    <button id="exportBtn">导出全部门Excel</button>
-    <input id="editKeyInput" class="toolbar-key" type="password" placeholder="更新口令" autocomplete="current-password">
+    <button id="onlineEditBtn" class="primary">在线修改</button>
+    <button id="importBtn">导入修改</button>
     <button id="saveBtn">保存更新</button>
-    <button id="editBtn" hidden>编辑</button>
-    <input id="excelImport" type="file" accept=".xlsx,.xls" hidden>
+    <button id="exportBtn">导出</button>
     <span id="status" class="status">加载中...</span>
   </div>
 
@@ -35,7 +32,7 @@
           <p>用于切换各一级部门的价值链全景图。</p>
         </div>
         <div class="dept-grid" id="deptGrid"></div>
-        <div class="dept-note">钉钉在线表格用于协作维护；导入 Excel 后点击“保存更新”，数据将同步到云端。</div>
+        <div class="dept-note">在线修改和导入修改均为草稿；点击“保存更新”后，所有一级部门的数据会一次同步到云端。</div>
       </aside>
 
       <section class="matrix-panel">
@@ -45,27 +42,53 @@
         </div>
         <div class="chain-title">全司主价值链 <span>高亮部分 = 当前部门价值链映射到的主链环节</span></div>
         <div class="chain-strip" id="chainStrip"></div>
+        <div class="matrix-toolbar" id="editControls" hidden>
+          <span>选择行或列标题后操作</span>
+          <button id="addColumnBtn" title="新增列" aria-label="新增列">+ 列</button>
+          <button id="deleteColumnBtn" title="删除选中列" aria-label="删除选中列">- 列</button>
+          <button id="addRowBtn" title="新增行" aria-label="新增行">+ 行</button>
+          <button id="deleteRowBtn" title="删除选中行" aria-label="删除选中行">- 行</button>
+        </div>
         <div class="matrix" id="rolloutMatrix"></div>
         <div class="legend">
           <div>
-            <span class="pill"><span class="dot"></span>每格保留百分比与状态</span>
+            <span class="pill"><span class="dot"></span>进度、状态、描述独立保存</span>
             <span class="pill"><span class="dot" style="background:var(--teal)"></span>云端统一保存和展示</span>
           </div>
-          <div>支持查看、导入 Excel、保存更新与全部门 Excel 导出。</div>
+          <div>导出和导入仅包含全景图表格内容。</div>
         </div>
       </section>
     </div>
-    <div class="page-mark">维护入口：钉钉在线表格或 Excel 导入；云端保存后，所有访问者刷新即可看到最新数据。</div>
+    <div class="page-mark">所有部门修改保留在当前草稿中；点击保存更新后统一发布。</div>
   </section>
 
+  <div class="modal-backdrop" id="importModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+      <div class="modal-head"><h2 id="importModalTitle">导入修改</h2><button id="closeImportModalBtn" class="icon-button" title="关闭" aria-label="关闭">x</button></div>
+      <p>导入 Excel 后仅更新同名一级部门 Sheet，内容先保留为草稿，点击保存更新后才会同步云端。</p>
+      <div class="modal-actions">
+        <button id="downloadTemplateBtn">下载导入模板</button>
+        <button id="chooseImportBtn" class="primary">选择 Excel 文件</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="saveModal" hidden>
+    <section class="modal compact" role="dialog" aria-modal="true" aria-labelledby="saveModalTitle">
+      <div class="modal-head"><h2 id="saveModalTitle">保存更新</h2><button id="closeSaveModalBtn" class="icon-button" title="关闭" aria-label="关闭">x</button></div>
+      <p>输入更新密钥后，将一次保存全部一级部门的草稿内容。</p>
+      <input id="editKeyInput" type="password" placeholder="更新密钥" autocomplete="current-password">
+      <div class="modal-actions">
+        <button id="cancelSaveBtn">取消</button>
+        <button id="confirmSaveBtn" class="primary">确认保存</button>
+      </div>
+    </section>
+  </div>
+
+  <input id="excelImport" type="file" accept=".xlsx,.xls" hidden>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="./config.js"></script>
   <script src="./app.js"></script>
   <script src="./api-client.js"></script>
-  <script>
-    document.getElementById("dingtalkEditBtn").addEventListener("click", function () {
-      window.open("https://alidocs.dingtalk.com/i/nodes/r1R7q3QmWe7OMEjXfNoQX734JxkXOEP2", "_blank", "noopener");
-    });
-  </script>
 </body>
 </html>
