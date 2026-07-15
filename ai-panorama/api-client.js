@@ -4,6 +4,7 @@
   if (!endpoint) return;
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const editKeyInput = document.getElementById("editKeyInput");
 
   async function waitForInitialData() {
     for (let index = 0; index < 100; index += 1) {
@@ -26,18 +27,14 @@
     setStatus("已加载云端数据" + (payload.updatedAt ? "（已同步）" : ""));
   }
 
-  function getEditKey() {
-    const keyName = "ai-panorama-edit-key";
-    const existing = sessionStorage.getItem(keyName);
-    if (existing) return existing;
-    const value = window.prompt("请输入更新口令");
-    if (value) sessionStorage.setItem(keyName, value);
-    return value;
-  }
-
   saveBtn.onclick = async () => {
-    const editKey = getEditKey();
-    if (!editKey) return;
+    const editKey = editKeyInput?.value.trim();
+    if (!editKey) {
+      setStatus("请输入更新口令后再保存");
+      editKeyInput?.focus();
+      return;
+    }
+
     try {
       setStatus("保存中...");
       const response = await fetch(endpoint, {
