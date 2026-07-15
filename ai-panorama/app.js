@@ -1,4 +1,5 @@
 let app = null;
+let savedApp = null;
 let active = null;
 let editing = false;
 let dirty = false;
@@ -14,6 +15,7 @@ const defaultRows = [
 ];
 
 const $ = (id) => document.getElementById(id);
+const cloneData = (value) => JSON.parse(JSON.stringify(value));
 const getRows = (department) => department.rows || app.rows || defaultRows;
 const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 
@@ -116,6 +118,7 @@ async function loadData() {
   const dbData = isConfiguredDb() ? await loadDbData().catch(() => null) : null;
   app = normalize(dbData || jsonData);
   active = app.departments.find((department) => department.name === "产品中心") || app.departments[0];
+  savedApp = cloneData(app);
   render();
   setStatus(dbData ? "已加载数据库数据" : "已加载初始数据");
 }
@@ -250,6 +253,24 @@ $("onlineEditBtn").onclick = () => {
   updateEditState();
   renderMatrix();
   setStatus(editing ? "在线修改中：可编辑单元格、行列标题，也可新增或删除行列" : "已退出在线修改");
+};
+
+$("cancelEditBtn").onclick = () => {
+  if (!savedApp) {
+    editing = false;
+    updateEditState();
+    setStatus("已取消编辑");
+    return;
+  }
+  const currentName = active?.name;
+  app = normalize(cloneData(savedApp));
+  active = app.departments.find((department) => department.name === currentName) || app.departments[0];
+  editing = false;
+  dirty = false;
+  updateEditState();
+  render();
+  updateUpdatedAt(app.updatedAt);
+  setStatus("已取消编辑，已恢复最近一次保存的版本");
 };
 
 function nextName(base, values) {
