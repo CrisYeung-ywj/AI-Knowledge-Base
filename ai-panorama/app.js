@@ -273,6 +273,7 @@ $("addRowBtn").onclick = () => {
   selectedRowIndex = active.rows.length - 1;
   markDirty("已新增行，待保存");
   renderMatrix();
+  requestAnimationFrame(() => $("rolloutMatrix").scrollIntoView({ block: "end", behavior: "smooth" }));
 };
 
 $("deleteRowBtn").onclick = () => {
