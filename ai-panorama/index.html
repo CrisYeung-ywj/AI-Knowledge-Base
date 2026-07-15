@@ -13,6 +13,7 @@
     <button id="saveBtn">保存更新</button>
     <button id="exportBtn">导出</button>
     <button id="historyBtn">历史版本</button>
+    <button id="exitHistoryBtn" hidden>退出历史查看</button>
     <span id="updatedAt" class="updated-at">最近更新：加载中...</span>
     <span id="status" class="status">加载中...</span>
   </div>
@@ -80,7 +81,6 @@
       <div class="modal-head"><h2 id="historyModalTitle">历史版本</h2><button id="closeHistoryModalBtn" class="icon-button" title="关闭" aria-label="关闭">x</button></div>
       <p>每次“保存更新”都会生成一个完整快照。查看不会影响当前内容；恢复后仅作为草稿，需再次保存才会发布。</p>
       <div id="historyList" class="history-list"></div>
-      <div id="historyPreview" class="history-preview" hidden></div>
     </section>
   </div>
 
