@@ -79,47 +79,25 @@
     return date.toLocaleString("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).replace(/\//g, "-");
   }
 
-  function updateUpdatedAt(value) {
-    byId("updatedAt").textContent = "最近更新：" + formatTime(value);
+  function updateUpdatedAt(value, label = "最近更新") {
+    const text = label + "：" + formatTime(value);
+    byId("updatedAt").textContent = text;
+    byId("updatedAt").title = text;
   }
 
-  let historySnapshot = null;
-  let historySnapshotId = null;
+  let liveApp = null;
+  let historyMode = false;
+  let historyView = null;
+
+  function updateHistoryMode() {
+    document.body.classList.toggle("history-mode", historyMode);
+    byId("exitHistoryBtn").hidden = !historyMode;
+    byId("historyBtn").hidden = historyMode;
+    updateEditState();
+  }
 
   function closeHistoryModal() {
     byId("historyModal").hidden = true;
-    byId("historyPreview").hidden = true;
-    historySnapshot = null;
-    historySnapshotId = null;
-  }
-
-  function renderHistoryPreview() {
-    const container = byId("historyPreview");
-    if (!historySnapshot) {
-      container.hidden = true;
-      return;
-    }
-    const department = historySnapshot.departments.find((item) => item.name === active?.name) || historySnapshot.departments[0];
-    if (!department) {
-      container.hidden = true;
-      return;
-    }
-    const rows = department.rows || historySnapshot.rows || [];
-    const stageHeads = department.stages.map((stage) => "<th>" + esc(stage) + "</th>").join("");
-    const bodyRows = rows.map((row) => {
-      const cells = department.stages.map((stage) => {
-        const cell = department.cells?.[stage]?.[row.id] || {};
-        return "<td><b>" + esc(cell.progress || "0%") + " " + esc(cell.status || "") + "</b><span>" + esc(cell.description || "") + "</span></td>";
-      }).join("");
-      return "<tr><th>" + esc(row.name) + "</th>" + cells + "</tr>";
-    }).join("");
-    const options = historySnapshot.departments.map((item) => "<option value=\"" + esc(item.name) + "\" " + (item.name === department.name ? "selected" : "") + ">" + esc(item.name) + "</option>").join("");
-    container.innerHTML = "<div class=\"history-preview-head\"><b>版本 " + historySnapshotId + " 快照</b><label>查看部门 <select id=\"historyDepartmentSelect\">" + options + "</select></label></div><div class=\"history-table-wrap\"><table><thead><tr><th>能力维度</th>" + stageHeads + "</tr></thead><tbody>" + bodyRows + "</tbody></table></div>";
-    byId("historyDepartmentSelect").onchange = (event) => {
-      active = historySnapshot.departments.find((item) => item.name === event.target.value) || department;
-      renderHistoryPreview();
-    };
-    container.hidden = false;
   }
 
   async function loadHistoryVersion(id) {
@@ -130,9 +108,37 @@
     return payload.version;
   }
 
+  function enterHistoryView(version) {
+    liveApp = app;
+    const currentName = active?.name;
+    app = normalize(version.data);
+    active = app.departments.find((item) => item.name === currentName) || app.departments[0];
+    historyMode = true;
+    historyView = version;
+    editing = false;
+    updateHistoryMode();
+    render();
+    updateUpdatedAt(version.created_at, "正在查看历史版本 #" + version.id);
+    setStatus("历史版本查看模式：仅查看，不会修改当前草稿");
+  }
+
+  function exitHistoryView() {
+    if (!historyMode) return;
+    const currentName = active?.name;
+    app = liveApp;
+    active = app.departments.find((item) => item.name === currentName) || app.departments[0];
+    liveApp = null;
+    historyView = null;
+    historyMode = false;
+    editing = false;
+    updateHistoryMode();
+    render();
+    updateUpdatedAt(app.updatedAt);
+    setStatus(dirty ? "已返回当前草稿，修改仍待保存" : "已返回当前版本");
+  }
+
   async function showHistory() {
     byId("historyModal").hidden = false;
-    byId("historyPreview").hidden = true;
     byId("historyList").textContent = "正在读取历史版本...";
     const response = await fetch(endpoint + "?history=1", { cache: "no-store" });
     if (!response.ok) throw new Error("历史版本读取失败：" + response.status);
@@ -142,15 +148,14 @@
       byId("historyList").textContent = "暂未生成历史版本。首次保存更新后会自动创建。";
       return;
     }
-    byId("historyList").innerHTML = versions.map((version) => "<div class=\"history-item\"><div><b>版本 " + esc(version.id) + "</b><span>" + formatTime(version.created_at) + "</span></div><div><button data-history-view=\"" + esc(version.id) + "\">查看快照</button><button class=\"primary\" data-history-restore=\"" + esc(version.id) + "\">恢复为草稿</button></div></div>").join("");
+    byId("historyList").innerHTML = versions.map((version) => "<div class=\\"history-item\\"><div><b>版本 " + esc(version.id) + "</b><span>" + formatTime(version.created_at) + "</span></div><div><button data-history-view=\\"" + esc(version.id) + "\\">进入查看</button><button class=\\"primary\\" data-history-restore=\\"" + esc(version.id) + "\\">恢复为草稿</button></div></div>").join("");
     byId("historyList").querySelectorAll("[data-history-view]").forEach((button) => {
       button.onclick = async () => {
         try {
           button.disabled = true;
           const version = await loadHistoryVersion(button.dataset.historyView);
-          historySnapshot = normalize(version.data);
-          historySnapshotId = version.id;
-          renderHistoryPreview();
+          closeHistoryModal();
+          enterHistoryView(version);
         } catch (error) {
           alert(error.message);
         } finally {
@@ -192,6 +197,13 @@
     });
   };
   byId("closeHistoryModalBtn").onclick = closeHistoryModal;
+  byId("exitHistoryBtn").onclick = exitHistoryView;
+
+  const statusNode = byId("status");
+  if (statusNode) {
+    const statusObserver = new MutationObserver(() => { statusNode.title = statusNode.textContent; });
+    statusObserver.observe(statusNode, { childList: true, characterData: true, subtree: true });
+  }
 
   loadRemoteData().catch((error) => {
     console.warn(error);
