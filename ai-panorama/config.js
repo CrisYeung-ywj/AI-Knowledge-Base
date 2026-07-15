@@ -1,5 +1,5 @@
 window.PANORAMA_API = {
-  endpoint: "https://ai-knowledge-base-iota.vercel.app/api/panorama"
+  endpoint: "https://linsy-ai-panorama.vercel.app/api/panorama"
 };
 
 window.PANORAMA_DB = {
