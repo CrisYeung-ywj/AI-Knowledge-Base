@@ -12,3 +12,13 @@
 @media(max-width:900px){.toolbar{width:calc(100vw - 16px);left:8px;right:8px}.updated-at,.status{display:none}}
 
 .toolbar #cancelEditBtn{width:74px}.toolbar .toolbar-cancel{color:var(--red)}
+
+/* Stable toolbar dimensions and edit-only controls */
+.toolbar #onlineEditBtn{width:74px}
+.toolbar #cancelEditBtn{width:74px}
+.toolbar #importBtn{width:74px}
+.toolbar #saveBtn{width:74px}
+.toolbar #exportBtn{width:52px}
+.toolbar #historyBtn{width:74px}
+.toolbar #exitHistoryBtn{width:120px}
+.matrix-toolbar[hidden]{display:none}
