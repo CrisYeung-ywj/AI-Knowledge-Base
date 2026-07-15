@@ -148,7 +148,7 @@
       byId("historyList").textContent = "暂未生成历史版本。首次保存更新后会自动创建。";
       return;
     }
-    byId("historyList").innerHTML = versions.map((version) => "<div class=\\"history-item\\"><div><b>版本 " + esc(version.id) + "</b><span>" + formatTime(version.created_at) + "</span></div><div><button data-history-view=\\"" + esc(version.id) + "\\">进入查看</button><button class=\\"primary\\" data-history-restore=\\"" + esc(version.id) + "\\">恢复为草稿</button></div></div>").join("");
+    byId("historyList").innerHTML = versions.map((version) => '<div class="history-item"><div><b>版本 ' + esc(version.id) + '</b><span>' + formatTime(version.created_at) + '</span></div><div><button data-history-view="' + esc(version.id) + '">进入查看</button><button class="primary" data-history-restore="' + esc(version.id) + '">恢复为草稿</button></div></div>').join("");
     byId("historyList").querySelectorAll("[data-history-view]").forEach((button) => {
       button.onclick = async () => {
         try {
