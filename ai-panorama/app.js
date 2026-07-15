@@ -63,7 +63,7 @@ const processMap = {
   '财务与资金管理':'授信评估-->收付款计划-->汇率/费用核算-->对账-->风险预警-->归档'
 };
 
-function setStatus(text){ status.textContent = text; }
+function setStatus(text){ document.getElementById('status').textContent = text; }
 function esc(value){ return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function sheetName(name){ return String(name).replace(/[\\/?*[\]:]/g,'').slice(0,31); }
 function isConfiguredDb(){ const db = window.PANORAMA_DB || {}; return Boolean(db.supabaseUrl && db.supabaseAnonKey && db.table && db.id); }
