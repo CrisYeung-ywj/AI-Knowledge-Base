@@ -311,8 +311,25 @@ function buildWorkbook() {
       merges.push({ s: { r: startRow, c: 0 }, e: { r: startRow + 2, c: 0 } });
     });
     const sheet = XLSX.utils.aoa_to_sheet(data);
+    const border = { top: { style: "thin", color: { rgb: "D9E0E0" } }, bottom: { style: "thin", color: { rgb: "D9E0E0" } }, left: { style: "thin", color: { rgb: "D9E0E0" } }, right: { style: "thin", color: { rgb: "D9E0E0" } } };
+    data.forEach((line, rowIndex) => {
+      line.forEach((_, columnIndex) => {
+        const cell = sheet[XLSX.utils.encode_cell({ r: rowIndex, c: columnIndex })];
+        if (!cell) return;
+        cell.s = {
+          alignment: { vertical: "center", horizontal: rowIndex === 0 || columnIndex === 0 ? "center" : "left", wrapText: true },
+          border,
+          font: rowIndex === 0 || columnIndex === 0 ? { bold: true, color: { rgb: "FFFFFF" } } : { color: { rgb: "1F2A24" } },
+          fill: rowIndex === 0 || columnIndex === 0 ? { fgColor: { rgb: "0F737B" } } : { fgColor: { rgb: "FFFFFF" } }
+        };
+      });
+    });
     sheet["!merges"] = merges;
     sheet["!cols"] = [{ wch: 16 }, ...department.stages.map(() => ({ wch: 34 }))];
+    sheet["!rows"] = data.map((_, rowIndex) => {
+      if (rowIndex === 0) return { hpt: 25 };
+      return { hpt: (rowIndex - 1) % 3 === 2 ? 62 : 22 };
+    });
     XLSX.utils.book_append_sheet(workbook, sheet, sheetName(department.name));
   });
   return workbook;
