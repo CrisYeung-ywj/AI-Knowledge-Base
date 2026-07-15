@@ -3,8 +3,8 @@
   const endpoint = configured.replace(/\/$/, "") || (location.hostname.endsWith(".vercel.app") ? "/api/panorama" : "");
   if (!endpoint) return;
 
+  const $ = (id) => document.getElementById(id);
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const editKeyInput = document.getElementById("editKeyInput");
 
   async function waitForInitialData() {
     for (let index = 0; index < 100; index += 1) {
@@ -27,15 +27,27 @@
     setStatus("已加载云端数据" + (payload.updatedAt ? "（已同步）" : ""));
   }
 
-  saveBtn.onclick = async () => {
-    const editKey = editKeyInput?.value.trim();
+  function closeSaveModal() {
+    $("saveModal").hidden = true;
+    $("editKeyInput").value = "";
+  }
+
+  $("saveBtn").onclick = () => {
+    $("saveModal").hidden = false;
+    $("editKeyInput").focus();
+  };
+  $("closeSaveModalBtn").onclick = closeSaveModal;
+  $("cancelSaveBtn").onclick = closeSaveModal;
+
+  $("confirmSaveBtn").onclick = async () => {
+    const editKey = $("editKeyInput").value.trim();
     if (!editKey) {
-      setStatus("请输入更新口令后再保存");
-      editKeyInput?.focus();
+      $("editKeyInput").focus();
+      setStatus("请输入更新密钥");
       return;
     }
-
     try {
+      $("confirmSaveBtn").disabled = true;
       setStatus("保存中...");
       const response = await fetch(endpoint, {
         method: "POST",
@@ -46,16 +58,19 @@
       if (!response.ok) throw new Error(payload.error || "保存失败：" + response.status);
       app.updatedAt = payload.updatedAt;
       dirty = false;
+      closeSaveModal();
       setStatus("已保存并同步给所有访问者");
     } catch (error) {
       console.error(error);
       alert(error.message);
       setStatus("保存失败");
+    } finally {
+      $("confirmSaveBtn").disabled = false;
     }
   };
 
   loadRemoteData().catch((error) => {
     console.warn(error);
-    setStatus("云端数据暂不可用，当前显示静态数据");
+    setStatus("云端数据暂不可用，当前显示本地草稿");
   });
 })();
