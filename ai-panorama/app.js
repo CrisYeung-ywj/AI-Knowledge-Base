@@ -301,18 +301,18 @@ function buildWorkbook() {
   }
   const workbook = XLSX.utils.book_new();
   app.departments.forEach((department) => {
-    const firstHeader = ["能力维度"];
-    const secondHeader = [""];
-    department.stages.forEach((stage) => {
-      firstHeader.push(stage, stage, stage);
-      secondHeader.push("进度", "状态", "描述");
-    });
-    const data = [firstHeader, secondHeader];
+    const data = [["能力维度", ...department.stages]];
+    const merges = [];
     getRows(department).forEach((row) => {
-      data.push([row.name, ...department.stages.flatMap((stage) => cellValues(department, stage, row))]);
+      const startRow = data.length;
+      data.push([row.name, ...department.stages.map((stage) => cellValues(department, stage, row)[0])]);
+      data.push(["", ...department.stages.map((stage) => cellValues(department, stage, row)[1])]);
+      data.push(["", ...department.stages.map((stage) => cellValues(department, stage, row)[2])]);
+      merges.push({ s: { r: startRow, c: 0 }, e: { r: startRow + 2, c: 0 } });
     });
     const sheet = XLSX.utils.aoa_to_sheet(data);
-    sheet["!cols"] = [{ wch: 16 }, ...department.stages.flatMap(() => [{ wch: 10 }, { wch: 14 }, { wch: 42 }])];
+    sheet["!merges"] = merges;
+    sheet["!cols"] = [{ wch: 16 }, ...department.stages.map(() => ({ wch: 34 }))];
     XLSX.utils.book_append_sheet(workbook, sheet, sheetName(department.name));
   });
   return workbook;
@@ -348,6 +348,31 @@ function structuredGroups(header, fields) {
 }
 
 function importStructuredSheet(department, table) {
+  const stages = (table[0] || []).slice(1).map((value) => String(value ?? "").trim()).filter(Boolean);
+  if (stages.length && table.length >= 4 && !["进度", "状态", "描述"].some((field) => (table[1] || []).includes(field))) {
+    const rows = [];
+    const cells = {};
+    stages.forEach((stage) => { cells[stage] = {}; });
+    for (let rowIndex = 1; rowIndex + 2 < table.length; rowIndex += 3) {
+      const name = String(table[rowIndex][0] ?? "").trim();
+      if (!name) continue;
+      const row = { id: keyFromName(name, rows.length), name };
+      rows.push(row);
+      stages.forEach((stage, stageIndex) => {
+        cells[stage][row.id] = {
+          progress: String(table[rowIndex][stageIndex + 1] ?? "").trim(),
+          status: String(table[rowIndex + 1][stageIndex + 1] ?? "").trim(),
+          description: String(table[rowIndex + 2][stageIndex + 1] ?? "").trim()
+        };
+      });
+    }
+    if (rows.length) {
+      department.stages = stages;
+      department.rows = rows;
+      department.cells = cells;
+      return true;
+    }
+  }
   const groups = structuredGroups(table[0] || [], table[1] || []);
   if (!groups.length) return false;
   department.stages = groups.map((group) => group.name);
