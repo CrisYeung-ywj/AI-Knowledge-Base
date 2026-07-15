@@ -3,7 +3,7 @@
   const endpoint = configured.replace(/\/$/, "") || (location.hostname.endsWith(".vercel.app") ? "/api/panorama" : "");
   if (!endpoint) return;
 
-  const $ = (id) => document.getElementById(id);
+  const byId = (id) => document.getElementById(id);
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   async function waitForInitialData() {
@@ -28,26 +28,26 @@
   }
 
   function closeSaveModal() {
-    $("saveModal").hidden = true;
-    $("editKeyInput").value = "";
+    byId("saveModal").hidden = true;
+    byId("editKeyInput").value = "";
   }
 
-  $("saveBtn").onclick = () => {
-    $("saveModal").hidden = false;
-    $("editKeyInput").focus();
+  byId("saveBtn").onclick = () => {
+    byId("saveModal").hidden = false;
+    byId("editKeyInput").focus();
   };
-  $("closeSaveModalBtn").onclick = closeSaveModal;
-  $("cancelSaveBtn").onclick = closeSaveModal;
+  byId("closeSaveModalBtn").onclick = closeSaveModal;
+  byId("cancelSaveBtn").onclick = closeSaveModal;
 
-  $("confirmSaveBtn").onclick = async () => {
-    const editKey = $("editKeyInput").value.trim();
+  byId("confirmSaveBtn").onclick = async () => {
+    const editKey = byId("editKeyInput").value.trim();
     if (!editKey) {
-      $("editKeyInput").focus();
+      byId("editKeyInput").focus();
       setStatus("请输入更新密钥");
       return;
     }
     try {
-      $("confirmSaveBtn").disabled = true;
+      byId("confirmSaveBtn").disabled = true;
       setStatus("保存中...");
       const response = await fetch(endpoint, {
         method: "POST",
@@ -65,7 +65,7 @@
       alert(error.message);
       setStatus("保存失败");
     } finally {
-      $("confirmSaveBtn").disabled = false;
+      byId("confirmSaveBtn").disabled = false;
     }
   };
 
