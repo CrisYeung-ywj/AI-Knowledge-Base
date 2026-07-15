@@ -1,971 +1,244 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AI赋能视觉大方向、首月试点与4周调研学习赋能计划">
-  <title>AI赋能视觉大方向与4周行动计划</title>
-  <style>
-    :root {
-      --green: #3AEFD0;
-      --green-soft: #DDFBF5;
-      --green-deep: #087C6A;
-      --blue: #00586D;
-      --blue-2: #0B7088;
-      --blue-soft: #E9F5F7;
-      --ink: #17343C;
-      --muted: #60787E;
-      --line: #DCE9EB;
-      --surface: #FFFFFF;
-      --bg: #F4F8F8;
-      --amber: #F2A93B;
-      --amber-soft: #FFF5E4;
-      --red: #D75A5A;
-      --red-soft: #FFF0F0;
-      --shadow: 0 14px 36px rgba(0, 88, 109, .09);
-      --radius: 20px;
-      --sidebar: 252px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI赋能视觉 · 4周行动计划（一页版）</title>
+<style>
+  :root{
+    --ink:#22302B;
+    --sub:#5C6B64;
+    --bg:#F4F6F2;
+    --card:#FFFFFF;
+    --line:#DDE4DC;
+    --cris:#E8842C;   /* 橙 = Cris */
+    --yiyi:#3D7DD8;   /* 蓝 = YIYI */
+    --mijiu:#2E9E6B;  /* 绿 = 米酒 */
+    --all:#8A94A6;    /* 灰 = 大家一起 */
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:var(--bg); color:var(--ink);
+    line-height:1.55; font-size:14px;
+    padding:28px 16px;
+  }
+  .page{max-width:920px;margin:0 auto}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 90% 2%, rgba(58, 239, 208, .16), transparent 24rem),
-        var(--bg);
-      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
-      line-height: 1.65;
-    }
-    button, input { font: inherit; }
-    button { color: inherit; }
-    a { color: inherit; }
-    :focus-visible { outline: 3px solid rgba(58, 239, 208, .75); outline-offset: 3px; }
+  /* ===== 头部 ===== */
+  header{margin-bottom:18px}
+  .tag{display:inline-block;font-size:12px;letter-spacing:2px;color:var(--sub);
+    border:1px solid var(--line);border-radius:999px;padding:2px 12px;margin-bottom:10px;background:var(--card)}
+  h1{font-size:30px;line-height:1.25;font-weight:800;margin-bottom:8px}
+  h1 em{font-style:normal;color:var(--cris)}
+  .oneliner{font-size:15px;color:var(--sub);max-width:620px}
+  .oneliner b{color:var(--ink)}
 
-    .scroll-progress {
-      position: fixed;
-      inset: 0 auto auto 0;
-      z-index: 100;
-      width: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--green), #8FF9E8);
-      box-shadow: 0 0 16px rgba(58, 239, 208, .7);
-    }
+  /* ===== 通用区块 ===== */
+  section{margin-top:20px}
+  .sec-title{font-size:16px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .sec-title::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--ink)}
 
-    .layout { min-height: 100vh; }
-    .sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 20;
-      width: var(--sidebar);
-      padding: 32px 20px 24px;
-      color: #fff;
-      background:
-        linear-gradient(175deg, rgba(58, 239, 208, .16), transparent 31%),
-        var(--blue);
-      overflow-y: auto;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 30px;
-      font-weight: 800;
-      letter-spacing: .04em;
-    }
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
-      color: var(--blue);
-      background: var(--green);
-      font-size: 18px;
-      box-shadow: 0 8px 24px rgba(58, 239, 208, .25);
-    }
-    .brand small { display: block; color: rgba(255,255,255,.65); font-size: 11px; font-weight: 500; }
-    .side-label {
-      margin: 20px 10px 8px;
-      color: rgba(255,255,255,.52);
-      font-size: 11px;
-      letter-spacing: .16em;
-    }
-    .toc { display: grid; gap: 4px; }
-    .toc a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 40px;
-      padding: 8px 11px;
-      border-radius: 11px;
-      color: rgba(255,255,255,.72);
-      text-decoration: none;
-      font-size: 13px;
-      transition: .2s ease;
-    }
-    .toc a::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.3);
-    }
-    .toc a:hover, .toc a.active { color: #fff; background: rgba(255,255,255,.11); }
-    .toc a.active::before { background: var(--green); box-shadow: 0 0 0 4px rgba(58,239,208,.16); }
-    .side-note {
-      margin-top: 26px;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      color: rgba(255,255,255,.68);
-      background: rgba(0,0,0,.08);
-      font-size: 12px;
-    }
+  /* ===== 目标数字 ===== */
+  .goals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .goal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .goal .num{font-size:24px;font-weight:800}
+  .goal .num span{font-size:13px;font-weight:600;margin-left:2px}
+  .goal p{font-size:12.5px;color:var(--sub);margin-top:2px}
 
-    .main { margin-left: var(--sidebar); }
-    .content { width: calc(100% - 56px); max-width: 1180px; margin: 0 auto; padding: 34px 0 96px; }
-    .mobile-toc { display: none; }
+  /* ===== 链路图（核心图） ===== */
+  .pipe-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px}
+  .pipe{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+  .step{position:relative;text-align:center;padding:0 6px}
+  .step .dot{width:100%;height:8px;border-radius:99px;margin-bottom:10px}
+  .step h4{font-size:14px;font-weight:700}
+  .step p{font-size:11.5px;color:var(--sub);margin-top:2px}
+  .step .who{display:inline-block;font-size:11px;font-weight:700;margin-top:6px;padding:1px 8px;border-radius:99px;color:#fff}
+  .c-yiyi{background:var(--yiyi)} .c-cris{background:var(--cris)} .c-mijiu{background:var(--mijiu)} .c-all{background:var(--all)}
+  .arrowline{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);margin-top:12px;border-top:1px dashed var(--line);padding-top:8px}
 
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 480px;
-      padding: 58px;
-      border-radius: 28px;
-      color: #fff;
-      background:
-        linear-gradient(120deg, rgba(0, 88, 109, .96), rgba(0, 88, 109, .8)),
-        var(--blue);
-      box-shadow: 0 24px 64px rgba(0,88,109,.18);
-    }
-    .hero::before, .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero::before { width: 360px; height: 360px; right: -70px; top: -180px; background: rgba(58,239,208,.22); }
-    .hero::after { width: 220px; height: 220px; right: 155px; bottom: -160px; border: 42px solid rgba(58,239,208,.13); }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 999px;
-      color: var(--green);
-      background: rgba(255,255,255,.08);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }
-    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-    .hero h1 {
-      max-width: 820px;
-      margin: 24px 0 18px;
-      font-size: clamp(38px, 5vw, 66px);
-      line-height: 1.12;
-      letter-spacing: -.04em;
-    }
-    .hero-lead { max-width: 830px; margin: 0; color: rgba(255,255,255,.76); font-size: 17px; }
-    .hero-lead strong { color: #fff; }
-    .hero-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 38px; }
-    .hero-metric {
-      position: relative;
-      z-index: 1;
-      min-height: 105px;
-      padding: 17px;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 16px;
-      background: rgba(255,255,255,.075);
-      backdrop-filter: blur(6px);
-    }
-    .hero-metric b { display: block; color: var(--green); font-size: 27px; line-height: 1.2; }
-    .hero-metric span { color: rgba(255,255,255,.68); font-size: 12px; }
-    .hero-footer { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; color: rgba(255,255,255,.6); font-size: 12px; }
+  /* ===== 分工 ===== */
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .role{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;border-top:4px solid var(--all)}
+  .role.cris{border-top-color:var(--cris)} .role.yiyi{border-top-color:var(--yiyi)} .role.mijiu{border-top-color:var(--mijiu)}
+  .role h3{font-size:15px;font-weight:800;display:flex;align-items:center;gap:6px}
+  .role h3 small{font-size:11px;font-weight:600;color:var(--sub)}
+  .role ul{list-style:none;margin-top:6px}
+  .role li{font-size:12.5px;color:var(--sub);padding-left:14px;position:relative;margin-top:3px}
+  .role li::before{content:"·";position:absolute;left:2px;font-weight:800;color:var(--ink)}
+  .helpers{margin-top:10px;background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;
+    font-size:12.5px;color:var(--sub);display:flex;flex-wrap:wrap;gap:6px 22px}
+  .helpers b{color:var(--ink)}
 
-    .section {
-      margin-top: 30px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.86);
-      box-shadow: var(--shadow);
-      scroll-margin-top: 18px;
-    }
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 26px 28px;
-      cursor: pointer;
-    }
-    .section-heading > div:first-child { display: flex; align-items: center; gap: 16px; }
-    .section-index {
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      color: var(--blue);
-      background: var(--green-soft);
-      font-weight: 900;
-    }
-    .section-heading h2 { margin: 0; color: var(--blue); font-size: 24px; line-height: 1.25; }
-    .section-heading p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
-    .collapse-btn {
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #fff;
-      cursor: pointer;
-    }
-    .collapse-btn span { transition: transform .2s ease; }
-    .section.is-collapsed .collapse-btn span { transform: rotate(-90deg); }
-    .section-body { padding: 0 28px 30px; }
-    .section.is-collapsed .section-body { display: none; }
+  /* ===== 4周 ===== */
+  .weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .week{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;position:relative}
+  .week .w{font-size:11px;font-weight:800;color:#fff;background:var(--ink);border-radius:6px;padding:1px 8px;display:inline-block}
+  .week h3{font-size:15px;font-weight:800;margin:6px 0 4px}
+  .week p{font-size:12.5px;color:var(--sub)}
+  .week .out{margin-top:8px;font-size:12px;background:var(--bg);border-radius:8px;padding:6px 8px}
+  .week .out b{font-size:11px;color:var(--sub);display:block}
+  .week::after{content:"→";position:absolute;right:-11px;top:44%;color:var(--sub);font-weight:700;background:var(--bg);z-index:2}
+  .week:last-child::after{display:none}
 
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
-    .card {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-    }
-    .card h3 { margin: 0 0 8px; color: var(--blue); font-size: 17px; }
-    .card p { margin: 0; color: var(--muted); font-size: 13px; }
-    .card .number { display: block; margin-bottom: 7px; color: var(--green-deep); font-size: 25px; font-weight: 900; }
-    .callout {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 14px;
-      margin-top: 18px;
-      padding: 18px 20px;
-      border-left: 4px solid var(--green);
-      border-radius: 12px;
-      color: var(--blue);
-      background: var(--green-soft);
-    }
-    .callout strong { font-size: 14px; }
-    .callout p { margin: 2px 0 0; color: #396B73; font-size: 13px; }
+  /* ===== 底部原则 ===== */
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .rule{border-radius:12px;padding:12px 14px;font-size:13px}
+  .rule.do{background:#EAF4EE;border:1px solid #CBE3D4}
+  .rule.dont{background:#FBEEE7;border:1px solid #F0D6C6}
+  .rule h4{font-size:13px;font-weight:800;margin-bottom:4px}
+  .rule li{margin-left:18px;color:var(--sub);margin-top:2px}
 
-    .evidence-card { position: relative; overflow: hidden; min-height: 176px; }
-    .evidence-card::after { content: attr(data-no); position: absolute; right: 12px; bottom: -22px; color: rgba(0,88,109,.055); font-size: 84px; font-weight: 900; }
-    .source-tag { display: inline-block; margin-bottom: 11px; padding: 4px 8px; border-radius: 7px; color: var(--green-deep); background: var(--green-soft); font-size: 11px; font-weight: 700; }
-    .evidence-card ul, .compact-list { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
-    .evidence-card li + li, .compact-list li + li { margin-top: 6px; }
+  footer{margin-top:18px;font-size:11.5px;color:var(--sub);display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
 
-    .direction-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 13px; }
-    .direction-card { position: relative; padding-top: 58px; }
-    .direction-icon {
-      position: absolute;
-      top: 17px;
-      left: 18px;
-      display: grid;
-      place-items: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      color: var(--blue);
-      background: var(--green);
-      font-size: 13px;
-      font-weight: 900;
-    }
-    .direction-card .priority { display: block; margin-top: 15px; color: var(--green-deep); font-size: 11px; font-weight: 800; }
-
-    .pilot-flow {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0,1fr));
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    .flow-step { position: relative; padding: 18px 12px; border-radius: 14px; text-align: center; background: var(--blue-soft); }
-    .flow-step:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -10px; top: 50%; color: var(--blue-2); font-weight: 900; transform: translateY(-50%); }
-    .flow-step b { display: block; color: var(--blue); font-size: 14px; }
-    .flow-step span { color: var(--muted); font-size: 11px; }
-    .selection-rule { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
-    .rule-box { padding: 20px; border-radius: 16px; background: var(--blue); color: #fff; }
-    .rule-box h3 { margin: 0 0 9px; font-size: 16px; }
-    .rule-box ul { margin: 0; padding-left: 18px; color: rgba(255,255,255,.76); font-size: 13px; }
-    .rule-box li + li { margin-top: 6px; }
-
-    .plan-toolbar {
-      position: sticky;
-      top: 8px;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 18px;
-      padding: 13px 14px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,.94);
-      box-shadow: 0 8px 24px rgba(0,88,109,.08);
-      backdrop-filter: blur(10px);
-    }
-    .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
-    .filter-label { margin-right: 3px; color: var(--muted); font-size: 11px; font-weight: 700; }
-    .filter-btn, .tool-btn {
-      min-height: 34px;
-      padding: 6px 11px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: #fff;
-      cursor: pointer;
-      font-size: 12px;
-      transition: .2s ease;
-    }
-    .filter-btn:hover, .filter-btn.active, .tool-btn:hover { color: var(--blue); border-color: var(--green); background: var(--green-soft); }
-    .plan-list { display: grid; gap: 18px; }
-    .week-block { display: grid; grid-template-columns: 145px 1fr; gap: 16px; }
-    .week-title {
-      position: sticky;
-      top: 79px;
-      align-self: start;
-      padding: 18px;
-      border-radius: 16px;
-      color: #fff;
-      background: var(--blue);
-    }
-    .week-title b { display: block; color: var(--green); font-size: 29px; line-height: 1.1; }
-    .week-title span { font-size: 12px; color: rgba(255,255,255,.72); }
-    .week-tasks { display: grid; gap: 11px; }
-    .task-card {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .task-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,88,109,.08); }
-    .task-card[hidden], .week-block[hidden] { display: none; }
-    .task-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-    .task-top h3 { margin: 0; color: var(--blue); font-size: 16px; }
-    .pills { display: flex; flex-wrap: wrap; gap: 5px; }
-    .pill { padding: 3px 8px; border-radius: 999px; color: var(--green-deep); background: var(--green-soft); font-size: 10px; font-weight: 800; }
-    .pill.status { color: #7B5716; background: var(--amber-soft); }
-    .task-goal { margin: 9px 0 13px; color: var(--muted); font-size: 13px; }
-    .task-fields { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 10px; }
-    .task-field { padding: 11px; border-radius: 11px; background: #F7FAFA; }
-    .task-field b { display: block; margin-bottom: 3px; color: var(--blue-2); font-size: 10px; letter-spacing: .06em; }
-    .task-field span, .task-field li { color: var(--muted); font-size: 12px; }
-    .task-field ul { margin: 0; padding-left: 16px; }
-    .task-field.wide { grid-column: span 1; }
-    .checkpoint {
-      margin: 6px 0 2px 161px;
-      padding: 16px 18px;
-      border: 1px dashed var(--green-deep);
-      border-radius: 15px;
-      color: var(--blue);
-      background: var(--green-soft);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; }
-    table { width: 100%; border-collapse: collapse; min-width: 760px; background: #fff; }
-    th, td { padding: 15px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 13px; }
-    th { color: var(--blue); background: var(--blue-soft); font-size: 12px; }
-    tr:last-child td { border-bottom: 0; }
-    td:first-child { color: var(--blue); font-weight: 800; white-space: nowrap; }
-
-    .deliverable-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .check-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-    }
-    .check-box { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; color: var(--blue); background: var(--green-soft); font-weight: 900; }
-    .check-item b { display: block; color: var(--blue); font-size: 14px; }
-    .check-item span { color: var(--muted); font-size: 12px; }
-
-    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
-    .metric-card { min-height: 156px; }
-    .metric-card .metric-value { display: block; color: var(--blue); font-size: 30px; font-weight: 900; line-height: 1.1; }
-    .metric-card .metric-label { display: block; margin: 6px 0; color: var(--green-deep); font-size: 12px; font-weight: 800; }
-    .metric-card p { font-size: 12px; }
-    .metric-card.guardrail { border-top: 4px solid var(--amber); }
-    .metric-card.primary { border-top: 4px solid var(--green); }
-
-    .risk-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .risk-card { display: grid; grid-template-columns: 7px 1fr; gap: 14px; }
-    .risk-bar { border-radius: 999px; background: var(--amber); }
-    .risk-card.high .risk-bar { background: var(--red); }
-    .risk-card h3 { font-size: 15px; }
-    .risk-meta { display: flex; gap: 8px; margin-top: 12px; }
-    .risk-meta span { padding: 4px 7px; border-radius: 7px; color: #6F571F; background: var(--amber-soft); font-size: 10px; font-weight: 700; }
-    .risk-card.high .risk-meta span { color: #8B3333; background: var(--red-soft); }
-    .cadence { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-top: 16px; }
-    .cadence div { padding: 15px; border-radius: 13px; color: var(--blue); background: var(--blue-soft); }
-    .cadence b { display: block; font-size: 13px; }
-    .cadence span { color: var(--muted); font-size: 11px; }
-
-    .roadmap { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 13px; }
-    .roadmap-card { position: relative; padding-top: 54px; }
-    .roadmap-card::before { content: attr(data-stage); position: absolute; top: 17px; left: 18px; color: var(--green-deep); font-size: 11px; font-weight: 900; letter-spacing: .08em; }
-    .roadmap-card.current { border-color: var(--green); box-shadow: inset 0 4px 0 var(--green); }
-    .roadmap-card h3 { font-size: 16px; }
-
-    .assumptions { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
-    .source-list { margin: 0; padding: 0; list-style: none; }
-    .source-list li { padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }
-    .source-list li:last-child { border-bottom: 0; }
-    .source-list b { display: block; color: var(--blue); font-size: 13px; }
-
-    .footer { margin-top: 26px; padding: 22px 8px; color: var(--muted); text-align: center; font-size: 11px; }
-    .floating-actions { position: fixed; right: 24px; bottom: 24px; z-index: 30; display: grid; gap: 8px; }
-    .float-btn {
-      display: grid;
-      place-items: center;
-      width: 44px;
-      height: 44px;
-      border: 0;
-      border-radius: 14px;
-      color: #fff;
-      background: var(--blue);
-      box-shadow: 0 10px 30px rgba(0,88,109,.2);
-      cursor: pointer;
-    }
-    .float-btn:hover { color: var(--blue); background: var(--green); }
-
-    @media (max-width: 1080px) {
-      :root { --sidebar: 220px; }
-      .content { width: calc(100% - 34px); max-width: 1040px; }
-      .hero { padding: 42px; }
-      .direction-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-      .metric-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .task-fields { grid-template-columns: 1fr 1fr; }
-      .task-field:first-child { grid-column: span 2; }
-    }
-
-    @media (max-width: 760px) {
-      .sidebar { display: none; }
-      .main { margin-left: 0; }
-      .content { width: calc(100% - 22px); max-width: 720px; padding-top: 12px; }
-      .mobile-toc { display: block; margin-bottom: 11px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
-      .mobile-toc summary { padding: 13px 15px; color: var(--blue); cursor: pointer; font-size: 13px; font-weight: 800; }
-      .mobile-toc nav { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 0 10px 12px; }
-      .mobile-toc a { padding: 8px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 11px; }
-      .mobile-toc a:hover { background: var(--green-soft); }
-      .hero { min-height: 0; padding: 30px 22px; border-radius: 21px; }
-      .hero h1 { margin-top: 18px; font-size: 38px; }
-      .hero-lead { font-size: 14px; }
-      .hero-metrics { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .hero-metric { min-width: 0; min-height: 94px; overflow-wrap: anywhere; }
-      .hero-footer { gap: 7px 14px; }
-      .section { margin-top: 18px; }
-      .section-heading { padding: 21px 18px; }
-      .section-heading h2 { font-size: 19px; }
-      .section-heading p { display: none; }
-      .section-body { padding: 0 18px 22px; }
-      .grid-3, .grid-4, .direction-grid, .selection-rule, .deliverable-grid, .risk-grid, .roadmap, .assumptions { grid-template-columns: 1fr; }
-      .pilot-flow { grid-template-columns: 1fr 1fr; }
-      .flow-step:not(:last-child)::after { content: none; }
-      .plan-toolbar { position: static; display: grid; }
-      .week-block { grid-template-columns: 1fr; }
-      .week-title { position: static; display: flex; align-items: center; gap: 10px; padding: 13px 16px; }
-      .week-title b { font-size: 22px; }
-      .task-top, .task-fields { display: grid; grid-template-columns: 1fr; }
-      .task-field:first-child { grid-column: auto; }
-      .checkpoint { margin-left: 0; }
-      .metric-grid, .cadence { grid-template-columns: 1fr 1fr; }
-      .floating-actions { right: 12px; bottom: 12px; }
-      .card, .task-card, .task-field, .section-heading > div:first-child { min-width: 0; }
-    }
-
-    @media print {
-      @page { size: A4; margin: 14mm; }
-      body { background: #fff; color: #18343C; font-size: 10pt; }
-      .sidebar, .mobile-toc, .floating-actions, .scroll-progress, .plan-toolbar, .collapse-btn { display: none !important; }
-      .main { margin: 0; }
-      .content { width: 100%; padding: 0; }
-      .hero { min-height: 0; padding: 26px; border-radius: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-      .hero h1 { font-size: 30pt; }
-      .hero-metrics { grid-template-columns: repeat(4, 1fr); }
-      .section { break-inside: avoid; margin-top: 12px; border-radius: 0; box-shadow: none; }
-      .section.is-collapsed .section-body { display: block !important; }
-      .task-card, .week-block { display: block !important; break-inside: avoid; }
-      .week-block { margin-top: 12px; }
-      .week-title { position: static; margin-bottom: 8px; }
-      .checkpoint { margin-left: 0; }
-      .direction-grid, .grid-4 { grid-template-columns: repeat(3, 1fr); }
-      .card, .task-card { break-inside: avoid; }
-    }
-  </style>
+  @media(max-width:760px){
+    .goals,.roles,.weeks{grid-template-columns:1fr 1fr}
+    .pipe{grid-template-columns:repeat(3,1fr);row-gap:16px}
+    .week::after{display:none}
+    .rules{grid-template-columns:1fr}
+    h1{font-size:24px}
+  }
+  @media print{
+    body{background:#fff;padding:0;font-size:12px}
+    .goal .num{font-size:20px}
+    section{margin-top:12px}
+  }
+</style>
 </head>
 <body>
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="page">
 
-  <div class="layout">
-    <aside class="sidebar" aria-label="页面目录">
-      <div class="brand">
-        <div class="brand-mark">AI</div>
-        <div>视觉赋能计划<small>VISUAL AI ENABLEMENT</small></div>
+  <header>
+    <span class="tag">AI 赋能视觉 · 首月行动计划</span>
+    <h1>挑一个商品，四周做出<em>一条真能投放的AI视频</em></h1>
+    <p class="oneliner">现在的问题：AI能出草稿，但改起来费劲，还没做出过一条业务认可、能直接上线的成片。
+    所以这个月<b>不贪多</b>——用一个商品把「需求到投放」整条路跑通，行就推广，不行就有明确结论。</p>
+  </header>
+
+  <!-- 目标 -->
+  <section>
+    <div class="sec-title">这个月要拿到的结果</div>
+    <div class="goals">
+      <div class="goal"><div class="num">1<span>条</span></div><p>业务点头、实际上架或投放的AI视频</p></div>
+      <div class="goal"><div class="num">≥30<span>%</span></div><p>关键环节省下的工时</p></div>
+      <div class="goal"><div class="num">2<span>人</span></div><p>业务同事能照着SOP独立做完</p></div>
+      <div class="goal"><div class="num">100<span>%</span></div><p>每一步谁做的、花多久、改了啥，都有记录</p></div>
+    </div>
+  </section>
+
+  <!-- 链路图 -->
+  <section>
+    <div class="sec-title">整条链路怎么跑，谁负责哪段</div>
+    <div class="pipe-wrap">
+      <div class="pipe">
+        <div class="step"><div class="dot c-yiyi"></div><h4>需求</h4><p>要做什么、交付口径</p><span class="who c-yiyi">YIYI</span></div>
+        <div class="step"><div class="dot c-yiyi"></div><h4>素材</h4><p>收集、打标签、归档</p><span class="who c-yiyi">YIYI</span></div>
+        <div class="step"><div class="dot c-cris"></div><h4>调度</h4><p>排期、匹配资源</p><span class="who c-cris">Cris</span></div>
+        <div class="step"><div class="dot c-cris"></div><h4>AI生成</h4><p>出图、出视频、控成本</p><span class="who c-cris">Cris</span></div>
+        <div class="step"><div class="dot c-mijiu"></div><h4>剪辑</h4><p>成片、审核、版本</p><span class="who c-mijiu">米酒</span></div>
+        <div class="step"><div class="dot c-all"></div><h4>投放</h4><p>上架、看数据</p><span class="who c-all">共同</span></div>
       </div>
-      <div class="side-label">目录</div>
-      <nav class="toc" id="toc">
-        <a href="#summary">管理层摘要</a>
-        <a href="#evidence">前期证据</a>
-        <a href="#direction">大方向</a>
-        <a href="#pilot">首月试点</a>
-        <a href="#plan">4周计划</a>
-        <a href="#roles">角色分工</a>
-        <a href="#deliverables">交付物</a>
-        <a href="#acceptance">验收指标</a>
-        <a href="#risk">风险与治理</a>
-        <a href="#roadmap">90天路线</a>
-        <a href="#basis">依据与假设</a>
-      </nav>
-      <div class="side-note">
-        <b>首月原则</b><br>
-        不追求打穿所有视觉场景；用一个商品跑通完整证据链，再决定规模化投入。
+      <div class="arrowline">
+        <span>颜色 = 责任人：<b style="color:var(--yiyi)">蓝·YIYI 前链</b>　<b style="color:var(--cris)">橙·Cris 中链</b>　<b style="color:var(--mijiu)">绿·米酒 后链</b></span>
+        <span>每个环节都要留记录，方便回头对比</span>
       </div>
-    </aside>
+    </div>
+  </section>
 
-    <main class="main">
-      <div class="content">
-        <details class="mobile-toc">
-          <summary>查看目录</summary>
-          <nav>
-            <a href="#summary">管理层摘要</a><a href="#evidence">前期证据</a>
-            <a href="#direction">大方向</a><a href="#pilot">首月试点</a>
-            <a href="#plan">4周计划</a><a href="#roles">角色分工</a>
-            <a href="#deliverables">交付物</a><a href="#acceptance">验收指标</a>
-            <a href="#risk">风险与治理</a><a href="#roadmap">90天路线</a>
-          </nav>
-        </details>
-
-        <header class="hero" id="top">
-          <span class="eyebrow">AI赋能视觉 · 首月行动方案</span>
-          <h1>从“做工具”转向<br>“重构工作方式”</h1>
-          <p class="hero-lead">
-            以<strong>真实流程、视觉Know-how、评测标准</strong>为底座，以小林生影、资源调度台和剪辑能力为载体；
-            通过一个代表性商品做出业务同级、可实际投放的完整AI视频，形成可复制的全链路Demo。
-          </p>
-          <div class="hero-metrics" aria-label="首月关键目标">
-            <div class="hero-metric"><b>4周</b><span>调研、重构、赋能、验证</span></div>
-            <div class="hero-metric"><b>1条</b><span>业务认可的投放级AI视频</span></div>
-            <div class="hero-metric"><b>≥30%</b><span>关键环节工时下降目标</span></div>
-            <div class="hero-metric"><b>100%</b><span>流程与AI任务可追溯</span></div>
-          </div>
-          <div class="hero-footer">
-            <span>总负责人：Cris</span>
-            <span>核心成员：YIYI、米酒</span>
-            <span>第2周形成阶段成果</span>
-            <span>更新时间：2026-07-14</span>
-          </div>
-        </header>
-
-        <section class="section" id="summary">
-          <div class="section-heading">
-            <div><span class="section-index">01</span><div><h2>管理层摘要</h2><p>为什么要转向，以及首月到底交付什么</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="grid-3">
-              <article class="card"><span class="number">现状</span><h3>有草稿生成能力，没有投放级闭环</h3><p>小林生影能够生成草稿，但仍需大量调整和剪辑；目前尚未稳定产出业务认可、可直接投放的完整视频。</p></article>
-              <article class="card"><span class="number">判断</span><h3>业务不是“配合改造”的对象</h3><p>不再让业务自己画流程；项目组通过跟岗、计时和案例回溯还原事实，再与一线人员共同确认。</p></article>
-              <article class="card"><span class="number">首月</span><h3>用一个全链路Demo证明价值</h3><p>完成L1-L5流程资产，复刻业务同级输出，并把至少一条AI视频送入真实上架或投放评测。</p></article>
-            </div>
-            <div class="callout">
-              <strong>核心结论</strong>
-              <p>“全链路50%-80%工作可被AI辅助、产量翻倍”是需要验证的价值假设；首月必须先跨过“业务同级、可投放、可评测”三道门槛。</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="evidence">
-          <div class="section-heading">
-            <div><span class="section-index">02</span><div><h2>前期证据</h2><p>以与水滴的指定单聊、其中转发记录及AI视觉全景图为准</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="grid-4">
-              <article class="card evidence-card" data-no="1"><span class="source-tag">7月11日 · 水滴单聊</span><h3>当前贡献仍小，必须重新拷问</h3><ul><li>业务AI视频占比约10%，小林生影占比更少</li><li>不知道业务如何完成、调整一条视频</li><li>目标应从单点工具转向全链路Demo</li></ul></article>
-              <article class="card evidence-card" data-no="2"><span class="source-tag">转发：健新与水滴</span><h3>产品经理要进入业务成为ITBP/FDE</h3><ul><li>流程必须深入拆到L1-L5</li><li>产品经理要做出业务同级甚至更好视频</li><li>视频需直接上架应用并做数据对比</li></ul></article>
-              <article class="card evidence-card" data-no="3"><span class="source-tag">转发：CHENCHAO与水滴</span><h3>技术沉淀不等于视觉Know-how</h3><ul><li>业务关注的是生产到结果效率</li><li>前链以知识库和资源为主，后链是专业能力</li><li>应驻场向PK、牛奶及一线人员分工学习</li></ul></article>
-              <article class="card evidence-card" data-no="4"><span class="source-tag">AI视觉项目管理表</span><h3>全景链路已有，需下钻到操作层</h3><ul><li>覆盖需求、资源、拍摄、生成、剪辑、投放</li><li>已列目标、流程、标准、赋能、岗位、工具</li><li>下一步是补齐真实动作、调整规则与评测</li></ul></article>
-            </div>
-            <h3 style="margin:20px 0 12px;color:var(--blue);font-size:16px;">首月必须回答的5个问题</h3>
-            <div class="direction-grid">
-              <article class="card direction-card"><span class="direction-icon">01</span><h3>视频怎么完成？</h3><p>从需求、素材到剪辑、投放，真实动作和分工是什么。</p></article>
-              <article class="card direction-card"><span class="direction-icon">02</span><h3>AI结果怎么调？</h3><p>图片、视频从草稿到可用，具体修改了什么、为什么。</p></article>
-              <article class="card direction-card"><span class="direction-icon">03</span><h3>高手方法差在哪？</h3><p>PK、牛奶妹与普通业务人员使用AI的方法差异是什么。</p></article>
-              <article class="card direction-card"><span class="direction-icon">04</span><h3>分工能否重构？</h3><p>现有岗位和交接是否合理，AI能否减少转译并串起全链路。</p></article>
-              <article class="card direction-card"><span class="direction-icon">05</span><h3>价值能否被证明？</h3><p>同级输出、50%-80%AI覆盖和产量翻倍假设是否成立。</p></article>
-            </div>
-            <div class="callout">
-              <strong>重新分析后的判断</strong>
-              <p>首月的北极星不是“培训了多少人”或“生成了多少草稿”，而是能否把视觉Know-how转化为评测标准，并交付一条与业务同级、真正可投放的AI视频。</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="direction">
-          <div class="section-heading">
-            <div><span class="section-index">03</span><div><h2>AI赋能视觉五大方向</h2><p>先把工作方式变成资产，再让AI放大它</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="direction-grid">
-              <article class="card direction-card"><span class="direction-icon">01</span><h3>流程L1-L5化</h3><p>驻场还原步骤、等待、返工和判断点，从全景链路下钻到可操作层。</p><span class="priority">首月优先级：最高</span></article>
-              <article class="card direction-card"><span class="direction-icon">02</span><h3>标准资产化</h3><p>沉淀需求字段、素材标签、资源规则、生成输入、剪辑模板和交付规范。</p><span class="priority">首月优先级：最高</span></article>
-              <article class="card direction-card"><span class="direction-icon">03</span><h3>产品经理FDE化</h3><p>不做需求转译者；需要学视频、设计和业务判断，直接交付业务结果。</p><span class="priority">首月优先级：高</span></article>
-              <article class="card direction-card"><span class="direction-icon">04</span><h3>工具底座化</h3><p>现有工具优先承接成熟流程；标准未稳定前，不启动大规模定制开发。</p><span class="priority">首月优先级：中</span></article>
-              <article class="card direction-card"><span class="direction-icon">05</span><h3>评测驱动化</h3><p>先定义业务同级标准，再追踪效率、质量、成本、上架和投放结果。</p><span class="priority">首月优先级：高</span></article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="pilot">
-          <div class="section-heading">
-            <div><span class="section-index">04</span><div><h2>首月试点边界</h2><p>一个商品、六个环节、三条责任链</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="pilot-flow" aria-label="试点端到端流程">
-              <div class="flow-step"><b>需求收集</b><span>Brief与交付口径</span></div>
-              <div class="flow-step"><b>素材准备</b><span>收集、标签、归档</span></div>
-              <div class="flow-step"><b>资源调度</b><span>匹配、排期、状态</span></div>
-              <div class="flow-step"><b>AI生成</b><span>图片、视频、成本</span></div>
-              <div class="flow-step"><b>视频剪辑</b><span>模板、审核、版本</span></div>
-              <div class="flow-step"><b>投放评测</b><span>上架、标识、数据对比</span></div>
-            </div>
-            <div class="selection-rule">
-              <div class="rule-box">
-                <h3>试点商品选择条件</h3>
-                <ul><li>未来4周内有稳定、真实的生产需求</li><li>现有素材相对完整，能减少非AI因素干扰</li><li>能覆盖YIYI、Cris、米酒三条责任链</li><li>可安排实际上架或投放，并获得最小评测数据</li></ul>
-              </div>
-              <article class="card">
-                <h3>明确不纳入首月</h3>
-                <ul class="compact-list"><li>客服、导购等非视觉业务场景</li><li>全品类、全渠道的大范围推广</li><li>尚未验证流程对应的大规模系统开发</li><li>需要长期投放周期才能判断的最终转化承诺</li></ul>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="plan">
-          <div class="section-heading">
-            <div><span class="section-index">05</span><div><h2>4周调研、学习与赋能计划</h2><p>可按周、负责人筛选；所有任务均绑定交付物和指标</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="plan-toolbar" aria-label="计划筛选器">
-              <div class="filter-group" data-filter-type="week"><span class="filter-label">按周</span><button class="filter-btn active" data-value="all" type="button">全部</button><button class="filter-btn" data-value="1" type="button">W1</button><button class="filter-btn" data-value="2" type="button">W2</button><button class="filter-btn" data-value="3" type="button">W3</button><button class="filter-btn" data-value="4" type="button">W4</button></div>
-              <div class="filter-group" data-filter-type="owner"><span class="filter-label">负责人</span><button class="filter-btn active" data-value="all" type="button">全部</button><button class="filter-btn" data-value="Cris" type="button">Cris</button><button class="filter-btn" data-value="YIYI" type="button">YIYI</button><button class="filter-btn" data-value="米酒" type="button">米酒</button><button class="filter-btn" data-value="共同" type="button">共同</button></div>
-            </div>
-
-            <div class="plan-list" id="planList">
-              <div class="week-block" data-week-block="1">
-                <div class="week-title"><b>W1</b><span>观察事实<br>建立基线</span></div>
-                <div class="week-tasks">
-                  <article class="task-card" data-week="1" data-owner="Cris 共同">
-                    <div class="task-top"><h3>项目启动与试点锁定</h3><div class="pills"><span class="pill">Cris</span><span class="pill status">未开始</span></div></div>
-                    <p class="task-goal">在第1个工作日确定商品、业务配合人、调研节奏和统一记录口径。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>按四项条件选择试点商品</li><li>确认视觉一线人员与样本任务</li><li>发布调研模板与每日同步机制</li></ul></div><div class="task-field"><b>交付物</b><span>项目章程、试点卡、调研日历</span></div><div class="task-field"><b>指标 / 依赖</b><span>D1完成；依赖真实生产需求</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="1" data-owner="YIYI">
-                    <div class="task-top"><h3>前链跟岗：需求、素材与分发</h3><div class="pills"><span class="pill">YIYI</span><span class="pill status">未开始</span></div></div>
-                    <p class="task-goal">还原从业务提需到资源匹配前，以及最终产出分发的真实做法。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>现场观察与操作复述</li><li>记录字段、文件、系统与沟通入口</li><li>抽取正常与异常案例各至少2个</li></ul></div><div class="task-field"><b>交付物</b><span>任务清单、输入输出物、素材问题台账</span></div><div class="task-field"><b>指标 / 依赖</b><span>覆盖≥3次真实任务；需业务授权观察</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="1" data-owner="Cris">
-                    <div class="task-top"><h3>中链跟岗：调度与AI生成</h3><div class="pills"><span class="pill">Cris</span><span class="pill status">未开始</span></div></div>
-                    <p class="task-goal">看清资源匹配、拍摄衔接、生成输入、模型选择与人工判断。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>记录调度状态与等待点</li><li>跟踪一次AI图片和视频任务</li><li>对比PK/牛奶妹与普通人员的AI使用方法</li></ul></div><div class="task-field"><b>交付物</b><span>调度现状图、生成任务样本、高手方法差异表</span></div><div class="task-field"><b>指标 / 依赖</b><span>至少1个完整生成任务；需PK/牛奶参与</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="1" data-owner="米酒">
-                    <div class="task-top"><h3>后链跟岗：剪辑、审核与交付</h3><div class="pills"><span class="pill">米酒</span><span class="pill status">未开始</span></div></div>
-                    <p class="task-goal">明确素材如何变成成片，以及质量判断和返工从哪里产生。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>观察素材接收、粗剪、精剪、审核</li><li>逐项记录AI草稿到最终成片的修改</li><li>归纳镜头、字幕、节奏、版本与返工原因</li></ul></div><div class="task-field"><b>交付物</b><span>剪辑流程初稿、AI调整清单、返工台账</span></div><div class="task-field"><b>指标 / 依赖</b><span>覆盖≥2条成片；需原始工程文件</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="1" data-owner="共同 Cris YIYI 米酒">
-                    <div class="task-top"><h3>基线汇总与事实回放</h3><div class="pills"><span class="pill">共同</span><span class="pill status">未开始</span></div></div>
-                    <p class="task-goal">只确认“事实是否准确”，本周不急于讨论系统方案。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>统一任务时间、等待、触点和返工定义</li><li>与一线人员做30分钟流程回放</li><li>标记未知项而不是主观补全</li></ul></div><div class="task-field"><b>交付物</b><span>现状流程初稿、工具清单、基线表</span></div><div class="task-field"><b>指标 / 依赖</b><span>关键步骤确认率≥90%；依赖一线反馈</span></div></div>
-                  </article>
-                </div>
-              </div>
-
-              <div class="week-block" data-week-block="2">
-                <div class="week-title"><b>W2</b><span>固化标准<br>识别机会</span></div>
-                <div class="week-tasks">
-                  <article class="task-card" data-week="2" data-owner="共同 Cris YIYI 米酒">
-                    <div class="task-top"><h3>L1-L5端到端现状流程定稿</h3><div class="pills"><span class="pill">共同</span><span class="pill status">未开始</span></div></div>
-                    <p class="task-goal">从全景图下钻到动作层，让每一步都有负责人、输入输出、系统、耗时、返工和判断依据。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>按L1-L5拆解三条责任链</li><li>补齐跨团队交接、调整动作与异常分支</li><li>检查现有岗位分工是否合理</li></ul></div><div class="task-field"><b>交付物</b><span>L1-L5流程图v1.0、接口与分工问题清单</span></div><div class="task-field"><b>指标 / 依赖</b><span>试点流程覆盖100%；依赖W1样本</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="2" data-owner="YIYI Cris 米酒">
-                    <div class="task-top"><h3>三条责任链SOP与标准字典</h3><div class="pills"><span class="pill">YIYI</span><span class="pill">Cris</span><span class="pill">米酒</span></div></div>
-                    <p class="task-goal">把隐性经验变成可复用、可检查、可输入AI的结构化资产。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>YIYI：字段、标签、命名、分发、AI标识</li><li>Cris：匹配、调度、模型、成本、质量</li><li>米酒：验收、镜头、结构、字幕、版本</li></ul></div><div class="task-field"><b>交付物</b><span>3套SOP卡、标准字典、缺口清单</span></div><div class="task-field"><b>指标 / 依赖</b><span>三链各完成1套；需视觉负责人确认</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="2" data-owner="Cris 共同">
-                    <div class="task-top"><h3>AI机会排序与目标流程v0.8</h3><div class="pills"><span class="pill">Cris</span><span class="pill">共同</span></div></div>
-                    <p class="task-goal">优先选择高价值、高频、较标准、低实施难度的机会，不按工具新鲜度排序。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>机会按价值、频率、标准化、难度评分</li><li>重构交接与分工，标记AI执行和人工审核</li><li>建立“业务同级、可投放”的评测表</li></ul></div><div class="task-field"><b>交付物</b><span>机会矩阵、目标流程、视频评测口径表</span></div><div class="task-field"><b>指标 / 依赖</b><span>锁定3—5个优先机会；依赖标准字典</span></div></div>
-                  </article>
-                </div>
-              </div>
-              <div class="checkpoint">第2周检查点：即使项目此时暂停，也必须交付可独立使用的L1-L5现状流程、标准字典、高手方法差异、机会清单、目标流程设计和视频评测基线。</div>
-
-              <div class="week-block" data-week-block="3">
-                <div class="week-title"><b>W3</b><span>重构流程<br>带教实操</span></div>
-                <div class="week-tasks">
-                  <article class="task-card" data-week="3" data-owner="Cris 共同">
-                    <div class="task-top"><h3>目标流程配置与标准样例</h3><div class="pills"><span class="pill">Cris</span><span class="pill">共同</span></div></div>
-                    <p class="task-goal">以业务同级视频为标杆，用现有能力做出完整投放级候选，不因局部不顺立即开发新系统。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>选定3条业务同级标杆并建立评测表</li><li>配置小林生影、调度台和现有大模型</li><li>制作Brief、素材、生成、剪辑、投放包</li></ul></div><div class="task-field"><b>交付物</b><span>目标流程图、投放级样例包、试点SOP</span></div><div class="task-field"><b>指标 / 依赖</b><span>产出1条投放级候选；依赖业务评审</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="3" data-owner="YIYI Cris 米酒">
-                    <div class="task-top"><h3>三链带教与第一轮试跑</h3><div class="pills"><span class="pill">YIYI</span><span class="pill">Cris</span><span class="pill">米酒</span></div></div>
-                    <p class="task-goal">每位负责人至少带领一名一线人员完成自己负责的流程片段。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>负责人演示一次，一线人员跟做一次</li><li>记录卡点、疑问、参数和返工</li><li>只修复高频阻塞，不扩展额外功能</li></ul></div><div class="task-field"><b>交付物</b><span>操作手册、培训材料、问题记录</span></div><div class="task-field"><b>指标 / 依赖</b><span>至少3名一线人员参与；依赖排班时间</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="3" data-owner="共同 Cris YIYI 米酒">
-                    <div class="task-top"><h3>第一轮数据复盘与快速修订</h3><div class="pills"><span class="pill">共同</span><span class="pill status">试验中</span></div></div>
-                    <p class="task-goal">用数据区分流程问题、标准问题、人员问题和工具问题。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>对比时间、产量、通过率、返工、成本</li><li>校准AI内容标识与任务ID</li><li>形成v1.0目标流程和SOP</li></ul></div><div class="task-field"><b>交付物</b><span>首轮试点报告、流程/SOP v1.0</span></div><div class="task-field"><b>指标 / 依赖</b><span>全部指标可计算；依赖完整记录</span></div></div>
-                  </article>
-                </div>
-              </div>
-
-              <div class="week-block" data-week-block="4">
-                <div class="week-title"><b>W4</b><span>独立复跑<br>验收复盘</span></div>
-                <div class="week-tasks">
-                  <article class="task-card" data-week="4" data-owner="共同 Cris YIYI 米酒">
-                    <div class="task-top"><h3>业务独立复跑与投放验证</h3><div class="pills"><span class="pill">共同</span><span class="pill status">待验证</span></div></div>
-                    <p class="task-goal">项目组只做必要支持，验证能力是否转移，并把AI视频送入真实上架或投放。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>业务人员按SOP独立完成任务</li><li>按评测表与业务标杆盲评</li><li>至少完成1条视频上架或投放</li></ul></div><div class="task-field"><b>交付物</b><span>独立复跑记录、投放记录、培训验收表</span></div><div class="task-field"><b>指标 / 依赖</b><span>至少2人独立完成、1条实际投放</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="4" data-owner="Cris 共同">
-                    <div class="task-top"><h3>效果验收与需求分级</h3><div class="pills"><span class="pill">Cris</span><span class="pill">共同</span></div></div>
-                    <p class="task-goal">把后续事项分成立即推广、继续试验、暂缓，避免工具需求无限增长。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>与人工基线做质量、时间、成本对比</li><li>采集可获得的上架、播放、点击等早期数据</li><li>筛出必要工具优化项</li></ul></div><div class="task-field"><b>交付物</b><span>试点与投放评测报告、工具需求分级表</span></div><div class="task-field"><b>指标 / 依赖</b><span>效率达标或形成明确反证；依赖基线可靠</span></div></div>
-                  </article>
-                  <article class="task-card" data-week="4" data-owner="Cris">
-                    <div class="task-top"><h3>管理复盘与90天扩展决策</h3><div class="pills"><span class="pill">Cris</span><span class="pill status">管理输出</span></div></div>
-                    <p class="task-goal">用一个可复述的标杆案例说明投入、方法、结果和下一步资源需求。</p>
-                    <div class="task-fields"><div class="task-field"><b>动作</b><ul><li>汇总流程资产、数据与案例对比</li><li>明确下月扩展链路与停止事项</li><li>形成管理层展示材料</li></ul></div><div class="task-field"><b>交付物</b><span>首月复盘、标杆案例、90天路线</span></div><div class="task-field"><b>指标 / 依赖</b><span>W4完成决策会；依赖负责人确认</span></div></div>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="roles">
-          <div class="section-heading">
-            <div><span class="section-index">06</span><div><h2>角色与责任边界</h2><p>Cris主导项目，三位成员各自对一条责任链结果负责</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>角色</th><th>主责链路</th><th>必须交付</th><th>关键协作</th><th>不承担</th></tr></thead>
-                <tbody>
-                  <tr><td>Cris</td><td>项目统筹、资源调度、AI图片与视频生成</td><td>项目章程、调度/生成SOP、指标口径、周会、首月复盘</td><td>协调视觉负责人和一线人员；整合三条链路</td><td>替业务定义未经验证的专业标准</td></tr>
-                  <tr><td>YIYI</td><td>需求、素材、资源匹配前链与产出分发</td><td>需求字段、素材标签、命名归档、分发与AI标识规范</td><td>向Cris提供生成输入；确保结果可追溯</td><td>调度与剪辑环节的最终决策</td></tr>
-                  <tr><td>米酒</td><td>素材验收、剪辑、审核、版本与交付</td><td>剪辑流程、镜头分类、模板、字幕节奏、审核标准</td><td>向前链反馈素材与生成质量要求</td><td>未验证的全自动剪辑承诺</td></tr>
-                  <tr><td>业务导师</td><td>PK、牛奶及对应一线专家的真实生产方法</td><td>标杆样例、关键判断、调整方法、业务同级评测意见</td><td>按责任链分别带教，避免多人同时研究同一环节</td><td>替项目组完成流程沉淀和文档整理</td></tr>
-                  <tr><td>视觉一线人员</td><td>提供真实操作事实并参与试跑</td><td>案例、流程回放、独立复跑、反馈</td><td>与对应责任人共同确认SOP</td><td>项目管理；从零自行绘制完整流程</td></tr>
-                  <tr><td>视觉负责人</td><td>标准和试点结果确认</td><td>关键节点确认、资源协调、验收意见</td><td>在流程初稿后参与评审</td><td>调研初期直接给出“标准答案”</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="deliverables">
-          <div class="section-heading">
-            <div><span class="section-index">07</span><div><h2>首月交付物清单</h2><p>每一项都能直接复用，而非只用于汇报</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="deliverable-grid">
-              <div class="check-item"><span class="check-box">01</span><div><b>L1-L5端到端流程图</b><span>负责人、输入输出、工具、时间、等待、调整、返工和判断点完整。</span></div></div>
-              <div class="check-item"><span class="check-box">02</span><div><b>三条责任链SOP卡</b><span>YIYI、Cris、米酒各一套，包含正常路径与常见异常。</span></div></div>
-              <div class="check-item"><span class="check-box">03</span><div><b>标准与数据字典</b><span>字段、标签、命名、状态、质量、AI标识和任务ID规则。</span></div></div>
-              <div class="check-item"><span class="check-box">04</span><div><b>高手方法与AI机会矩阵</b><span>提炼PK、牛奶妹等人员的方法差异，并按价值和可行性排序。</span></div></div>
-              <div class="check-item"><span class="check-box">05</span><div><b>投放级AI视频与完整样例包</b><span>Brief、素材、资源、生成、剪辑、评测、投放记录全部贯通。</span></div></div>
-              <div class="check-item"><span class="check-box">06</span><div><b>AI操作手册与培训材料</b><span>包含提示词、参数、人工审核点、常见问题与处理方式。</span></div></div>
-              <div class="check-item"><span class="check-box">07</span><div><b>试点、投放与培训验收</b><span>人工基线、盲评、独立复跑、投放记录、质量和成本对比。</span></div></div>
-              <div class="check-item"><span class="check-box">08</span><div><b>工具需求分级与90天路线</b><span>立即推广、继续试验、暂缓；只保留必要开发需求。</span></div></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="acceptance">
-          <div class="section-heading">
-            <div><span class="section-index">08</span><div><h2>首月验收指标</h2><p>效率是结果，质量与可追溯是护栏</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="metric-grid">
-              <article class="card metric-card primary"><span class="metric-value">100%</span><span class="metric-label">流程与任务可追溯</span><p>L1-L5步骤、AI任务ID、成本、版本、调整和投放去向完整。</p></article>
-              <article class="card metric-card primary"><span class="metric-value">≥1条</span><span class="metric-label">实际投放AI视频</span><p>不能停在草稿或演示包，必须完成真实上架或投放。</p></article>
-              <article class="card metric-card guardrail"><span class="metric-value">同级+</span><span class="metric-label">业务盲评质量</span><p>以现有业务标杆为参照，达到同级，争取形成更优案例。</p></article>
-              <article class="card metric-card primary"><span class="metric-value">≥30%</span><span class="metric-label">工时下降</span><p>关键环节工时下降；或单人产能提升不少于50%。</p></article>
-              <article class="card metric-card primary"><span class="metric-value">50%-80%</span><span class="metric-label">AI覆盖假设</span><p>统计被AI执行或显著辅助的工作量，验证目标是否成立。</p></article>
-              <article class="card metric-card primary"><span class="metric-value">3套</span><span class="metric-label">责任链资产</span><p>每条链均具备SOP、标准清单、调整规则和AI机会列表。</p></article>
-              <article class="card metric-card primary"><span class="metric-value">≥2人</span><span class="metric-label">独立完成</span><p>视觉人员可脱离项目组，按目标流程完成真实任务。</p></article>
-              <article class="card metric-card guardrail"><span class="metric-value">下一阶段</span><span class="metric-label">产量翻倍</span><p>作为规模化目标，不在业务量不稳定时做首月硬承诺。</p></article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="risk">
-          <div class="section-heading">
-            <div><span class="section-index">09</span><div><h2>风险与治理机制</h2><p>主动降低替代焦虑、范围膨胀和数据失真</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="risk-grid">
-              <article class="card risk-card high"><span class="risk-bar"></span><div><h3>业务担忧被替代，隐藏真实做法</h3><p>以学习工作为名驻场，先观察一线；强调流程由业务确认，首月不把个体效率作为绩效考核。</p><div class="risk-meta"><span>高影响</span><span>负责人：Cris</span></div></div></article>
-              <article class="card risk-card high"><span class="risk-bar"></span><div><h3>又做成只能展示的草稿视频</h3><p>把“业务同级、通过盲评、实际投放”设为P0门槛，未跨过门槛不算Demo完成。</p><div class="risk-meta"><span>高影响</span><span>负责人：共同</span></div></div></article>
-              <article class="card risk-card"><span class="risk-bar"></span><div><h3>三个人一窝蜂学习同一环节</h3><p>YIYI、Cris、米酒按前链、生成调度、剪辑明确分工，每周只在接口处合并。</p><div class="risk-meta"><span>中影响</span><span>每周审查</span></div></div></article>
-              <article class="card risk-card"><span class="risk-bar"></span><div><h3>标准未稳就提出开发需求</h3><p>工具需求必须关联已验证流程、高频痛点和量化收益；否则归入继续试验或暂缓。</p><div class="risk-meta"><span>中影响</span><span>负责人：Cris</span></div></div></article>
-            </div>
-            <div class="cadence">
-              <div><b>每日15分钟</b><span>三人同步发现、阻塞、次日观察点</span></div>
-              <div><b>每周一次回放</b><span>与一线人员确认事实，不讨论绩效</span></div>
-              <div><b>第2周评审</b><span>确认流程、标准、机会和指标基线</span></div>
-              <div><b>第4周决策</b><span>决定推广、继续试验或停止投入</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="roadmap">
-          <div class="section-heading">
-            <div><span class="section-index">10</span><div><h2>后续90天路线</h2><p>首月验证后再扩大链路与人员范围</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="roadmap">
-              <article class="card roadmap-card current" data-stage="0—30天"><h3>形成一个投放级全链路Demo</h3><p>打通三条责任链，做出业务同级AI视频，完成真实投放并形成流程、标准和效率证据。</p></article>
-              <article class="card roadmap-card" data-stage="31—60天"><h3>扩到2—3类内容</h3><p>在相近品类复制试点；补充图片处理、渠道适配和质量标准，验证跨人员稳定性。</p></article>
-              <article class="card roadmap-card" data-stage="61—90天"><h3>形成团队级生产机制</h3><p>接入投放与复盘数据；固化训练、看板和工具承接机制，评估向产量翻倍推进。</p></article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="basis">
-          <div class="section-heading">
-            <div><span class="section-index">11</span><div><h2>依据与默认假设</h2><p>只使用结论级证据，避免长篇复制原始记录</p></div></div>
-            <button class="collapse-btn" type="button" aria-label="折叠本章节" aria-expanded="true"><span>⌄</span></button>
-          </div>
-          <div class="section-body">
-            <div class="assumptions">
-              <article class="card">
-                <h3>信息依据</h3>
-                <ul class="source-list">
-                  <li><b>PDF会议纪要</b>《07-13 AI项目聚焦与价值落地》《07-13 AI赋能视频生产提效》</li>
-                  <li><b>指定钉钉单聊</b>与水滴在2026-07-11 21:50至2026-07-13 11:48的30条消息，包含健新、CHENCHAO等转发记录</li>
-                  <li><b>钉钉在线表格</b>用户指定的“AI视觉项目管理”节点，重点读取“全景图”及参考结构</li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3>默认假设</h3>
-                <ul class="compact-list">
-                  <li>周期为4周，第2周形成可独立使用的阶段成果。</li>
-                  <li>试点商品由Cris在第1个工作日按选择条件确定。</li>
-                  <li>人名统一为YIYI、Cris、米酒。</li>
-                  <li>首月不扩展到客服、导购等非视觉场景。</li>
-                  <li>不新增公开API；只沉淀必要工具优化需求。</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <footer class="footer">AI赋能视觉项目 · 4周行动计划 · 单文件离线版本</footer>
+  <!-- 分工 -->
+  <section>
+    <div class="sec-title">三个人各管一段，各自对结果负责</div>
+    <div class="roles">
+      <div class="role cris">
+        <h3>Cris <small>总负责 + 调度/生成</small></h3>
+        <ul>
+          <li>定计划、定标准、每周复盘</li>
+          <li>管资源排期，跑AI出图出视频</li>
+          <li>月底给管理层交代：值不值得推广</li>
+        </ul>
       </div>
-    </main>
-  </div>
+      <div class="role yiyi">
+        <h3>YIYI <small>前链：需求 + 素材</small></h3>
+        <ul>
+          <li>需求怎么提、字段怎么填</li>
+          <li>素材标签、命名、归档规范</li>
+          <li>成品分发和AI标识，保证可追溯</li>
+        </ul>
+      </div>
+      <div class="role mijiu">
+        <h3>米酒 <small>后链：剪辑 + 交付</small></h3>
+        <ul>
+          <li>剪辑流程、模板、审核标准</li>
+          <li>记清楚AI草稿到成片改了什么</li>
+          <li>把返工原因归类，反馈给前链</li>
+        </ul>
+      </div>
+    </div>
+    <div class="helpers">
+      <span><b>师傅：</b>PK、牛奶妹带教，教真实做法</span>
+      <span><b>一线同事：</b>出真实案例，参与试跑</span>
+      <span><b>视觉负责人：</b>关键节点把关、验收</span>
+    </div>
+  </section>
 
-  <div class="floating-actions" aria-label="页面操作">
-    <button class="float-btn" id="printBtn" type="button" title="打印或导出PDF" aria-label="打印或导出PDF">▤</button>
-    <button class="float-btn" id="topBtn" type="button" title="返回顶部" aria-label="返回顶部">↑</button>
-  </div>
+  <!-- 4周 -->
+  <section>
+    <div class="sec-title">四周怎么干：先看、再写、后教、最后放手</div>
+    <div class="weeks">
+      <div class="week">
+        <span class="w">第1周</span>
+        <h3>跟着看</h3>
+        <p>蹲在业务旁边，看一条视频到底怎么做出来的。记步骤、记耗时、记返工，只记事实不提方案。</p>
+        <div class="out"><b>拿到手</b>现状流程初稿 + 耗时基线</div>
+      </div>
+      <div class="week">
+        <span class="w">第2周</span>
+        <h3>写下来</h3>
+        <p>把流程拆到动作层，定出SOP和标准；对比高手和普通人用AI的差别，挑3–5个AI最帮得上忙的环节。</p>
+        <div class="out"><b>拿到手</b>流程图 + 3套SOP + 机会清单</div>
+      </div>
+      <div class="week">
+        <span class="w">第3周</span>
+        <h3>教着做</h3>
+        <p>用现有工具做出一条投放级候选视频；三人各带一名一线同事跑一遍自己那段，记下卡点马上修。</p>
+        <div class="out"><b>拿到手</b>候选视频 + 操作手册</div>
+      </div>
+      <div class="week">
+        <span class="w">第4周</span>
+        <h3>放手验</h3>
+        <p>业务自己照SOP做，项目组只帮忙不代劳。至少1条视频真上架投放，和人工做的比质量、比时间、比成本。</p>
+        <div class="out"><b>拿到手</b>投放数据 + 推广/暂停结论</div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    (() => {
-      const sections = [...document.querySelectorAll('.section')];
-      const tocLinks = [...document.querySelectorAll('#toc a')];
-      const progress = document.getElementById('scrollProgress');
-      const filterState = { week: 'all', owner: 'all' };
+  <!-- 原则 -->
+  <section>
+    <div class="rules">
+      <div class="rule do">
+        <h4>✓ 我们的原则</h4>
+        <ul>
+          <li>业务不用自己画流程，我们跟岗还原，业务只确认对不对</li>
+          <li>第一个月不拿个人效率考核任何人，别让大家藏着掖着</li>
+          <li>每天三人碰15分钟，每周和一线回放一次事实</li>
+        </ul>
+      </div>
+      <div class="rule dont">
+        <h4>✗ 这个月不做</h4>
+        <ul>
+          <li>不搞大规模系统开发——流程没验证前不写代码</li>
+          <li>不碰客服、导购，不做全品类铺开</li>
+          <li>草稿和演示不算完成，<b>投放出去才算数</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      document.querySelectorAll('.section-heading').forEach((heading) => {
-        const section = heading.closest('.section');
-        const button = heading.querySelector('.collapse-btn');
-        const toggle = (event) => {
-          if (event.target.closest('a')) return;
-          const collapsed = section.classList.toggle('is-collapsed');
-          button.setAttribute('aria-expanded', String(!collapsed));
-          button.setAttribute('aria-label', collapsed ? '展开本章节' : '折叠本章节');
-        };
-        heading.addEventListener('click', toggle);
-        button.addEventListener('click', (event) => event.stopPropagation());
-        button.addEventListener('click', toggle);
-      });
+  <footer>
+    <span>总负责：Cris ｜ 核心成员：YIYI、米酒</span>
+    <span>第2周出阶段成果 · 第4周开决策会 · 更新于 2026-07-14</span>
+  </footer>
 
-      document.querySelectorAll('.filter-group').forEach((group) => {
-        group.addEventListener('click', (event) => {
-          const button = event.target.closest('.filter-btn');
-          if (!button) return;
-          group.querySelectorAll('.filter-btn').forEach((item) => item.classList.remove('active'));
-          button.classList.add('active');
-          filterState[group.dataset.filterType] = button.dataset.value;
-          applyFilters();
-        });
-      });
-
-      function applyFilters() {
-        document.querySelectorAll('.task-card').forEach((card) => {
-          const weekOK = filterState.week === 'all' || card.dataset.week === filterState.week;
-          const ownerOK = filterState.owner === 'all' || card.dataset.owner.split(' ').includes(filterState.owner);
-          card.hidden = !(weekOK && ownerOK);
-        });
-        document.querySelectorAll('.week-block').forEach((block) => {
-          block.hidden = ![...block.querySelectorAll('.task-card')].some((card) => !card.hidden);
-        });
-        const checkpoint = document.querySelector('.checkpoint');
-        checkpoint.hidden = !(['all', '2'].includes(filterState.week) && ['all', '共同', 'Cris'].includes(filterState.owner));
-      }
-
-      function updateScroll() {
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        progress.style.width = total > 0 ? `${Math.min(100, (window.scrollY / total) * 100)}%` : '0%';
-        let activeId = sections[0]?.id;
-        sections.forEach((section) => {
-          if (section.getBoundingClientRect().top <= 160) activeId = section.id;
-        });
-        tocLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`));
-      }
-
-      document.querySelectorAll('.mobile-toc a').forEach((link) => {
-        link.addEventListener('click', () => link.closest('details').removeAttribute('open'));
-      });
-      document.getElementById('topBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      document.getElementById('printBtn').addEventListener('click', () => window.print());
-      window.addEventListener('scroll', updateScroll, { passive: true });
-      window.addEventListener('resize', updateScroll);
-      updateScroll();
-    })();
-  </script>
+</div>
 </body>
 </html>
