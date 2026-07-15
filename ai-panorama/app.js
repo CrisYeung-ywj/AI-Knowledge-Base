@@ -245,6 +245,7 @@ function updateEditState() {
   document.body.classList.toggle("editing", editing);
   $("onlineEditBtn").classList.toggle("active", editing);
   $("editControls").hidden = !editing;
+  $("cancelEditBtn").hidden = !editing;
   $("onlineEditBtn").textContent = editing ? "完成修改" : "在线修改";
 }
 
