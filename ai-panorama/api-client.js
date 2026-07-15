@@ -22,6 +22,7 @@
     if (!payload.data) return;
     app = normalize(payload.data);
     app.updatedAt = payload.updatedAt || app.updatedAt || null;
+    savedApp = cloneData(app);
     active = app.departments.find((department) => department.name === active?.name) || app.departments[0];
     dirty = false;
     render();
@@ -59,6 +60,7 @@
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || "保存失败：" + response.status);
       app.updatedAt = payload.updatedAt;
+      savedApp = cloneData(app);
       dirty = false;
       updateUpdatedAt(app.updatedAt);
       closeSaveModal();
