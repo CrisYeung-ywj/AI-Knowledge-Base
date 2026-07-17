@@ -1,0 +1,3257 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>林氏家居 AI 战略与赋能全景图</title>
+  <style>
+    :root{
+      --ink:#17221d;
+      --muted:#66736b;
+      --paper:#fbf4e8;
+      --paper2:#f2e7d5;
+      --line:#d4c4ac;
+      --red:#d75235;
+      --teal:#176a70;
+      --green:#3e8064;
+      --blue:#2d638f;
+      --gold:#b88336;
+      --plum:#75516b;
+      --slate:#51615a;
+      --dark:#121d18;
+      --white:#fffaf0;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",Segoe UI,sans-serif;
+      background:linear-gradient(135deg,#101812,#23352b 52%,#151f1b);
+      letter-spacing:0;
+    }
+
+    .deck{
+      width:1920px;
+      margin:0 auto;
+      padding:42px 0 70px;
+    }
+
+    .artboard{
+      position:relative;
+      width:1920px;
+      height:1080px;
+      margin:0 auto 46px;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(23,34,29,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,34,29,.035) 1px, transparent 1px),
+        var(--paper);
+      background-size:34px 34px;
+      border:1px solid rgba(255,255,255,.28);
+      box-shadow:0 28px 90px rgba(0,0,0,.34);
+    }
+
+    body.single{
+      background:var(--paper);
+    }
+
+    body.single .deck{
+      padding:0;
+    }
+
+    body.single .artboard{
+      display:none;
+      margin:0;
+      border:none;
+      box-shadow:none;
+    }
+
+    body.single .artboard.active{
+      display:block;
+    }
+
+    .topbar{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:34px;
+      height:92px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      z-index:10;
+    }
+
+    .kicker{
+      color:#8d6b42;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      margin:8px 0 0;
+      color:var(--ink);
+      font-size:52px;
+      line-height:1.08;
+      font-weight:900;
+    }
+
+    .sub{
+      margin-top:12px;
+      max-width:1040px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.55;
+    }
+
+    .stamp{
+      min-width:206px;
+      border:1px solid var(--line);
+      background:var(--white);
+      border-radius:8px;
+      padding:16px 18px;
+      text-align:center;
+      color:var(--teal);
+      font-weight:900;
+      font-size:20px;
+    }
+
+    .stamp small{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.08em;
+    }
+
+    .page-mark{
+      position:absolute;
+      left:54px;
+      bottom:26px;
+      color:#7a756c;
+      font-size:13px;
+      z-index:10;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:var(--white);
+      color:#2e3d35;
+      font-size:13px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      display:inline-block;
+      background:var(--red);
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:48px;
+      padding:4px 9px;
+      border-radius:999px;
+      background:#16241d;
+      color:var(--white);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.04em;
+    }
+
+    .formula{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 20px;
+      border-radius:8px;
+      border:1px solid rgba(215,82,53,.32);
+      background:#fff4e5;
+      color:var(--red);
+      font-size:28px;
+      line-height:1;
+      font-weight:900;
+      box-shadow:0 14px 30px rgba(75,57,35,.12);
+    }
+
+    .formula-flow{
+      display:grid;
+      grid-template-columns:auto 46px 1fr;
+      align-items:center;
+      gap:10px;
+    }
+
+    .formula-arrow{
+      height:2px;
+      background:var(--red);
+      position:relative;
+    }
+
+    .formula-arrow:after{
+      content:"";
+      position:absolute;
+      right:-1px;
+      top:50%;
+      width:12px;
+      height:12px;
+      border-top:3px solid var(--red);
+      border-right:3px solid var(--red);
+      transform:translateY(-50%) rotate(45deg);
+    }
+
+    .formula-target{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:51px;
+      border:1px solid rgba(23,106,112,.34);
+      border-radius:8px;
+      background:#edf5ef;
+      color:var(--teal);
+      font-size:25px;
+      font-weight:900;
+      box-shadow:0 14px 30px rgba(75,57,35,.10);
+    }
+
+    .grid-bg{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:
+        linear-gradient(115deg,rgba(215,82,53,.08),transparent 32%),
+        linear-gradient(245deg,rgba(45,99,143,.10),transparent 34%),
+        #f7efe1;
+      overflow:hidden;
+    }
+
+    /* 01 overview */
+    .overview-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      display:grid;
+      grid-template-columns:650px 1fr;
+      gap:24px;
+    }
+
+    .overview-left{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff8ec;
+      padding:28px;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      gap:22px;
+    }
+
+    .strategy-line{
+      display:grid;
+      gap:14px;
+    }
+
+    .strategy-item{
+      border:1px solid #dacbb6;
+      border-radius:8px;
+      background:#f9f0e1;
+      padding:18px 20px;
+    }
+
+    .strategy-item b{
+      display:block;
+      margin-bottom:8px;
+      color:#7c5a34;
+      font-size:15px;
+    }
+
+    .strategy-item strong{
+      display:block;
+      color:var(--ink);
+      font-size:28px;
+      line-height:1.15;
+    }
+
+    .strategy-item p{
+      margin:9px 0 0;
+      color:#59665f;
+      font-size:15px;
+      line-height:1.52;
+    }
+
+    .principles{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .principles span{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#f4ead9;
+      padding:14px;
+      color:#3f4d45;
+      font-size:15px;
+      font-weight:900;
+      text-align:center;
+    }
+
+    .capability-wall{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#edf0e6;
+      overflow:hidden;
+      padding:26px;
+    }
+
+    .capability-divider{
+      position:absolute;
+      top:28px;
+      bottom:28px;
+      left:50%;
+      width:1px;
+      background:linear-gradient(180deg,transparent,rgba(23,106,112,.42),transparent);
+      z-index:1;
+    }
+
+    .zone-title{
+      position:absolute;
+      top:22px;
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,250,240,.94);
+      color:#34443b;
+      font-size:14px;
+      font-weight:900;
+      box-shadow:0 10px 22px rgba(36,42,36,.08);
+    }
+
+    .zone-title.general{left:30px}
+    .zone-title.vertical{right:30px}
+
+    .zone-title:before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--c);
+    }
+
+    .capability-ring{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:430px;
+      height:430px;
+      transform:translate(-50%,-50%);
+      border:2px dashed rgba(23,106,112,.34);
+      border-radius:50%;
+      background:rgba(255,250,240,.44);
+    }
+
+    .capability-center{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:310px;
+      min-height:210px;
+      transform:translate(-50%,-50%);
+      border-radius:8px;
+      background:#13201a;
+      color:var(--white);
+      padding:26px;
+      text-align:center;
+      box-shadow:0 22px 56px rgba(23,34,29,.28);
+      z-index:2;
+    }
+
+    .capability-center h2{
+      margin:0 0 12px;
+      font-size:34px;
+      line-height:1.12;
+    }
+
+    .capability-center p{
+      margin:0;
+      color:#dfd5c6;
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .product-card{
+      position:absolute;
+      left:var(--x);
+      top:var(--y);
+      width:var(--w);
+      min-height:var(--h);
+      transform:translate(-50%,-50%);
+      border:1px solid var(--line);
+      border-left:10px solid var(--c);
+      border-radius:8px;
+      background:rgba(255,250,240,.98);
+      padding:15px 16px 14px;
+      box-shadow:0 14px 30px rgba(36,42,36,.13);
+      z-index:3;
+    }
+
+    .product-card h3{
+      margin:0;
+      color:var(--ink);
+      font-size:23px;
+      line-height:1.1;
+    }
+
+    .agent-badge{
+      display:inline-flex;
+      align-items:center;
+      margin-top:7px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(23,106,112,.11);
+      color:var(--teal);
+      font-size:11px;
+      line-height:1;
+      font-weight:900;
+    }
+
+    .agent-badge.vertical{
+      background:rgba(215,82,53,.11);
+      color:var(--red);
+    }
+
+    .product-card .keyword{
+      margin-top:7px;
+      color:var(--c);
+      font-size:15px;
+      font-weight:900;
+    }
+
+    .product-card p{
+      margin:10px 0 0;
+      color:#526059;
+      font-size:13px;
+      line-height:1.42;
+    }
+
+    .product-card .next{
+      margin-top:10px;
+      padding:8px 9px;
+      border:1px dashed #c7b89f;
+      border-radius:8px;
+      background:#eee7dc;
+      color:#566159;
+      font-size:11px;
+      line-height:1.38;
+    }
+
+    .product-card.more-card{
+      border-left-color:var(--gold);
+      background:rgba(255,250,240,.92);
+    }
+
+    .product-card.more-card h3{
+      color:var(--gold);
+      font-size:22px;
+    }
+
+    /* 02 super individual */
+    .super-stage{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:
+        linear-gradient(120deg,rgba(23,106,112,.12),transparent 42%),
+        linear-gradient(300deg,rgba(215,82,53,.12),transparent 40%),
+        #f7efe1;
+      overflow:hidden;
+    }
+
+    .super-person{
+      position:absolute;
+      left:50%;
+      top:52%;
+      width:390px;
+      height:500px;
+      transform:translate(-50%,-50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .person-aura{
+      position:absolute;
+      width:390px;
+      height:390px;
+      border-radius:50%;
+      border:2px solid rgba(23,106,112,.28);
+      background:rgba(255,250,240,.55);
+    }
+
+    .person-body{
+      position:relative;
+      width:210px;
+      height:310px;
+      z-index:2;
+    }
+
+    .head{
+      position:absolute;
+      left:62px;
+      top:0;
+      width:86px;
+      height:86px;
+      border-radius:50%;
+      background:#f4c9a9;
+      border:5px solid #1b2a23;
+    }
+
+    .torso{
+      position:absolute;
+      left:32px;
+      top:92px;
+      width:146px;
+      height:168px;
+      border-radius:44px 44px 8px 8px;
+      background:#176a70;
+      border:5px solid #1b2a23;
+    }
+
+    .arm{
+      position:absolute;
+      top:122px;
+      width:48px;
+      height:126px;
+      border-radius:30px;
+      background:#f4c9a9;
+      border:5px solid #1b2a23;
+    }
+
+    .arm.left{left:0;transform:rotate(14deg)}
+    .arm.right{right:0;transform:rotate(-14deg)}
+
+    .leg{
+      position:absolute;
+      top:244px;
+      width:58px;
+      height:66px;
+      border-radius:8px 8px 24px 24px;
+      background:#243a31;
+    }
+
+    .leg.left{left:52px}
+    .leg.right{right:52px}
+
+    .role-card{
+      position:absolute;
+      width:285px;
+      min-height:132px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,250,240,.96);
+      padding:16px 18px 16px 72px;
+      box-shadow:0 16px 32px rgba(36,42,36,.12);
+    }
+
+    .role-card:before{
+      content:"";
+      position:absolute;
+      left:18px;
+      top:22px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:var(--c);
+      box-shadow:0 42px 0 -6px var(--c);
+    }
+
+    .role-card h3{
+      margin:0 0 8px;
+      color:var(--c);
+      font-size:24px;
+      line-height:1.05;
+    }
+
+    .role-card p{
+      margin:0;
+      color:#526059;
+      font-size:15px;
+      line-height:1.48;
+    }
+
+    .tool-chip{
+      position:absolute;
+      left:var(--x);
+      top:var(--y);
+      min-width:118px;
+      padding:12px 16px;
+      border:1px solid rgba(23,34,29,.24);
+      border-radius:999px;
+      background:#fffaf0;
+      color:#26372f;
+      font-size:16px;
+      font-weight:900;
+      text-align:center;
+      box-shadow:0 10px 24px rgba(38,45,39,.11);
+    }
+
+    .tool-chip:before{
+      content:"";
+      display:inline-block;
+      width:10px;
+      height:10px;
+      margin-right:8px;
+      border-radius:50%;
+      background:var(--c);
+    }
+
+    .super-caption{
+      position:absolute;
+      left:96px;
+      bottom:72px;
+      width:1728px;
+      display:grid;
+      grid-template-columns:1.15fr 1fr 1fr;
+      gap:16px;
+    }
+
+    .caption-block{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,250,240,.95);
+      padding:18px 20px;
+    }
+
+    .caption-block b{
+      display:block;
+      margin-bottom:8px;
+      color:#7c5a34;
+      font-size:16px;
+    }
+
+    .caption-block p{
+      margin:0;
+      color:#526059;
+      font-size:16px;
+      line-height:1.5;
+    }
+
+    /* 03 organization */
+    .org-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      display:grid;
+      grid-template-rows:170px 1fr 150px;
+      gap:18px;
+    }
+
+    .step-flow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+
+    .flow-step{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff8ec;
+      padding:18px 16px 16px;
+      box-shadow:0 12px 24px rgba(36,42,36,.08);
+    }
+
+    .flow-step:after{
+      content:"";
+      position:absolute;
+      right:-12px;
+      top:50%;
+      width:20px;
+      height:2px;
+      background:#bba98f;
+    }
+
+    .flow-step:last-child:after{display:none}
+
+    .flow-step span{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      background:var(--c);
+      color:var(--white);
+      font-weight:900;
+    }
+
+    .flow-step h3{
+      margin:14px 0 8px;
+      color:#1f3028;
+      font-size:24px;
+    }
+
+    .flow-step p{
+      margin:0;
+      color:#5a665f;
+      font-size:15px;
+      line-height:1.45;
+    }
+
+    .path-board{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .org-path{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#f8efe0;
+      padding:24px;
+      overflow:hidden;
+    }
+
+    .org-path h2{
+      margin:0 0 12px;
+      color:var(--c);
+      font-size:36px;
+      line-height:1.08;
+    }
+
+    .org-path .path-sub{
+      margin:0 0 20px;
+      color:#56635b;
+      font-size:17px;
+      line-height:1.55;
+    }
+
+    .path-items{
+      display:grid;
+      gap:12px;
+    }
+
+    .path-item{
+      display:grid;
+      grid-template-columns:64px 1fr;
+      gap:12px;
+      align-items:center;
+      border:1px solid rgba(23,34,29,.15);
+      border-radius:8px;
+      background:#fffaf0;
+      padding:12px 14px;
+    }
+
+    .path-item strong{
+      color:var(--c);
+      font-size:20px;
+      text-align:center;
+    }
+
+    .path-item span{
+      color:#3e4c44;
+      font-size:15px;
+      line-height:1.42;
+    }
+
+    .mechanism-strip{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .mechanism{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff8ec;
+      padding:18px 20px;
+    }
+
+    .mechanism b{
+      display:block;
+      margin-bottom:8px;
+      color:#7c5a34;
+      font-size:17px;
+    }
+
+    .mechanism p{
+      margin:0;
+      color:#53625a;
+      font-size:15px;
+      line-height:1.48;
+    }
+
+    /* 04 technology */
+    .tech-stack{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:150px;
+      bottom:52px;
+      display:grid;
+      grid-template-rows:1fr 1fr 1fr;
+      gap:14px;
+    }
+
+    .compare-row{
+      display:grid;
+      grid-template-columns:305px 1fr 1fr;
+      gap:16px;
+      min-height:0;
+    }
+
+    .compare-title{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#14211b;
+      color:var(--white);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .compare-title h2{
+      margin:0;
+      font-size:30px;
+      line-height:1.16;
+    }
+
+    .compare-title p{
+      margin:14px 0 0;
+      color:#d8cfc0;
+      font-size:15px;
+      line-height:1.52;
+    }
+
+    .choice{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff8ec;
+      padding:18px 20px;
+      overflow:hidden;
+    }
+
+    .choice.recommended{
+      border-color:rgba(23,106,112,.45);
+      background:#edf0e6;
+    }
+
+    .choice.rejected{
+      background:#f3eadc;
+    }
+
+    .choice h3{
+      margin:0 0 12px;
+      color:var(--c);
+      font-size:28px;
+      line-height:1.1;
+    }
+
+    .choice .status{
+      position:absolute;
+      top:18px;
+      right:18px;
+      border-radius:999px;
+      padding:7px 11px;
+      color:var(--white);
+      background:var(--c);
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .choice p{
+      margin:0 0 12px;
+      color:#4e5d55;
+      font-size:16px;
+      line-height:1.52;
+      max-width:630px;
+    }
+
+    .mini-diagram{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      margin-top:12px;
+    }
+
+    .mini-node{
+      min-width:92px;
+      border:1px solid rgba(23,34,29,.18);
+      border-radius:8px;
+      background:rgba(255,250,240,.9);
+      padding:9px 12px;
+      color:#2b3b33;
+      font-size:14px;
+      font-weight:900;
+      text-align:center;
+    }
+
+    .base-node{
+      min-width:170px;
+      background:#15211c;
+      color:var(--white);
+      border-color:#15211c;
+    }
+
+    .risk-list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .risk-list span{
+      border:1px solid rgba(23,34,29,.14);
+      border-radius:8px;
+      background:rgba(255,250,240,.75);
+      padding:9px 10px;
+      color:#4b5a52;
+      font-size:14px;
+      line-height:1.35;
+    }
+
+    /* ===== Task 2: risk-list 样式③ (square X + heavier red gradient) ===== */
+    .risk-list.risk-danger span{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      border:1px solid rgba(215,82,53,.4);
+      background:linear-gradient(135deg,rgba(215,82,53,.14),rgba(215,82,53,.08));
+      color:#9c3826;
+      font-weight:700;
+    }
+    .risk-list.risk-danger span .xmark{
+      flex:none;
+      width:19px;
+      height:19px;
+      border-radius:4px;
+      background:var(--red);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    /* ===== Task 1: 方案C metaphor scene ===== */
+    .metaphor-scene{
+      margin-top:11px;
+      padding:11px 14px;
+      border-radius:10px;
+    }
+    .metaphor-scene.bad{background:linear-gradient(135deg,#ece4d4,#e3d9c4)}
+    .metaphor-scene.good{background:linear-gradient(135deg,#e0ebe2,#d2e4d6)}
+    .scene-head{
+      font-size:13.5px;
+      font-weight:900;
+      margin-bottom:9px;
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    .metaphor-scene.bad .scene-head{color:var(--slate)}
+    .metaphor-scene.good .scene-head{color:var(--teal)}
+    .crowd{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+    .worker{display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.9}
+    .worker .face{
+      width:28px;height:28px;border-radius:50%;
+      background:#bfb094;border:1.5px solid #a89568;
+      display:flex;align-items:center;justify-content:center;font-size:14px;
+    }
+    .worker .who{font-size:9.5px;color:#7a6a4a;font-weight:700}
+    .solo{display:flex;align-items:center;gap:14px}
+    .solo .big-face{
+      width:56px;height:56px;border-radius:50%;
+      background:var(--teal);
+      display:flex;align-items:center;justify-content:center;font-size:30px;
+      box-shadow:0 4px 14px rgba(23,106,112,.4);flex:none;
+    }
+    .solo .solo-desc b{display:block;font-size:14px;color:var(--teal);margin-bottom:3px}
+    .solo .solo-desc span{font-size:11.5px;color:#5e6d63;line-height:1.4}
+    .toolbelt{display:flex;gap:5px;margin-top:6px}
+    .toolbelt i{
+      width:20px;height:20px;border-radius:5px;
+      background:rgba(23,106,112,.2);
+      display:flex;align-items:center;justify-content:center;font-size:11px;font-style:normal;
+    }
+
+    /* ===== Task 3: product scenario lists ===== */
+    .scenario-block{margin-top:9px}
+    .scenario-head{
+      font-size:12.5px;
+      font-weight:900;
+      color:#7a6a4a;
+      margin-bottom:6px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .scenario-grid{display:flex;flex-direction:column;gap:4px}
+    .scenario-item{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:5px 10px;
+      border-radius:7px;
+      background:rgba(255,250,240,.7);
+      border:1px solid rgba(23,34,29,.1);
+    }
+    .scenario-item .dept{
+      flex:none;
+      min-width:112px;
+      font-size:12px;
+      font-weight:900;
+      color:var(--c);
+      padding:2px 7px;
+      border-radius:5px;
+      background:rgba(0,0,0,.04);
+      text-align:center;
+    }
+    .scenario-item .task{
+      font-size:12.5px;
+      color:#4e5d55;
+      line-height:1.3;
+    }
+
+    /* 05 rollout */
+    .rollout-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      display:grid;
+      grid-template-columns:420px 1fr;
+      gap:20px;
+    }
+
+    .dept-panel{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff8ec;
+      padding:18px;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      gap:14px;
+    }
+
+    .dept-panel h2,
+    .matrix-panel h2{
+      margin:0;
+      color:#20302a;
+      font-size:26px;
+      line-height:1.12;
+    }
+
+    .dept-panel p{
+      margin:7px 0 0;
+      color:#66736b;
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .dept-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      align-content:start;
+      overflow:hidden;
+    }
+
+    .dept-card{
+      border:1px solid #d8c9b4;
+      border-radius:8px;
+      background:#fffaf0;
+      min-height:62px;
+      padding:9px 10px;
+      text-align:left;
+      font-family:inherit;
+      color:#20302a;
+      cursor:pointer;
+    }
+
+    .dept-card.active{
+      border-color:var(--red);
+      background:#fff0e4;
+      box-shadow:inset 0 0 0 1px rgba(215,82,53,.18);
+    }
+
+    .dept-card b{
+      display:block;
+      font-size:14px;
+      line-height:1.18;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .dept-card span{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin-top:7px;
+      color:#7a756c;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .dept-card i{
+      display:block;
+      width:44px;
+      height:6px;
+      border-radius:999px;
+      background:#e5d9c7;
+      overflow:hidden;
+      font-style:normal;
+    }
+
+    .dept-card i em{
+      display:block;
+      height:100%;
+      width:var(--p);
+      background:var(--c);
+    }
+
+    .dept-note{
+      border:1px solid #d8c9b4;
+      border-radius:8px;
+      background:#f4ead9;
+      padding:13px 14px;
+      color:#526059;
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .matrix-panel{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#f7efe1;
+      padding:18px;
+      overflow:hidden;
+    }
+
+    .dept-summary{
+      display:grid;
+      grid-template-columns:1fr 170px 210px;
+      gap:14px;
+      align-items:stretch;
+      margin-bottom:14px;
+    }
+
+    .summary-card{
+      border:1px solid #d7c8b1;
+      border-radius:8px;
+      background:#fffaf0;
+      padding:16px 18px;
+    }
+
+    .summary-card h3{
+      margin:0 0 8px;
+      color:var(--teal);
+      font-size:26px;
+      line-height:1.08;
+    }
+
+    .summary-card p{
+      margin:0;
+      color:#56645c;
+      font-size:15px;
+      line-height:1.45;
+    }
+
+    .progress-big{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      border:1px solid #d7c8b1;
+      border-radius:8px;
+      background:#fffaf0;
+    }
+
+    .progress-big strong{
+      color:var(--red);
+      font-size:44px;
+      line-height:1;
+    }
+
+    .progress-big span{
+      margin-top:8px;
+      color:#66736b;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .chain-strip{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .chain-step{
+      position:relative;
+      border:1px solid #d6c6ae;
+      border-radius:8px;
+      background:#fffaf0;
+      padding:12px 12px;
+      min-height:62px;
+    }
+
+    .chain-step b{
+      display:block;
+      color:#23342c;
+      font-size:15px;
+      line-height:1.2;
+    }
+
+    .chain-step span{
+      display:block;
+      margin-top:5px;
+      color:#7a756c;
+      font-size:12px;
+      line-height:1.28;
+    }
+
+    .matrix{
+      display:grid;
+      grid-template-columns:132px repeat(7,1fr);
+      grid-template-rows:50px repeat(4,96px);
+      border:1px solid #c9b89d;
+      border-radius:8px;
+      overflow:hidden;
+      background:#c9b89d;
+      gap:1px;
+    }
+
+    .matrix-cell{
+      background:#fffaf0;
+      padding:10px;
+      min-width:0;
+    }
+
+    .matrix-head{
+      background:#14575e;
+      color:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:14px;
+      line-height:1.25;
+      font-weight:900;
+    }
+
+    .row-head{
+      background:#e2eee9;
+      color:#14575e;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:16px;
+      font-weight:900;
+    }
+
+    .matrix-cell b{
+      display:block;
+      color:var(--red);
+      font-size:14px;
+      line-height:1.2;
+    }
+
+    .matrix-cell span{
+      display:block;
+      margin-top:6px;
+      color:#4f5e56;
+      font-size:12px;
+      line-height:1.34;
+    }
+
+    .matrix-cell.hot{
+      background:#fff1cc;
+    }
+
+    .matrix-cell.hot b{
+      color:#996a21;
+    }
+
+    .rollout-legend{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      color:#56645c;
+      font-size:14px;
+      line-height:1.45;
+    }
+      /* ============================================================
+       06 / 07 / 08  —  图A 机器人 · 图B 工具选型 · 图C 场景对照
+       (appended after technology page, linsy style)
+    ============================================================ */
+
+    /* ---------- shared small bits ---------- */
+    .fig-intro{
+      position:absolute;
+      left:54px;
+      top:150px;
+      font-size:16px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    /* ===== 图A robot diagram ===== */
+    .figa-stage{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:150px;
+      bottom:54px;
+    }
+    .figa-stage svg{width:100%;height:100%}
+    .figa-legend{
+      position:absolute;
+      left:54px;
+      bottom:60px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      z-index:3;
+    }
+    .figa-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:var(--white);
+      font-size:14px;
+      font-weight:900;
+      color:#2e3d35;
+    }
+    .figa-chip .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+    /* ===== 图B tool matrix ===== */
+    .figb-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:150px;
+      bottom:54px;
+      display:grid;
+      grid-template-rows:auto 1fr;
+      gap:18px;
+    }
+    .figb-matrix{
+      border:1px solid var(--line);
+      border-radius:10px;
+      overflow:hidden;
+      background:var(--white);
+    }
+    .figb-matrix table{width:100%;border-collapse:collapse;font-size:18px}
+    .figb-matrix thead th{
+      padding:16px 18px;
+      text-align:center;
+      font-weight:900;
+      font-size:17px;
+      background:var(--paper2);
+      border-bottom:2px solid var(--line);
+    }
+    .figb-matrix thead th.dim{text-align:left;width:24%}
+    .figb-matrix thead th.ourcol{background:#e4efe7}
+    .figb-matrix thead th .role{display:block;font-weight:600;color:var(--muted);font-size:13px;margin-top:3px}
+    .figb-matrix tbody td{
+      padding:13px 18px;
+      text-align:center;
+      border-bottom:1px solid #eaddc6;
+      vertical-align:middle;
+    }
+    .figb-matrix tbody td.dim{text-align:left;font-weight:900;color:var(--ink);font-size:16px}
+    .figb-matrix tbody td.dim small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:2px}
+    .figb-matrix tbody td.ourcol{background:#eef6f0}
+    .figb-matrix tbody tr:last-child td{border-bottom:none}
+    .figb-yes{color:var(--green);font-weight:900;font-size:20px}
+    .figb-no{color:var(--red);font-weight:900;font-size:19px}
+    .figb-part{color:var(--gold);font-weight:900;font-size:16px}
+    .figb-mini{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+    .figb-verdict td{background:#14211b !important;color:var(--white);font-weight:900;font-size:16px}
+    .figb-verdict td.ourcol{background:#1f7a32 !important}
+    .figb-verdict .vno{color:#ff9b87}
+    /* bottom: risk + codex */
+    .figb-bottom{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+    .figb-risk{
+      border:1px solid rgba(215,82,53,.35);
+      border-radius:10px;
+      background:#f7ece2;
+      padding:20px 22px;
+    }
+    .figb-risk h3{margin:0 0 14px;font-size:20px;color:var(--red);font-weight:900}
+    .figb-risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .figb-risk-grid span{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      border:1px solid rgba(215,82,53,.4);
+      background:linear-gradient(135deg,rgba(215,82,53,.14),rgba(215,82,53,.08));
+      border-radius:8px;
+      padding:11px 13px;
+      color:#9c3826;
+      font-size:14.5px;
+      font-weight:700;
+      line-height:1.3;
+    }
+    .figb-risk-grid .xm{
+      flex:none;width:20px;height:20px;border-radius:4px;background:var(--red);color:#fff;
+      display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;
+    }
+    .figb-codex{
+      border:1px solid var(--line);
+      border-left:5px solid var(--gold);
+      border-radius:10px;
+      background:var(--white);
+      padding:20px 22px;
+    }
+    .figb-codex h3{margin:0 0 10px;font-size:18px;color:var(--gold);font-weight:900}
+    .figb-codex p{margin:0;font-size:14px;color:#4e5d55;line-height:1.6}
+    .figb-codex p b{color:var(--ink)}
+
+    /* ===== 图C scenario table ===== */
+    .figc-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:158px;
+      bottom:54px;
+      display:grid;
+      grid-template-rows:auto auto;
+      gap:16px;
+    }
+    .figc-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:2px}
+    .figc-chip{
+      display:flex;align-items:center;gap:10px;
+      padding:9px 15px;border:1px solid var(--line);border-radius:11px;background:var(--white);
+      font-size:14px;font-weight:900;
+    }
+    .figc-chip .dot{width:11px;height:11px;border-radius:50%;flex:none}
+    .figc-chip small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:1px}
+    .figc-table{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--white)}
+    .figc-table table{width:100%;border-collapse:collapse;font-size:14.5px}
+    .figc-table thead th{
+      text-align:left;padding:13px 16px;font-weight:900;font-size:14.5px;
+      background:var(--paper2);border-bottom:2px solid var(--line);
+    }
+    .figc-table thead th .ph{display:flex;align-items:center;gap:7px}
+    .figc-table thead th .ph .dot{width:9px;height:9px;border-radius:50%}
+    .figc-table thead th .role{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+    .figc-coldim{width:13%}
+    .figc-table tbody td{padding:11px 16px;border-bottom:1px solid #eaddc6;vertical-align:top}
+    .figc-table tbody tr:last-child td{border-bottom:none}
+    .figc-dimcell{font-weight:900;color:var(--ink)}
+    .figc-dimcell small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+    .figc-cell40{background:#eef2f8}
+    .figc-txt{color:#4e5d55;font-size:13.5px;line-height:1.45}
+    .figc-txt b{color:var(--ink);font-weight:700}
+    .figc-lvl{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:13px;margin-bottom:3px}
+    .figc-lvl::before{content:"";width:7px;height:7px;border-radius:50%;flex:none}
+    .figc-lvl.base::before{background:var(--slate)}
+    .figc-lvl.up::before{background:var(--blue)}
+    .figc-lvl.exec::before{background:var(--red)}
+    /* fit matrix */
+    .figc-fit{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--white)}
+    .figc-fit table{width:100%;border-collapse:collapse;font-size:14px}
+    .figc-fit th,.figc-fit td{padding:10px 16px;border-bottom:1px solid #eaddc6;text-align:center}
+    .figc-fit th{background:var(--paper2);font-weight:900;font-size:13.5px;border-bottom:2px solid var(--line)}
+    .figc-fit th:first-child,.figc-fit td:first-child{text-align:left;width:40%}
+    .figc-fit td:first-child{font-weight:700;color:var(--ink)}
+    .figc-fit tbody tr:last-child td{border-bottom:none}
+    .figc-fit .hdot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:5px}
+    .figc-best{color:var(--green);font-weight:900;font-size:15px}
+    .figc-ok{color:var(--blue);font-weight:900;font-size:15px}
+    .figc-weak{color:var(--muted);font-weight:500;font-size:15px}
+    .figc-fit-title{font-size:15px;font-weight:900;margin:0 0 8px}
+
+    /* 2026-07 user revision: visualized role uplift, simplified org map, robot photo, dynamic value-chain matrix */
+    .capability-lift-stage{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .lift-card{
+      position:relative;
+      min-height:0;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:
+        radial-gradient(circle at 88% 16%,rgba(23,106,112,.16),transparent 24%),
+        linear-gradient(135deg,#fffaf0,#f3eadb);
+      padding:20px 20px 18px;
+      overflow:hidden;
+      box-shadow:0 14px 30px rgba(36,42,36,.1);
+    }
+
+    .lift-card:after{
+      content:"";
+      position:absolute;
+      left:164px;
+      right:230px;
+      top:88px;
+      border-top:2px dashed rgba(23,34,29,.22);
+    }
+
+    .job-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+      position:relative;
+      z-index:2;
+    }
+
+    .job-person{
+      display:flex;
+      align-items:center;
+      gap:13px;
+    }
+
+    .person-icon{
+      width:72px;
+      height:72px;
+      border-radius:22px;
+      background:var(--c);
+      color:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+      box-shadow:inset 0 -12px 0 rgba(0,0,0,.12),0 12px 24px rgba(36,42,36,.15);
+    }
+
+    .job-title b{
+      display:block;
+      color:var(--ink);
+      font-size:27px;
+      line-height:1.08;
+    }
+
+    .job-title span{
+      display:block;
+      margin-top:5px;
+      color:var(--c);
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .ai-core{
+      flex:none;
+      width:126px;
+      height:72px;
+      border-radius:18px;
+      background:#15211c;
+      color:var(--white);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      box-shadow:0 14px 28px rgba(23,34,29,.22);
+    }
+
+    .ai-core .bot{
+      font-size:28px;
+      line-height:1;
+    }
+
+    .ai-core small{
+      margin-top:5px;
+      color:#f3d7a6;
+      font-size:12px;
+      letter-spacing:.08em;
+    }
+
+    .ability-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1.18fr;
+      gap:14px;
+    }
+
+    .ability-box{
+      border:1px solid rgba(23,34,29,.12);
+      border-radius:8px;
+      background:rgba(255,250,240,.88);
+      padding:14px 15px;
+    }
+
+    .ability-box h4{
+      margin:0 0 10px;
+      color:#7c5a34;
+      font-size:15px;
+      line-height:1;
+    }
+
+    .ability-box .tokens{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .ability-box .tokens span{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      min-height:31px;
+      padding:7px 9px;
+      border-radius:7px;
+      background:#efe4d2;
+      color:#425149;
+      font-size:13px;
+      font-weight:800;
+      line-height:1.2;
+    }
+
+    .superpower{
+      border-color:rgba(23,106,112,.28);
+      background:linear-gradient(135deg,rgba(23,106,112,.1),rgba(255,250,240,.9));
+    }
+
+    .superpower h4{color:var(--c)}
+    .superpower .tokens span{background:#fff1cc;color:#654a22}
+
+    .org-visual-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:154px;
+      bottom:70px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      grid-template-rows:1fr 238px;
+      gap:18px;
+    }
+
+    .org-map-card{
+      grid-row:1 / 3;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:
+        linear-gradient(rgba(23,34,29,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,34,29,.035) 1px, transparent 1px),
+        #f7efe1;
+      background-size:30px 30px;
+      position:relative;
+      overflow:hidden;
+      padding:26px;
+    }
+
+    .org-map-card:before{
+      content:"";
+      position:absolute;
+      inset:38px;
+      border:1px dashed rgba(23,106,112,.28);
+      border-radius:50%;
+    }
+
+    .org-center{
+      position:absolute;
+      left:50%;
+      top:48%;
+      width:250px;
+      min-height:126px;
+      transform:translate(-50%,-50%);
+      border-radius:24px;
+      background:#14211b;
+      color:var(--white);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:18px;
+      box-shadow:0 24px 54px rgba(23,34,29,.3);
+      z-index:3;
+    }
+
+    .org-center b{font-size:24px;line-height:1.15}
+    .org-center span{margin-top:8px;color:#f0d7a6;font-size:13px;line-height:1.35}
+
+    .org-node{
+      position:absolute;
+      left:var(--x);
+      top:var(--y);
+      transform:translate(-50%,-50%);
+      width:var(--w,184px);
+      min-height:76px;
+      border:1px solid rgba(23,34,29,.16);
+      border-left:8px solid var(--c);
+      border-radius:14px;
+      background:rgba(255,250,240,.96);
+      padding:12px 13px;
+      box-shadow:0 14px 28px rgba(36,42,36,.1);
+      z-index:2;
+    }
+
+    .org-node strong{
+      display:block;
+      color:var(--c);
+      font-size:16px;
+      line-height:1.15;
+    }
+
+    .org-node span{
+      display:block;
+      margin-top:5px;
+      color:#526059;
+      font-size:12px;
+      line-height:1.28;
+    }
+
+    .org-link{
+      position:absolute;
+      left:50%;
+      top:48%;
+      width:var(--len);
+      height:0;
+      border-top:2px dashed rgba(23,106,112,.42);
+      transform-origin:left center;
+      transform:rotate(var(--rot));
+      z-index:1;
+    }
+
+    .org-path-v2{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff8ec;
+      padding:22px;
+      overflow:hidden;
+    }
+
+    .org-path-v2 h2{
+      margin:0 0 9px;
+      color:var(--c);
+      font-size:30px;
+      line-height:1.08;
+    }
+
+    .org-path-v2 .path-sub{
+      margin:0 0 14px;
+      color:#56635b;
+      font-size:15px;
+      line-height:1.45;
+    }
+
+    .org-path-v2 .path-items{
+      gap:9px;
+    }
+
+    .org-path-v2 .path-item{
+      grid-template-columns:48px 1fr;
+      padding:9px 12px;
+    }
+
+    .org-path-v2 .path-item strong{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:31px;
+      height:31px;
+      border-radius:50%;
+      color:var(--white);
+      background:var(--c);
+      font-size:16px;
+    }
+
+    .org-path-v2 .path-item span{
+      font-size:13.5px;
+    }
+
+    .mechanism-strip-v2{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      grid-column:2;
+    }
+
+    .mechanism-strip-v2 .mechanism{
+      padding:16px 17px;
+    }
+
+    .agent-board{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:150px;
+      bottom:54px;
+      display:grid;
+      grid-template-columns:430px 1fr 430px;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .agent-stack{
+      display:grid;
+      gap:16px;
+      align-content:center;
+    }
+
+    .agent-card{
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#fff8ec;
+      padding:18px 20px;
+      box-shadow:0 12px 26px rgba(36,42,36,.08);
+    }
+
+    .agent-card h3{
+      margin:0 0 8px;
+      color:var(--c);
+      font-size:23px;
+      line-height:1.1;
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .agent-card p{
+      margin:0;
+      color:#4f5e56;
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .agent-hero{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:
+        radial-gradient(circle at center 42%,rgba(255,186,84,.28),transparent 38%),
+        linear-gradient(180deg,#fff4e4,#f4e5cf);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:34px;
+    }
+
+    .agent-hero:before{
+      content:"";
+      position:absolute;
+      width:600px;
+      height:600px;
+      border-radius:50%;
+      border:2px dashed rgba(215,82,53,.22);
+    }
+
+    .agent-hero img{
+      position:relative;
+      z-index:2;
+      width:680px;
+      max-height:680px;
+      object-fit:contain;
+      filter:drop-shadow(0 24px 34px rgba(86,55,31,.22));
+    }
+
+    .agent-nameplate{
+      position:absolute;
+      left:50%;
+      bottom:42px;
+      transform:translateX(-50%);
+      z-index:3;
+      border:1px solid rgba(215,82,53,.34);
+      border-radius:999px;
+      background:rgba(255,250,240,.94);
+      padding:12px 22px;
+      color:var(--red);
+      font-size:21px;
+      font-weight:900;
+      box-shadow:0 12px 24px rgba(86,55,31,.14);
+    }
+
+    .memory-card{
+      border-color:rgba(184,131,54,.55);
+      background:linear-gradient(135deg,#fff6dc,#fffaf0);
+    }
+
+    .figb-bottom{display:block}
+    .figb-risk{height:100%}
+
+    .rollout-layout.revised{
+      grid-template-columns:360px 1fr;
+      gap:18px;
+    }
+
+    .rollout-layout.revised .dept-panel{
+      padding:16px;
+    }
+
+    .rollout-layout.revised .dept-grid{
+      grid-template-columns:1fr;
+      gap:7px;
+    }
+
+    .rollout-layout.revised .dept-card{
+      min-height:50px;
+      padding:8px 10px;
+    }
+
+    .rollout-layout.revised .dept-card b{
+      font-size:13px;
+    }
+
+    .rollout-layout.revised .dept-card span{
+      margin-top:5px;
+    }
+
+    .main-chain-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin:2px 0 9px;
+      color:#20302a;
+      font-size:15px;
+      font-weight:900;
+    }
+
+    .main-chain-title span{
+      color:#66736b;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .rollout-layout.revised .chain-strip{
+      grid-template-columns:repeat(7,1fr);
+      margin-bottom:12px;
+    }
+
+    .rollout-layout.revised .chain-step{
+      min-height:58px;
+      padding:10px 10px;
+    }
+
+    .rollout-layout.revised .chain-step.active{
+      border-color:var(--red);
+      background:#fff1cc;
+      box-shadow:inset 0 0 0 1px rgba(215,82,53,.15);
+    }
+
+    .rollout-layout.revised .matrix{
+      grid-template-rows:none;
+      overflow:hidden;
+    }
+
+    .rollout-layout.revised .matrix-head{
+      min-height:46px;
+      padding:8px;
+      font-size:13px;
+    }
+
+    .rollout-layout.revised .matrix-cell{
+      min-height:86px;
+      padding:8px;
+    }
+
+    .rollout-layout.revised .matrix-cell b{
+      font-size:12.5px;
+    }
+
+    .rollout-layout.revised .matrix-cell span{
+      font-size:11.5px;
+      line-height:1.28;
+    }
+
+    .rollout-layout.revised .row-head{
+      font-size:14px;
+    }
+
+    .tool-name{
+      display:inline-flex;
+      align-items:center;
+      margin-top:6px;
+      padding:4px 7px;
+      border-radius:6px;
+      background:#e9f1ee;
+      color:#14575e;
+      font-weight:900;
+      font-size:11px;
+    }
+
+    /* 2026-07-01 revision round 2 */
+    .topbar{
+      top:28px;
+      height:118px;
+    }
+
+    h1{
+      font-size:48px;
+      line-height:1.06;
+    }
+
+    .sub{
+      margin-top:8px;
+      max-width:1420px;
+      font-size:15.5px;
+      line-height:1.38;
+    }
+
+    .stamp{
+      margin-top:2px;
+    }
+
+    .overview-layout,
+    .grid-bg,
+    .tech-stack,
+    .figa-stage,
+    .agent-board,
+    .figb-layout,
+    .figc-layout,
+    .rollout-layout{
+      top:166px;
+    }
+
+    .role-transform-stage{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:166px;
+      bottom:58px;
+      display:grid;
+      grid-template-rows:repeat(5,1fr);
+      gap:10px;
+    }
+
+    .transform-lane{
+      position:relative;
+      display:grid;
+      grid-template-columns:292px 142px 1fr;
+      gap:14px;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:linear-gradient(135deg,#fffaf0,#f3eadb);
+      padding:9px 14px;
+      overflow:hidden;
+      box-shadow:0 12px 26px rgba(36,42,36,.09);
+    }
+
+    .transform-lane:before,
+    .transform-lane:after{
+      content:"";
+      position:absolute;
+      top:50%;
+      height:2px;
+      border-top:2px dashed rgba(23,34,29,.24);
+      transform:translateY(-50%);
+      z-index:0;
+    }
+
+    .transform-lane:before{left:306px;width:88px}
+    .transform-lane:after{left:448px;right:28px}
+
+    .job-figure{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:82px 1fr;
+      gap:14px;
+      align-items:center;
+    }
+
+    .person-figure{
+      position:relative;
+      width:76px;
+      height:108px;
+      margin:auto;
+    }
+
+    .person-figure .head{
+      position:absolute;
+      left:22px;
+      top:4px;
+      width:34px;
+      height:34px;
+      border:3px solid #1b2a23;
+      border-radius:50%;
+      background:#f5c9a9;
+      z-index:2;
+    }
+
+    .person-figure .body{
+      position:absolute;
+      left:15px;
+      top:39px;
+      width:48px;
+      height:50px;
+      border:3px solid #1b2a23;
+      border-radius:18px 18px 8px 8px;
+      background:var(--c);
+      z-index:1;
+    }
+
+    .person-figure:before,
+    .person-figure:after{
+      content:"";
+      position:absolute;
+      top:51px;
+      width:17px;
+      height:42px;
+      border-radius:999px;
+      background:#f5c9a9;
+      border:3px solid #1b2a23;
+    }
+
+    .person-figure:before{left:4px;transform:rotate(14deg)}
+    .person-figure:after{right:4px;transform:rotate(-14deg)}
+
+    .person-figure .legs{
+      position:absolute;
+      left:21px;
+      top:84px;
+      width:34px;
+      height:22px;
+      border-radius:0 0 10px 10px;
+      background:#23352b;
+      box-shadow:25px 0 0 -8px #23352b;
+    }
+
+    .person-figure .prop{
+      position:absolute;
+      right:-4px;
+      top:-2px;
+      width:30px;
+      height:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:2px solid #1b2a23;
+      border-radius:10px;
+      background:#fffaf0;
+      font-size:16px;
+      z-index:3;
+    }
+
+    .job-copy b{
+      display:block;
+      color:var(--c);
+      font-size:24px;
+      line-height:1.06;
+    }
+
+    .job-copy span{
+      display:block;
+      margin-top:6px;
+      color:#4f5e56;
+      font-size:12.5px;
+      line-height:1.28;
+    }
+
+    .ai-transform{
+      position:relative;
+      z-index:2;
+      width:126px;
+      height:94px;
+      border-radius:22px;
+      background:#14211b;
+      color:#fffaf0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      box-shadow:0 15px 30px rgba(23,34,29,.24);
+    }
+
+    .ai-transform strong{
+      font-size:30px;
+      line-height:1;
+    }
+
+    .ai-transform span{
+      margin-top:6px;
+      font-size:12px;
+      font-weight:900;
+      color:#f3d7a6;
+    }
+
+    .role-squad{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:8px;
+    }
+
+    .role-squad.six{
+      grid-template-columns:repeat(6,1fr);
+    }
+
+    .mini-role{
+      min-height:108px;
+      border:1px solid rgba(23,34,29,.14);
+      border-radius:9px;
+      background:rgba(255,250,240,.94);
+      padding:8px 7px;
+      text-align:center;
+      box-shadow:0 8px 18px rgba(36,42,36,.07);
+    }
+
+    .mini-role .mini-person{
+      position:relative;
+      width:36px;
+      height:48px;
+      margin:0 auto 4px;
+    }
+
+    .mini-role .mini-person:before{
+      content:"";
+      position:absolute;
+      left:10px;
+      top:0;
+      width:16px;
+      height:16px;
+      border-radius:50%;
+      background:#f5c9a9;
+      border:2px solid #1b2a23;
+    }
+
+    .mini-role .mini-person:after{
+      content:"";
+      position:absolute;
+      left:6px;
+      top:20px;
+      width:24px;
+      height:25px;
+      border-radius:10px 10px 6px 6px;
+      background:var(--mc);
+      border:2px solid #1b2a23;
+    }
+
+    .mini-role i{
+      position:relative;
+      z-index:2;
+      display:inline-flex;
+      width:21px;
+      height:21px;
+      align-items:center;
+      justify-content:center;
+      margin-top:13px;
+      border-radius:7px;
+      background:#fffaf0;
+      border:1px solid rgba(23,34,29,.25);
+      font-style:normal;
+      font-size:12px;
+    }
+
+    .mini-role b{
+      display:block;
+      color:#25352e;
+      font-size:12.2px;
+      line-height:1.15;
+    }
+
+    .mini-role span{
+      display:block;
+      margin-top:4px;
+      color:#6b756f;
+      font-size:9.6px;
+      line-height:1.2;
+    }
+
+    .org-focus-layout{
+      position:absolute;
+      left:54px;
+      right:54px;
+      top:176px;
+      bottom:70px;
+      display:grid;
+      grid-template-columns:1.38fr .72fr;
+      grid-template-rows:1fr 148px;
+      gap:18px;
+    }
+
+    .topdown-main{
+      border:2px solid rgba(215,82,53,.42);
+      border-radius:10px;
+      background:
+        linear-gradient(120deg,rgba(215,82,53,.12),transparent 34%),
+        #fff8ec;
+      padding:24px 26px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .path-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#17221d;
+      color:#fffaf0;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .topdown-flow{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .topdown-step{
+      position:relative;
+      min-height:345px;
+      border:1px solid rgba(23,34,29,.14);
+      border-radius:10px;
+      background:#fffaf0;
+      padding:18px 16px 16px;
+      box-shadow:0 14px 28px rgba(36,42,36,.09);
+    }
+
+    .topdown-step:after{
+      content:"";
+      position:absolute;
+      right:-22px;
+      top:50%;
+      width:24px;
+      height:24px;
+      border-top:4px solid var(--red);
+      border-right:4px solid var(--red);
+      transform:translateY(-50%) rotate(45deg);
+      background:transparent;
+      z-index:2;
+    }
+
+    .topdown-step:last-child:after{display:none}
+
+    .topdown-step .big-num{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:var(--red);
+      color:#fffaf0;
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .topdown-step h3{
+      margin:16px 0 10px;
+      color:#25352e;
+      font-size:24px;
+      line-height:1.1;
+    }
+
+    .topdown-step p{
+      margin:0;
+      color:#53625a;
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .topdown-step .scene-icon{
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#f4ead9;
+      font-size:28px;
+    }
+
+    .assist-route{
+      border:1px solid rgba(23,106,112,.38);
+      border-radius:10px;
+      background:linear-gradient(135deg,rgba(23,106,112,.08),#fffaf0);
+      padding:20px;
+      overflow:hidden;
+    }
+
+    .assist-route h2{
+      margin:0 0 8px;
+      color:var(--teal);
+      font-size:27px;
+      line-height:1.08;
+    }
+
+    .assist-route p{
+      margin:0 0 14px;
+      color:#526059;
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .assist-step{
+      display:grid;
+      grid-template-columns:38px 1fr;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+      padding:10px 12px;
+      border:1px solid rgba(23,34,29,.12);
+      border-radius:8px;
+      background:#fffaf0;
+      min-height:64px;
+    }
+
+    .assist-step strong{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      background:var(--teal);
+      color:#fffaf0;
+      font-size:15px;
+    }
+
+    .assist-step span{
+      color:#3e4c44;
+      font-size:13.5px;
+      line-height:1.34;
+      font-weight:700;
+    }
+
+    .assist-arrow{
+      text-align:center;
+      color:var(--teal);
+      font-size:20px;
+      line-height:1;
+      font-weight:900;
+      margin:2px 0 -6px;
+    }
+
+    .org-focus-layout .mechanism-strip-v2{
+      grid-column:1 / 3;
+    }
+
+    .agent-hero{
+      position:relative;
+    }
+
+    .agent-pin{
+      position:absolute;
+      z-index:4;
+      min-width:92px;
+      padding:8px 10px;
+      border:1px solid rgba(23,34,29,.18);
+      border-radius:999px;
+      background:rgba(255,250,240,.96);
+      color:#26372f;
+      font-size:13px;
+      font-weight:900;
+      text-align:center;
+      box-shadow:0 10px 22px rgba(86,55,31,.13);
+    }
+
+    .agent-pin:after{
+      content:"";
+      position:absolute;
+      left:var(--dot-x,50%);
+      top:var(--dot-y,50%);
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--c);
+      box-shadow:0 0 0 5px rgba(255,250,240,.8);
+    }
+
+    .agent-ray{
+      position:absolute;
+      z-index:3;
+      left:var(--x);
+      top:var(--y);
+      width:var(--w);
+      height:0;
+      border-top:2px solid var(--c);
+      transform-origin:left center;
+      transform:rotate(var(--r));
+      opacity:.88;
+    }
+
+    .rollout-layout.revised .dept-card i,
+    .rollout-layout.revised .progress-big{
+      display:none;
+    }
+
+    .rollout-layout.revised .dept-card span{
+      color:#66736b;
+      font-weight:800;
+    }
+
+    .rollout-layout.revised .dept-summary{
+      grid-template-columns:1fr 280px;
+    }
+
+
+
+    /* 08 AI enablement panorama: display-only snapshot */
+    .enablement08-layout{position:absolute;left:54px;right:54px;top:154px;bottom:62px;display:grid;grid-template-columns:360px 1fr;gap:18px}
+    .enablement08-dept-panel,.enablement08-matrix-panel{border:1px solid var(--line);border-radius:8px;background:#fff8ec;padding:16px}
+    .enablement08-dept-panel{display:grid;grid-template-rows:auto 1fr auto;gap:14px}
+    .enablement08-dept-panel h2{margin:0;font-size:26px}.enablement08-dept-panel p{margin:7px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+    .enablement08-dept-grid{display:grid;gap:7px;align-content:start}.enablement08-dept-card{min-height:50px;padding:8px 10px;border:1px solid #d8c9b4;border-radius:8px;background:var(--white);text-align:left;font-family:inherit;cursor:pointer}
+    .enablement08-dept-card.active{border-color:var(--red);background:#fff0e4;box-shadow:inset 0 0 0 1px rgba(215,82,53,.18)}.enablement08-dept-card b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.enablement08-dept-card span{display:block;margin-top:5px;color:var(--muted);font-size:12px;font-weight:800}
+    .enablement08-dept-note{border:1px solid #d8c9b4;border-radius:8px;background:#f4ead9;padding:13px 14px;color:#526059;font-size:13px;line-height:1.45}
+    .enablement08-matrix-panel{background:#f7efe1;overflow:auto}.enablement08-summary{display:grid;grid-template-columns:1fr 280px;gap:14px;margin-bottom:14px}.enablement08-summary-card{border:1px solid #d7c8b1;border-radius:8px;background:var(--white);padding:16px 18px}.enablement08-summary-card h3{margin:0 0 8px;color:var(--teal);font-size:26px}.enablement08-summary-card p{margin:0;color:#56645c;font-size:15px;line-height:1.45}
+    .enablement08-chain-title{display:flex;justify-content:space-between;margin:2px 0 9px;font-size:15px;font-weight:900}.enablement08-chain-title span{color:var(--muted);font-size:12px;font-weight:700}.enablement08-chain-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:12px}.enablement08-chain-step{min-height:58px;padding:10px;border:1px solid #d6c6ae;border-radius:8px;background:var(--white)}.enablement08-chain-step.active{background:#fff1cc;border-color:var(--red)}.enablement08-chain-step b{display:block;font-size:15px}.enablement08-chain-step span{display:block;margin-top:5px;color:#7a756c;font-size:12px;line-height:1.28}
+    .enablement08-matrix{display:grid;border:1px solid #c9b89d;border-radius:8px;overflow:hidden;background:#c9b89d;gap:1px}.enablement08-matrix-head{min-height:42px;padding:7px;background:var(--teal);color:var(--white);display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;font-weight:900}.enablement08-row-head{background:#e2eee9;color:var(--teal);display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:900;padding:8px}.enablement08-cell{min-height:94px;background:var(--white);padding:8px;overflow:hidden}.enablement08-cell:nth-child(odd){background:#fffaf0}.enablement08-cell-meta{display:flex;gap:5px;align-items:center}.enablement08-cell-progress,.enablement08-cell-status{display:inline-block;font-size:12.5px;line-height:1.2;font-weight:900}.enablement08-cell-progress{color:var(--red)}.enablement08-cell-progress.hot{color:#996a21}.enablement08-cell-status{color:#7a4e2b}.enablement08-cell-body{display:block;margin-top:6px;color:#3f4d45;font-size:11.2px;line-height:1.32;white-space:pre-line}
+    .enablement08-legend{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;color:#56645c;font-size:13px}.enablement08-legend .pill{font-size:13px}
+
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="artboard" data-page="overview" id="overview">
+      <div class="topbar">
+        <div>
+          <div class="kicker">01 Strategy Atlas</div>
+          <h1>林氏家居 AI 战略全景图</h1>
+          <div class="sub">用一条主线串起能力、组织、技术和推广：先让关键岗位变强，再把可复制场景沉淀成组织资产。</div>
+        </div>
+        <div class="stamp">总览<small>能力体系 + 推广闭环</small></div>
+      </div>
+
+      <div class="overview-layout">
+        <div class="overview-left">
+          <div class="formula-flow">
+            <div class="formula">AI+人=超级个体</div>
+            <div class="formula-arrow"></div>
+            <div class="formula-target">超级组织</div>
+          </div>
+          <div class="strategy-line">
+            <div class="strategy-item">
+              <b>思想变革</b>
+              <strong>让一线骨干、专业岗位、管理者具备“多角色工作能力”。</strong>
+              <p>AI 不替代岗位责任，优先放大判断、表达、分析、执行和复盘能力。</p>
+            </div>
+            <div class="strategy-item">
+              <b>组织变革</b>
+              <strong>建设AI先锋：业务先锋军 + 技术先锋军。</strong>
+              <p>一级长牵引，部门接口人承接，种子选手打样。</p>
+            </div>
+            <div class="strategy-item">
+              <b>技术路线</b>
+              <strong>超级通用 Agent + 少量垂直 Agent。</strong>
+              <p>一个超级通用底座解决大多数问题，重点场景用少量垂直 Agent 深化。</p>
+            </div>
+          </div>
+          <div class="principles">
+            <span>真实场景</span>
+            <span>可复制模板</span>
+            <span>组织沉淀</span>
+          </div>
+        </div>
+
+        <div class="capability-wall">
+          <div class="capability-divider"></div>
+          <div class="zone-title general" style="--c:var(--teal)">通用型 Agent</div>
+          <div class="zone-title vertical" style="--c:var(--red)">垂直型 Agent</div>
+          <div class="capability-ring"></div>
+          <div class="capability-center">
+            <h2>企业 AI 工作现场</h2>
+            <p>群聊、听记、文档、表格、业务系统和知识库在同一工作现场被读取、分析、执行和沉淀。</p>
+          </div>
+          <div class="product-card" style="--c:var(--red);--x:20%;--y:24%;--w:292px;--h:142px">
+            <h3>林氏小龙虾</h3>
+            <div class="agent-badge">通用</div>
+            <div class="keyword">全面办事工作台</div>
+            <p>读资料、查上下文、调工具并产出结果。</p>
+            <div class="next">下一步：记忆、权限、意图路由、专家套件。</div>
+          </div>
+          <div class="product-card" style="--c:var(--teal);--x:78%;--y:24%;--w:292px;--h:142px">
+            <h3>小林AI</h3>
+            <div class="agent-badge">通用</div>
+            <div class="keyword">快问答入口</div>
+            <p>制度、知识、经营数据和轻量办公的对话入口。</p>
+            <div class="next">下一步：个人知识、模型选择、移动端触达。</div>
+          </div>
+          <div class="product-card" style="--c:var(--blue);--x:78%;--y:58%;--w:292px;--h:142px">
+            <h3>钉钉AI / AI表格</h3>
+            <div class="agent-badge">通用</div>
+            <div class="keyword">协同与数据底座</div>
+            <p>会议、表格、搜问、任务台账和群聊沉淀。</p>
+            <div class="next">下一步：与小龙虾打通，形成任务闭环。</div>
+          </div>
+          <div class="product-card" style="--c:var(--green);--x:22%;--y:66%;--w:292px;--h:142px">
+            <h3>林氏放我家</h3>
+            <div class="agent-badge vertical">垂直</div>
+            <div class="keyword">场景生图</div>
+            <p>客户房间照与产品图融合，辅助导购转化。</p>
+            <div class="next">下一步：套系生成、导购话术、采纳率追踪。</div>
+          </div>
+          <div class="product-card" style="--c:var(--plum);--x:57%;--y:75%;--w:292px;--h:142px">
+            <h3>小林生影</h3>
+            <div class="agent-badge vertical">垂直</div>
+            <div class="keyword">视频产线</div>
+            <p>从场景图、分镜图到短视频的批量生产线。</p>
+            <div class="next">下一步：模型参数、任务队列、转化验证。</div>
+          </div>
+          <div class="product-card more-card" style="--c:var(--gold);--x:82%;--y:82%;--w:260px;--h:112px">
+            <h3>更多垂直 Agent</h3>
+            <div class="agent-badge vertical">垂直</div>
+            <p>代表公司还有更多面向具体业务场景的垂直能力，后续按价值链补齐。</p>
+          </div>
+        </div>
+      </div>
+      <div class="page-mark">林氏家居 AI战略全景 · 2026.06</div>
+    </section>
+
+    <section class="artboard" data-page="super" id="super">
+      <div class="topbar">
+        <div>
+          <div class="kicker">02 Super Individual</div>
+          <h1>AI 让岗位长出“岗位外能力”</h1>
+          <div class="sub">电商行业的岗位原本各有专长；接入 AI 后，不是简单提效，而是让一个人同时调用分析、设计、内容、自动化、教练等跨岗位能力。</div>
+        </div>
+        <div class="stamp">目标<small>岗位 + AI = 超级个体</small></div>
+      </div>
+
+      <div class="role-transform-stage">
+        <div class="transform-lane" style="--c:var(--red)">
+          <div class="job-figure">
+            <div class="person-figure"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="prop">🛒</span></div>
+            <div class="job-copy"><b>电商运营</b><span>原本：上架、活动、价格、店铺数据。</span></div>
+          </div>
+          <div class="ai-transform"><strong>AI</strong><span>能力外挂</span></div>
+          <div class="role-squad">
+            <div class="mini-role" style="--mc:var(--blue)"><div class="mini-person"><i>📊</i></div><b>数据分析师</b><span>看异常、追原因</span></div>
+            <div class="mini-role" style="--mc:var(--gold)"><div class="mini-person"><i>🧭</i></div><b>活动策划</b><span>拆打法、排节奏</span></div>
+            <div class="mini-role" style="--mc:var(--green)"><div class="mini-person"><i>🧾</i></div><b>复盘顾问</b><span>自动成报告</span></div>
+            <div class="mini-role" style="--mc:var(--plum)"><div class="mini-person"><i>⚙️</i></div><b>自动化员</b><span>批量改表改稿</span></div>
+            <div class="mini-role" style="--mc:var(--teal)"><div class="mini-person"><i>🔎</i></div><b>机会雷达</b><span>发现爆品线索</span></div>
+          </div>
+        </div>
+
+        <div class="transform-lane" style="--c:var(--gold)">
+          <div class="job-figure">
+            <div class="person-figure"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="prop">📋</span></div>
+            <div class="job-copy"><b>产品经理</b><span>原本：用户洞察、需求定义、方案设计、项目推进、指标复盘。</span></div>
+          </div>
+          <div class="ai-transform"><strong>AI</strong><span>产品副驾驶</span></div>
+          <div class="role-squad six">
+            <div class="mini-role" style="--mc:var(--teal)"><div class="mini-person"><i>🔍</i></div><b>用户研究员</b><span>反馈、竞品、行业、假设</span></div>
+            <div class="mini-role" style="--mc:var(--blue)"><div class="mini-person"><i>📊</i></div><b>数据分析师</b><span>指标、漏斗、SQL、归因</span></div>
+            <div class="mini-role" style="--mc:var(--plum)"><div class="mini-person"><i>🧩</i></div><b>原型设计师</b><span>草图、流程、原型、验证</span></div>
+            <div class="mini-role" style="--mc:var(--green)"><div class="mini-person"><i>🔧</i></div><b>技术顾问</b><span>流程、接口、约束、沟通</span></div>
+            <div class="mini-role" style="--mc:var(--red)"><div class="mini-person"><i>✅</i></div><b>测试经理</b><span>验收、异常、用例、风险</span></div>
+            <div class="mini-role" style="--mc:var(--gold)"><div class="mini-person"><i>🚀</i></div><b>产品运营</b><span>节奏、版本、对标、增长</span></div>
+          </div>
+        </div>
+
+        <div class="transform-lane" style="--c:var(--teal)">
+          <div class="job-figure">
+            <div class="person-figure"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="prop">🎧</span></div>
+            <div class="job-copy"><b>客服主管</b><span>原本：抽查会话、处理客诉、辅导团队。</span></div>
+          </div>
+          <div class="ai-transform"><strong>AI</strong><span>能力外挂</span></div>
+          <div class="role-squad">
+            <div class="mini-role" style="--mc:var(--green)"><div class="mini-person"><i>🧪</i></div><b>质检员</b><span>全量看会话</span></div>
+            <div class="mini-role" style="--mc:var(--blue)"><div class="mini-person"><i>📈</i></div><b>小组分析师</b><span>按人群找问题</span></div>
+            <div class="mini-role" style="--mc:var(--red)"><div class="mini-person"><i>🎯</i></div><b>流失诊断师</b><span>定位询单断点</span></div>
+            <div class="mini-role" style="--mc:var(--gold)"><div class="mini-person"><i>👩</i></div><b>培训教练</b><span>生成训练题</span></div>
+            <div class="mini-role" style="--mc:var(--plum)"><div class="mini-person"><i>📣</i></div><b>话术编辑</b><span>改写统一口径</span></div>
+          </div>
+        </div>
+
+        <div class="transform-lane" style="--c:var(--green)">
+          <div class="job-figure">
+            <div class="person-figure"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="prop">🛋️</span></div>
+            <div class="job-copy"><b>商品企划</b><span>原本：产品规划、改款沟通、成本跟进。</span></div>
+          </div>
+          <div class="ai-transform"><strong>AI</strong><span>能力外挂</span></div>
+          <div class="role-squad">
+            <div class="mini-role" style="--mc:var(--blue)"><div class="mini-person"><i>🔬</i></div><b>原料研究员</b><span>抓价格和趋势</span></div>
+            <div class="mini-role" style="--mc:var(--plum)"><div class="mini-person"><i>🎨</i></div><b>设计助理</b><span>生成改款方向</span></div>
+            <div class="mini-role" style="--mc:var(--gold)"><div class="mini-person"><i>⏱️</i></div><b>计划预警员</b><span>看进度风险</span></div>
+            <div class="mini-role" style="--mc:var(--red)"><div class="mini-person"><i>💰</i></div><b>成本分析师</b><span>拆材料影响</span></div>
+            <div class="mini-role" style="--mc:var(--teal)"><div class="mini-person"><i>📑</i></div><b>评审秘书</b><span>产出评审材料</span></div>
+          </div>
+        </div>
+
+        <div class="transform-lane" style="--c:var(--blue)">
+          <div class="job-figure">
+            <div class="person-figure"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="prop">🏬</span></div>
+            <div class="job-copy"><b>门店运营</b><span>原本：接待、导购赋能、成交跟进。</span></div>
+          </div>
+          <div class="ai-transform"><strong>AI</strong><span>能力外挂</span></div>
+          <div class="role-squad">
+            <div class="mini-role" style="--mc:var(--green)"><div class="mini-person"><i>🏠</i></div><b>空间搭配师</b><span>给客户看效果</span></div>
+            <div class="mini-role" style="--mc:var(--red)"><div class="mini-person"><i>💬</i></div><b>话术设计师</b><span>按异议出回应</span></div>
+            <div class="mini-role" style="--mc:var(--gold)"><div class="mini-person"><i>📊</i></div><b>经营顾问</b><span>看门店短板</span></div>
+            <div class="mini-role" style="--mc:var(--teal)"><div class="mini-person"><i>🧑</i></div><b>导购教练</b><span>生成演练脚本</span></div>
+            <div class="mini-role" style="--mc:var(--plum)"><div class="mini-person"><i>📣</i></div><b>私域运营</b><span>跟进客户节奏</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="page-mark">先把关键岗位变强，再把岗位外能力沉淀成案例、模板和工具配置</div>
+    </section>
+
+    <section class="artboard" data-page="organization" id="organization">
+      <div class="topbar">
+        <div>
+          <div class="kicker">03 Organization Path</div>
+          <h1>两条组织路径同时推进</h1>
+          <div class="sub">一条线靠一级负责人把场景压实；另一条线从 AI 产品创新部先赋能信息与数字化中心同事，再由信数同事带着各自服务的业务方落地。</div>
+        </div>
+        <div class="stamp">推广机制<small>带动 + 赋能 + 扩散</small></div>
+      </div>
+
+      <div class="org-focus-layout">
+        <div class="topdown-main">
+          <span class="path-label">主路线｜路径一：自上而下推进</span>
+          <div class="topdown-flow">
+            <div class="topdown-step">
+              <div class="big-num">1</div>
+              <h3>一级负责人定场景</h3>
+              <p>先选一个部门最痛、最高频、能看见结果的业务场景。</p>
+              <div class="scene-icon">🎯</div>
+            </div>
+            <div class="topdown-step">
+              <div class="big-num">2</div>
+              <h3>部门接口人拉清单</h3>
+              <p>明确目标、人员、资料、系统入口和每周推进节奏。</p>
+              <div class="scene-icon">📋</div>
+            </div>
+            <div class="topdown-step">
+              <div class="big-num">3</div>
+              <h3>种子选手跑样板</h3>
+              <p>用真实工作产出第一个可展示结果，而不是只做工具演示。</p>
+              <div class="scene-icon">🏁</div>
+            </div>
+            <div class="topdown-step">
+              <div class="big-num">4</div>
+              <h3>案例进入部门例会</h3>
+              <p>把样板放到例会、培训、榜单里，让同岗位能照着复用。</p>
+              <div class="scene-icon">📣</div>
+            </div>
+            <div class="topdown-step">
+              <div class="big-num">5</div>
+              <h3>沉淀组织资产</h3>
+              <p>把个人经验变成知识库、SOP、模板和工具配置。</p>
+              <div class="scene-icon">📚</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="assist-route">
+          <h2>辅助路线｜路径二：信数赋能扩散</h2>
+          <p>不是画面主体，而是让主路线跑得更快的支撑链路。</p>
+          <div class="assist-step"><strong>1</strong><span>AI产品创新部：做工具底座、样板和培训包</span></div>
+          <div class="assist-arrow">↓</div>
+          <div class="assist-step"><strong>2</strong><span>信数同事：学会拆需求、配工具、接数据</span></div>
+          <div class="assist-arrow">↓</div>
+          <div class="assist-step"><strong>3</strong><span>AI赋能：在真实场景里跑出首个闭环</span></div>
+          <div class="assist-arrow">↓</div>
+          <div class="assist-step"><strong>4</strong><span>全公司：复用知识库、SOP、模板和工具配置</span></div>
+        </aside>
+
+        <div class="mechanism-strip-v2">
+          <div class="mechanism"><b>准入</b><p>只收真实业务问题，不做脱离场景的工具展示。</p></div>
+          <div class="mechanism"><b>运营</b><p>每周收案例，每月盘复用，按价值链补齐模板。</p></div>
+          <div class="mechanism"><b>激励</b><p>标杆案例、优秀接口人、超级个体进入可视化榜单。</p></div>
+          <div class="mechanism"><b>沉淀</b><p>案例转知识库，动作转SOP，经验转培训，工具转配置。</p></div>
+        </div>
+      </div>
+      <div class="page-mark">组织推动的关键不是培训一次，而是让案例持续进入复用循环</div>
+    </section>
+
+    <section class="artboard" data-page="technology" id="technology">
+      <div class="topbar">
+        <div>
+          <div class="kicker">04 Technology Route</div>
+          <h1>技术路线选择</h1>
+          <div class="sub">用统一底座降低维护成本，用垂直能力解决关键场景；核心能力可控，业务入口清晰，长期走向同一智能工作现场。</div>
+        </div>
+        <div class="stamp">路线对比<small>Agent + 工具 + 产品</small></div>
+      </div>
+
+      <div class="tech-stack">
+        <div class="compare-row">
+          <div class="compare-title">
+            <div>
+              <h2>Agent 模式</h2>
+              <p>先选架构，再谈规模复制。</p>
+            </div>
+            <span class="pill"><span class="dot" style="background:var(--teal)"></span>采纳右侧路线</span>
+          </div>
+          <div class="choice rejected" style="--c:var(--slate)">
+            <span class="status">不作为主线</span>
+            <h3>多垂直 Agent</h3>
+            <p>为每个场景单独构建垂直 Agent，短期看起来精准，长期会带来建设成本高、泛化弱、维护复杂的问题。</p>
+            <div class="metaphor-scene bad">
+              <div class="scene-head">👷 一群小学生技工 · 人多各管一摊，协同成本高</div>
+              <div class="crowd">
+                <div class="worker"><div class="face">🔧</div><div class="who">商品</div></div>
+                <div class="worker"><div class="face">🎧</div><div class="who">客服</div></div>
+                <div class="worker"><div class="face">📦</div><div class="who">物流</div></div>
+                <div class="worker"><div class="face">💰</div><div class="who">财务</div></div>
+                <div class="worker"><div class="face">🛒</div><div class="who">导购</div></div>
+                <div class="worker"><div class="face">🔁</div><div class="who">售后</div></div>
+                <div class="worker"><div class="face">➕</div><div class="who">数十个</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="choice recommended" style="--c:var(--teal)">
+            <span class="status">采纳</span>
+            <h3>超级通用 Agent + 少量垂直 Agent</h3>
+            <p>一个超级通用 Agent 解决大多数问题，再用少量垂直 Agent 深化关键业务场景，扩展性强、复制快、成本可控。</p>
+            <div class="mini-diagram">
+              <span class="mini-node base-node">超级通用 Agent</span><span class="mini-node">商品上架</span><span class="mini-node">智能导购</span><span class="mini-node">视觉营销</span><span class="mini-node">供应链</span>
+            </div>
+            <div class="metaphor-scene good">
+              <div class="solo">
+                <div class="big-face">🧑‍🎓</div>
+                <div class="solo-desc">
+                  <b>🎓 一名实习博士生 · 一个人就能办成</b>
+                  <span>掌握 SOP + 工具即可上岗，单体能力强，按需调用工具链放大产能</span>
+                  <div class="toolbelt"><i>🔧</i><i>📚</i><i>🔌</i><i>🖥️</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row">
+          <div class="compare-title">
+            <div>
+              <h2>工具选型</h2>
+              <p>外部产品可用来验证体验，核心能力要可治理、可沉淀。</p>
+            </div>
+            <span class="pill"><span class="dot" style="background:var(--red)"></span>自研核心底座</span>
+          </div>
+          <div class="choice rejected" style="--c:var(--red)">
+            <span class="status">审慎使用</span>
+            <h3>外采通用 Agent</h3>
+            <p>第三方采购能快速试用，例如 Codex、Workbuddy、悟空等；但作为企业核心工作入口存在边界风险。</p>
+            <div class="risk-list risk-danger">
+              <span><span class="xmark">✕</span>需翻墙·门槛高</span><span><span class="xmark">✕</span>账号不稳·易封号</span><span><span class="xmark">✕</span>充值需提交 Token·有密码泄露风险</span><span><span class="xmark">✕</span>绑定单一外部平台</span><span><span class="xmark">✕</span>数据资产难沉淀</span>
+            </div>
+          </div>
+          <div class="choice recommended" style="--c:var(--teal)">
+            <span class="status">主线</span>
+            <h3>基于 Claude Agent SDK 二开自研</h3>
+            <p>以世界级 Agent 底座为基础，叠加林氏自己的工具、权限、数据资产、知识库和业务流程。</p>
+            <div class="mini-diagram">
+              <span class="mini-node base-node">Claude Agent SDK</span><span class="mini-node">自研Skill</span><span class="mini-node">权限</span><span class="mini-node">知识库</span><span class="mini-node">工具链</span><span class="mini-node">数据沉淀</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-row">
+          <div class="compare-title">
+            <div>
+              <h2>内部产品分工</h2>
+              <p>入口不同，底层能力逐步互通。</p>
+            </div>
+            <span class="pill"><span class="dot" style="background:var(--gold)"></span>长期趋同</span>
+          </div>
+          <div class="choice recommended" style="--c:var(--blue)">
+            <span class="status">Chat</span>
+            <h3>小林AI</h3>
+            <p>快问答入口，偏管理层，主打战略协同与经营分析。</p>
+            <div class="scenario-block">
+              <div class="scenario-head">📊 管理层 · 实际应用场景</div>
+              <div class="scenario-grid">
+                <div class="scenario-item"><span class="dept">电商事业部</span><span class="task">多平台经营问数、GMV 复盘</span></div>
+                <div class="scenario-item"><span class="dept">大家居新零售</span><span class="task">经销商业绩分析、区域策略研判</span></div>
+                <div class="scenario-item"><span class="dept">财经中心</span><span class="task">经营报表问数、成本利润分析</span></div>
+                <div class="scenario-item"><span class="dept">产品中心</span><span class="task">品类表现分析、选品决策支持</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="choice recommended" style="--c:var(--red)">
+            <span class="status">Work</span>
+            <h3>林氏小龙虾</h3>
+            <p>全面办事工作台，偏执行层，主打具体落地、跨系统执行。</p>
+            <div class="scenario-block">
+              <div class="scenario-head">⚙️ 执行层 · 实际应用场景</div>
+              <div class="scenario-grid">
+                <div class="scenario-item"><span class="dept">客户服务中心</span><span class="task">质检抽查会话、客服小组分析报告、询单流失分析</span></div>
+                <div class="scenario-item"><span class="dept">产品中心</span><span class="task">原材料价格定时抓取、产品改款设计、计划进度分析</span></div>
+                <div class="scenario-item"><span class="dept">计划采购部</span><span class="task">采购单据处理、供应商资料整理</span></div>
+                <div class="scenario-item"><span class="dept">财经中心</span><span class="task">财务对账、成本分析、经营分析</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-mark">短期分工清晰，中期工具互通，长期合并为统一智能工作现场</div>
+    </section>
+    <section class="artboard" data-page="figA" id="figA">
+      <div class="topbar">
+        <div>
+          <div class="kicker">05 Agent Capability</div>
+          <h1>一个超级 Agent = 有记忆的数字员工</h1>
+          <div class="sub">有大脑会规划、有小脑快执行、有手脚能操作电脑和工具，还能记住偏好、上下文与历史任务；一个机器人连起钉钉、本地电脑、业务系统与知识库。</div>
+        </div>
+        <div class="stamp">能力示意<small>大脑 + 手脚 + 记忆</small></div>
+      </div>
+
+      <div class="agent-board">
+        <div class="agent-stack">
+          <div class="agent-card" style="--c:var(--blue)">
+            <h3>🧠 大脑</h3>
+            <p>理解目标，判断复杂度，拆解步骤，决定先查什么、先做什么、产出什么。</p>
+          </div>
+          <div class="agent-card" style="--c:var(--red)">
+            <h3>⚡ 小脑</h3>
+            <p>把明确动作快速执行：读取资料、整理表格、生成报告、跑脚本、批量处理。</p>
+          </div>
+          <div class="agent-card" style="--c:var(--gold)">
+            <h3>🦾 手脚</h3>
+            <p>操作电脑、文件、浏览器和业务系统，完成从“想法”到“附件交付”的最后一步。</p>
+          </div>
+        </div>
+
+        <div class="agent-hero">
+          <div class="agent-ray" style="--c:var(--blue);--x:170px;--y:220px;--w:250px;--r:24deg"></div>
+          <div class="agent-ray" style="--c:var(--red);--x:694px;--y:210px;--w:248px;--r:156deg"></div>
+          <div class="agent-ray" style="--c:var(--gold);--x:130px;--y:740px;--w:270px;--r:-20deg"></div>
+          <div class="agent-ray" style="--c:var(--green);--x:800px;--y:750px;--w:246px;--r:202deg"></div>
+          <div class="agent-ray" style="--c:var(--teal);--x:140px;--y:600px;--w:276px;--r:0deg"></div>
+          <div class="agent-ray" style="--c:var(--gold);--x:704px;--y:88px;--w:276px;--r:166deg"></div>
+          <div class="agent-pin" style="--c:var(--blue);left:62px;top:190px;--dot-x:100%;--dot-y:50%">大脑｜规划</div>
+          <div class="agent-pin" style="--c:var(--red);right:58px;top:180px;--dot-x:0%;--dot-y:50%">小脑｜快执行</div>
+          <div class="agent-pin" style="--c:var(--gold);left:54px;bottom:110px;--dot-x:100%;--dot-y:50%">手脚｜操作电脑</div>
+          <div class="agent-pin" style="--c:var(--green);right:56px;bottom:120px;--dot-x:0%;--dot-y:50%">工具｜调用系统</div>
+          <div class="agent-pin" style="--c:var(--teal);left:48px;top:580px;--dot-x:100%;--dot-y:50%">知识库｜有依据</div>
+          <div class="agent-pin" style="--c:var(--gold);right:48px;top:54px;--dot-x:0%;--dot-y:50%">记忆｜越用越懂</div>
+          <img src="https://linsy-ai-data.linshimuye.com/prod/upload/ai/mcp/15790/.linsy/attachments/1783040287502_pasted-image-1783040287479-1.png" alt="林氏小龙虾机器人" />
+          <div class="agent-nameplate">林氏小龙虾 Agent</div>
+        </div>
+
+        <div class="agent-stack">
+          <div class="agent-card" style="--c:var(--green)">
+            <h3>🔧 工具</h3>
+            <p>按任务调用钉钉、本地电脑、表格、浏览器、代码能力和市面成熟工具。</p>
+          </div>
+          <div class="agent-card" style="--c:var(--teal)">
+            <h3>📚 知识库</h3>
+            <p>连接制度、SOP、产品资料、客服话术、经营口径，让回答和交付有依据。</p>
+          </div>
+          <div class="agent-card memory-card" style="--c:var(--gold)">
+            <h3>🧩 记忆</h3>
+            <p>记住用户偏好、历史任务、常用模板、部门案例和上下文，越用越贴近真实工作。</p>
+          </div>
+        </div>
+      </div>
+      <div class="page-mark">一个超级 Agent + 工具链 + 记忆：能想、能做、能连，也能把经验沉淀下来</div>
+    </section>
+
+    <section class="artboard" data-page="figB" id="figB">
+      <div class="topbar">
+        <div>
+          <div class="kicker">06 Tool Selection</div>
+          <h1>工具选型对比：我方自研 vs 外部采购</h1>
+          <div class="sub">自研和外采的差别不在"能不能用"，而在能力可控、数据沉淀与安全自主权。先逐项打勾，再说清外部工具的风险。</div>
+        </div>
+        <div class="stamp">自研 vs 外采<small>能力 + 风险</small></div>
+      </div>
+
+      <div class="figb-layout">
+        <div class="figb-matrix">
+          <table>
+            <thead>
+              <tr>
+                <th class="dim">能力维度</th>
+                <th class="ourcol">我方自研<span class="role">小林AI + 小龙虾</span></th>
+                <th>ChatGPT<span class="role">通用对话</span></th>
+                <th>Codex<span class="role">编码助手</span></th>
+                <th>Workbuddy<span class="role">第三方办公</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="dim">顶级模型能力<small>底层智能水平</small></td>
+                <td class="ourcol"><span class="figb-yes">✓</span><span class="figb-mini">顶尖 SDK 二开</span></td>
+                <td><span class="figb-yes">✓</span></td>
+                <td><span class="figb-yes">✓</span><span class="figb-mini">偏编码</span></td>
+                <td><span class="figb-part">△</span><span class="figb-mini">依赖外部模型</span></td>
+              </tr>
+              <tr>
+                <td class="dim">免翻墙 / 合规接入<small>能否稳定合规使用</small></td>
+                <td class="ourcol"><span class="figb-yes">✓</span><span class="figb-mini">内网部署</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">需翻墙</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">需翻墙</span></td>
+                <td><span class="figb-part">△</span></td>
+              </tr>
+              <tr>
+                <td class="dim">账号稳定性<small>是否易封号</small></td>
+                <td class="ourcol"><span class="figb-yes">✓</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">易封号</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">同源风险</span></td>
+                <td><span class="figb-part">△</span></td>
+              </tr>
+              <tr>
+                <td class="dim">覆盖业务全场景<small>非编码的经营/流程</small></td>
+                <td class="ourcol"><span class="figb-yes">✓</span><span class="figb-mini">管理+执行层</span></td>
+                <td><span class="figb-part">△</span><span class="figb-mini">通用问答</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">仅编码</span></td>
+                <td><span class="figb-part">△</span></td>
+              </tr>
+              <tr>
+                <td class="dim">数据资产沉淀<small>能否积累公司数据</small></td>
+                <td class="ourcol"><span class="figb-yes">✓</span><span class="figb-mini">数据留内部</span></td>
+                <td><span class="figb-no">✕</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">代码外泄</span></td>
+                <td><span class="figb-no">✕</span></td>
+              </tr>
+              <tr>
+                <td class="dim">数据安全 / 自主权<small>企业根基是否可控</small></td>
+                <td class="ourcol"><span class="figb-yes">✓</span><span class="figb-mini">自主可控</span></td>
+                <td><span class="figb-no">✕</span><span class="figb-mini">绑定外部</span></td>
+                <td><span class="figb-no">✕</span></td>
+                <td><span class="figb-no">✕</span></td>
+              </tr>
+              <tr class="figb-verdict">
+                <td class="dim">综合评估</td>
+                <td class="ourcol">✓ 采纳</td>
+                <td><span class="vno">✕ 否决</span></td>
+                <td><span class="vno">✕ 否决</span></td>
+                <td><span class="vno">✕ 否决</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figb-bottom">
+          <div class="figb-risk">
+            <h3>⚠️ 外部工具五大风险（ChatGPT 为代表，Codex / Workbuddy 同理）</h3>
+            <div class="figb-risk-grid">
+              <span><span class="xm">✕</span>需翻墙·门槛高，一线难普及</span>
+              <span><span class="xm">✕</span>账号不稳·易封号，连续性无保障</span>
+              <span><span class="xm">✕</span>充值需提交密码 / Token·有密码泄露风险</span>
+              <span><span class="xm">✕</span>绑定单一外部平台·受制于人</span>
+              <span><span class="xm">✕</span>无法沉淀数据资产·长期受限</span>
+              <span style="background:linear-gradient(135deg,rgba(23,106,112,.12),rgba(23,106,112,.06));border-color:rgba(23,106,112,.4);color:#176a70"><span class="xm" style="background:#176a70">✓</span>自研：内网可用·自主可控·数据沉淀</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-mark">外部工具四道硬伤：翻墙·封号·数据外泄·绑死平台；自研基于顶尖 SDK，兼得能力、扩展性与数据主权</div>
+    </section>
+
+    <section class="artboard" data-page="figC" id="figC">
+      <div class="topbar">
+        <div>
+          <div class="kicker">07 Scenario Matrix</div>
+          <h1>场景对照：小林AI 3.1 → 4.0 → 林氏小龙虾</h1>
+          <div class="sub">小林AI 4.0 接入 BI、管理中心和更多知识库，主要定位是战略分析、经营分析与管理决策；林氏小龙虾定位为全能交付，把执行层的活真正跑完。</div>
+        </div>
+        <div class="stamp">能力对照<small>3.1 / 4.0 / 小龙虾</small></div>
+      </div>
+
+      <div class="figc-layout">
+        <div>
+          <div class="figc-legend">
+            <div class="figc-chip"><span class="dot" style="background:var(--slate)"></span><span>小林AI 3.1<small>会聊天、会查工具的助手</small></span></div>
+            <div class="figc-chip"><span class="dot" style="background:var(--blue)"></span><span>小林AI 4.0<small>BI / 管理中心 / 知识库驱动的经营问答</small></span></div>
+            <div class="figc-chip"><span class="dot" style="background:var(--red)"></span><span>林氏小龙虾<small>执行层全能交付工具</small></span></div>
+          </div>
+          <div class="figc-table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="figc-coldim">能力维度</th>
+                  <th><div class="ph"><span class="dot" style="background:var(--slate)"></span>小林AI 3.1</div><span class="role">决策者 · 对话助手</span></th>
+                  <th><div class="ph"><span class="dot" style="background:var(--blue)"></span>小林AI 4.0</div><span class="role">决策者 · 经营问答</span></th>
+                  <th><div class="ph"><span class="dot" style="background:var(--red)"></span>林氏小龙虾</div><span class="role">执行者 · 全能交付</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="figc-dimcell">核心定位<small>解决什么</small></td>
+                  <td><div class="figc-lvl base">问答辅助</div><div class="figc-txt">我问你答，必要时帮我查一下</div></td>
+                  <td class="figc-cell40"><div class="figc-lvl up">经营问答</div><div class="figc-txt">接入 BI、管理中心和知识库，围绕经营问题快速问数、追因、给建议</div></td>
+                  <td><div class="figc-lvl exec">全能交付</div><div class="figc-txt">接目标、跑流程、调工具、产文件，解决知识工作 80% 的具体实操</div></td>
+                </tr>
+                <tr>
+                  <td class="figc-dimcell">战略分析<small>市场/竞品判断</small></td>
+                  <td><div class="figc-txt">基于提问给观点，适合轻量判断和快速启发</div></td>
+                  <td class="figc-cell40"><div class="figc-txt">围绕战略、经营、管理议题做<b>问数→追因→建议</b></div></td>
+                  <td><div class="figc-txt">可补充资料抓取、材料整理和执行落地，支撑分析闭环</div></td>
+                </tr>
+                <tr>
+                  <td class="figc-dimcell">材料制作<small>报告/表格产出</small></td>
+                  <td><div class="figc-txt">以文字回答为主，<b>不交付文件</b></div></td>
+                  <td class="figc-cell40"><div class="figc-txt">更适合输出经营结论、管理建议和问答解释</div></td>
+                  <td><div class="figc-txt">可交付 <b>Word / Excel / HTML / 报告</b>，强在“量、快、可追踪”</div></td>
+                </tr>
+                <tr>
+                  <td class="figc-dimcell">数据查询<small>调系统取数</small></td>
+                  <td><div class="figc-txt">会调工具取数并解释（单轮为主）</div></td>
+                  <td class="figc-cell40"><div class="figc-txt">基于 BI 和管理中心做多指标经营问答、异常追因</div></td>
+                  <td><div class="figc-txt">按 SOP 直连系统取数、回填、生成附件和执行记录</div></td>
+                </tr>
+                <tr>
+                  <td class="figc-dimcell">企业可控<small>风险与确认</small></td>
+                  <td><div class="figc-txt">涉及权限或敏感操作时确认，防重复调用</div></td>
+                  <td class="figc-cell40"><div class="figc-txt">加<b>工作区隔离·命令限制·产物校验</b></div></td>
+                  <td><div class="figc-txt">受控范围内执行，适合规则明确实操</div></td>
+                </tr>
+                <tr>
+                  <td class="figc-dimcell">角色感<small>更像什么</small></td>
+                  <td><div class="figc-txt">一个会查系统的<b>助手</b></div></td>
+                  <td class="figc-cell40"><div class="figc-txt">一个懂经营数据和管理口径的<b>经营参谋</b></div></td>
+                  <td><div class="figc-txt">一个能跨工具完成交付的<b>数字员工</b></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <div class="figc-fit-title">谁更适合哪类活？　<span style="font-weight:500;font-size:13px;color:var(--muted)">●● 主场景 / 最顺手　● 基础能力具备 / 也能做</span></div>
+          <div class="figc-fit">
+            <table>
+              <thead>
+                <tr>
+                  <th>典型场景</th>
+                  <th><span class="hdot" style="background:var(--slate)"></span>3.1</th>
+                  <th><span class="hdot" style="background:var(--blue)"></span>4.0</th>
+                  <th><span class="hdot" style="background:var(--red)"></span>小龙虾</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>高频简单问答（查制度 / 查信息）</td><td><span class="figc-best">●●</span></td><td><span class="figc-ok">●</span></td><td><span class="figc-ok">●</span></td></tr>
+                <tr><td>战略分析 / 经营分析 / 管理决策</td><td><span class="figc-ok">●</span></td><td><span class="figc-best">●●</span></td><td><span class="figc-ok">●</span></td></tr>
+                <tr><td>材料制作（报告 / 表格交付）</td><td><span class="figc-ok">●</span></td><td><span class="figc-ok">●</span></td><td><span class="figc-best">●●</span></td></tr>
+                <tr><td>长流程、规则明确的批量实操</td><td><span class="figc-ok">●</span></td><td><span class="figc-ok">●</span></td><td><span class="figc-best">●●</span></td></tr>
+                <tr><td>需要最终附件交付 + 过程可追踪</td><td><span class="figc-ok">●</span></td><td><span class="figc-ok">●</span></td><td><span class="figc-best">●●</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="page-mark">小林AI 4.0 服务经营问答和管理决策，林氏小龙虾服务全能交付和具体落地——协同而非替代</div>
+    </section>
+
+
+    <section class="artboard enablement08" data-page="enablement" id="enablement">
+      <div class="topbar">
+        <div>
+          <div class="kicker">08 AI Enablement Panorama</div>
+          <h1>AI赋能全景图</h1>
+          <div class="sub">以一级部门为组织颗粒：展示全司主价值链，以及各部门自身价值链节点目标、流程链路、标准规范、赋能计划与 AI 工具。</div>
+        </div>
+        <div class="stamp">赋能全景<small>部门 + 价值链 + 进度</small></div>
+      </div>
+
+      <div class="enablement08-layout">
+        <aside class="enablement08-dept-panel">
+          <div>
+            <h2>一级部门</h2>
+            <p>点击部门，查看对应价值链全景。</p>
+          </div>
+          <div class="enablement08-dept-grid" id="enablement08DeptGrid"></div>
+          <div class="enablement08-dept-note">以真实场景为起点，持续沉淀目标、流程、标准、赋能计划与 AI 工具。</div>
+        </aside>
+
+        <section class="enablement08-matrix-panel">
+          <div class="enablement08-summary">
+            <div class="enablement08-summary-card"><h3 id="enablement08DeptName"></h3><p id="enablement08DeptRole"></p></div>
+            <div class="enablement08-summary-card"><h3 id="enablement08DeptFocus"></h3><p id="enablement08DeptFocusText"></p></div>
+          </div>
+          <div class="enablement08-chain-title">全司主价值链 <span>高亮部分 = 当前部门价值链映射到的主链环节</span></div>
+          <div class="enablement08-chain-strip" id="enablement08ChainStrip"></div>
+          <div class="enablement08-matrix" id="enablement08Matrix"></div>
+          <div class="enablement08-legend">
+            <span class="pill"><span class="dot"></span>进度、状态、描述</span>
+            <span class="pill"><span class="dot" style="background:var(--teal)"></span>部门价值链全景</span>
+            <span>数据来自 AI赋能全景图已发布版本</span>
+          </div>
+        </section>
+      </div>
+      <div class="page-mark">AI赋能全景图 · 仅展示</div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const data = {"rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"version":2,"mainChain":[{"desc":"行业、用户、业务问题、策略判断","name":"洞察与需求"},{"desc":"产品、物料、方案、成本、系统方案","name":"商品与方案"},{"desc":"视觉、营销内容、招商、流量","name":"内容与获客"},{"desc":"咨询、接待、活动、成交、下单","name":"运营与转化"},{"desc":"订单、仓配、售后、逆向、报关","name":"履约与服务"},{"desc":"结算、应收应付、资金、经营分析","name":"结算与经营"},{"desc":"人才、标准、品质、VOC、复盘迭代","name":"组织与沉淀"}],"updatedAt":"2026-07-15T08:28:48.023135+00:00","departments":[{"line":"研供","name":"产品中心","role":"产品规划、研发设计、视觉拍摄、成本签价、采销协同、计划调度、制造运营、品质管控。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"产品规划":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"制造运营":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"品质管控":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"成本签价":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"研发设计":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"视觉拍摄":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"计划调度":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"采销协同":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#5f7d68","focus":"视觉拍摄","links":[0,1,2,5,6],"people":984,"stages":["产品规划","研发设计","视觉拍摄","成本签价","采销协同","计划调度","制造运营","品质管控"],"focusText":"视觉拍摄已进入小林生影工具验证；其余环节从价值链资料和SOP开始沉淀。"},{"line":"线上营销","name":"客户服务中心","role":"售前咨询与转化、订单跟单与履约、售后服务、投诉与舆情管理、VOC与质量管理。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"售后服务":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"VOC与质量管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"售前咨询与转化":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"投诉与舆情管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"订单跟单与履约":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#2f6e73","focus":"培训推广","links":[3,4,6],"people":809,"stages":["售前咨询与转化","订单跟单与履约","售后服务","投诉与舆情管理","VOC与质量管理"],"focusText":"已进行2轮培训，挑选83名种子选手，收集部分案例。"},{"line":"线下营销","name":"大家居新零售事业部","role":"招商建店、经销管理与赋能、流量运营、客户接待、成交转化、订单履约、经销结算、经营分析。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"客户接待":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"成交转化":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"招商建店":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"流量运营":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"经营分析":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"经销结算":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"订单履约":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"经销管理与赋能":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#d75235","focus":"成交转化","links":[2,3,4,5,6],"people":411,"stages":["招商建店","经销管理与赋能","流量运营","客户接待","成交转化","订单履约","经销结算","经营分析"],"focusText":"成交转化环节已有林氏放我家，适合做门店成交样板。"},{"line":"线上营销","name":"电商事业部","role":"商品知识管理、商品素材、商品上架与信息维护、活动与价格运营。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"商品素材":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"商品知识管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"活动与价格运营":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"商品上架与信息维护":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#c75f43","focus":"商品运营","links":[1,2,3,6],"people":238,"stages":["商品知识管理","商品素材","商品上架与信息维护","活动与价格运营"],"focusText":"优先围绕商品素材、上架维护、活动价格运营寻找高频样板。"},{"line":"线上营销","name":"品牌市场中心","role":"行业与竞品动态分析、用户画像与需求研究、营销内容创作。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"营销内容创作":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"用户画像与需求研究":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"行业与竞品动态分析":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#b88336","focus":"内容与洞察","links":[0,2,6],"people":215,"stages":["行业与竞品动态分析","用户画像与需求研究","营销内容创作"],"focusText":"优先沉淀行业竞品、用户画像和营销内容创作模板。"},{"line":"内控","name":"人力行政中心","role":"组织人事、招聘配置、人才发展、绩效薪酬、员工服务、行政文化。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"人才发展":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"员工服务":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"招聘配置":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"组织人事":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"绩效薪酬":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"行政文化":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#8d6852","focus":"组织知识","links":[0,6],"people":168,"stages":["组织人事","招聘配置","人才发展","绩效薪酬","员工服务","行政文化"],"focusText":"优先沉淀员工服务、招聘配置、人才发展和行政文化的常用资料。"},{"line":"IT","name":"信息与数字化中心","role":"业务需求、需求分析、方案设计、开发测试、上线运维、复盘迭代。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"上线运维":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"业务需求":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"复盘迭代":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"开发测试":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"方案设计":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"需求分析":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#143f43","focus":"AI赋能扩散","links":[0,1,6],"people":144,"stages":["业务需求","需求分析","方案设计","开发测试","上线运维","复盘迭代"],"focusText":"优先沉淀需求分析、方案设计、开发测试和复盘迭代的方法模板。"},{"line":"物流","name":"数创物流中心","role":"物流策略、仓储运营、末端履约、售后逆向、计费结算。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"仓储运营":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"售后逆向":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"末端履约":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"物流策略":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"计费结算":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#587a96","focus":"履约异常","links":[0,4,5,6],"people":103,"stages":["物流策略","仓储运营","末端履约","售后逆向","计费结算"],"focusText":"优先从仓储运营、末端履约、售后逆向和计费结算里找异常处理样板。"},{"line":"财务","name":"财经中心","role":"经营分析、采购-应付、销售-应收、资金/出纳、总账报表。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"总账报表":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"经营分析":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"资金/出纳":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"采购-应付":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"销售-应收":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#7d7055","focus":"经营分析","links":[5,6],"people":89,"stages":["经营分析","采购-应付","销售-应收","资金/出纳","总账报表"],"focusText":"优先围绕经营分析、对账、成本分析和报表口径沉淀样板。"},{"line":"线上营销","name":"家居事业部","role":"售前咨询与转化、订单跟单与履约、售后服务。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"售后服务":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"售前咨询与转化":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"订单跟单与履约":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#6a8a58","focus":"服务转化","links":[3,4,6],"people":67,"stages":["售前咨询与转化","订单跟单与履约","售后服务"],"focusText":"优先沉淀咨询转化、订单跟单和售后服务的复用话术与流程。"},{"line":"海外","name":"海外B2B事业部","role":"招商获客、客户服务管理、商品与物料管理、商品下单、订单管理、报关管理、财务与资金管理。","rows":[{"id":"nodeGoal","name":"节点目标"},{"id":"processLink","name":"流程链路"},{"id":"standards","name":"标准规范"},{"id":"enablement","name":"赋能计划"},{"id":"aiTools","name":"AI工具"}],"cells":{"商品下单":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"报关管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"招商获客":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"订单管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"客户服务管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"商品与物料管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}},"财务与资金管理":{"aiTools":{"status":"待接入","progress":"0%","description":"小林AI、钉钉、BI、RPA、行业工具及知识库。"},"nodeGoal":{"status":"待确认","progress":"0%","description":"明确该节点的业务目标、责任边界、输入输出和验收口径。"},"standards":{"status":"待定","progress":"0%","description":"需求模板、资源标签、SOP、权限边界、质量验收及版本记录。"},"enablement":{"status":"待推进","progress":"0%","description":"团队明确责任人和复盘节奏；AI辅助生成初稿、沉淀案例并分析异常。"},"processLink":{"status":"待梳理","progress":"0%","description":"需求确认-->资料收集-->方案制定-->执行协同-->验收交付-->复盘沉淀"}}},"color":"#2d638f","focus":"海外业务","links":[2,3,4,5,6],"people":38,"stages":["招商获客","客户服务管理","商品与物料管理","商品下单","订单管理","报关管理","财务与资金管理"],"focusText":"优先沉淀海外招商、客户服务、商品资料、订单和报关管理模板。"}]};
+      let active = data.departments[0];
+      const byId = (id) => document.getElementById(id);
+      const esc = (value) => String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      const isHot = (progress) => /^(10|70|100)%/.test(String(progress || ""));
+      const cellFor = (stage, row) => active.cells?.[stage]?.[row.id] || { progress: "", status: "", description: "" };
+      function renderDepartments(){
+        const grid = byId("enablement08DeptGrid");
+        grid.innerHTML = data.departments.map((dept, index) => '<button class="enablement08-dept-card ' + (dept === active ? "active" : "") + '" data-index="' + index + '" type="button"><b>' + esc(dept.name) + '</b><span>' + esc(dept.people) + '人｜' + esc(dept.line) + '</span></button>').join("");
+        grid.querySelectorAll("button").forEach((button) => { button.onclick = () => { active = data.departments[Number(button.dataset.index)]; render(); }; });
+      }
+      function renderSummary(){
+        byId("enablement08DeptName").textContent = active.name;
+        byId("enablement08DeptRole").textContent = active.people + "人｜" + active.line + "｜" + active.role;
+        byId("enablement08DeptFocus").textContent = active.focus;
+        byId("enablement08DeptFocusText").textContent = active.focusText;
+      }
+      function renderChain(){
+        byId("enablement08ChainStrip").innerHTML = data.mainChain.map((item, index) => '<div class="enablement08-chain-step ' + (active.links.includes(index) ? "active" : "") + '" style="' + (active.links.includes(index) ? "border-color:" + active.color : "") + '"><b>' + esc(item.name) + '</b><span>' + esc(item.desc) + '</span></div>').join("");
+      }
+      function renderMatrix(){
+        const rows = active.rows?.length ? active.rows : data.rows;
+        const matrix = byId("enablement08Matrix");
+        matrix.style.gridTemplateColumns = '132px repeat(' + active.stages.length + ', minmax(0, 1fr))';
+        matrix.innerHTML = '<div class="enablement08-matrix-head">能力维度</div>' + active.stages.map((stage) => '<div class="enablement08-matrix-head">' + esc(stage) + '</div>').join("") + rows.map((row) => '<div class="enablement08-row-head">' + esc(row.name) + '</div>' + active.stages.map((stage) => { const cell = cellFor(stage, row); return '<div class="enablement08-cell"><div class="enablement08-cell-meta"><span class="enablement08-cell-progress ' + (isHot(cell.progress) ? "hot" : "") + '">' + esc(cell.progress) + '</span><span class="enablement08-cell-status">' + esc(cell.status) + '</span></div><span class="enablement08-cell-body">' + esc(cell.description) + '</span></div>'; }).join("")).join("");
+      }
+      function render(){ renderDepartments(); renderSummary(); renderChain(); renderMatrix(); }
+      render();
+      const page = new URLSearchParams(location.search).get("export");
+      if (page) { const target = document.querySelector('.artboard[data-page="' + CSS.escape(page) + '"]'); if (target) { document.body.classList.add("single"); target.classList.add("active"); } }
+    })();
+  </script>
+</body>
+</html>
