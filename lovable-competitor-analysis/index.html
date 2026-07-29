@@ -282,16 +282,6 @@
     .insight-verdict { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; padding: 22px 24px; color: #fff; border-radius: 20px; background: var(--blue); box-shadow: var(--shadow); }
     .insight-verdict b { display: inline-flex; align-items: center; justify-content: center; min-width: 112px; min-height: 36px; color: #003945; border-radius: 999px; background: var(--green); font-size: 12px; }
     .insight-verdict p { margin: 0; color: rgba(255,255,255,.84); font-size: 14px; }
-    .deep-insights { display: grid; gap: 11px; margin-top: 16px; }
-    .deep-insight { display: grid; grid-template-columns: 190px minmax(0, 1fr) 240px; gap: 17px; align-items: start; padding: 18px; }
-    .deep-insight-index { display: flex; gap: 10px; align-items: flex-start; }
-    .deep-insight-index b { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 31px; height: 31px; color: #003945; border-radius: 9px; background: var(--green); font-size: 11px; }
-    .deep-insight-index strong { display: block; color: var(--blue); font-size: 14px; line-height: 1.45; }
-    html[data-theme="dark"] .deep-insight-index strong { color: var(--green); }
-    .deep-insight > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
-    .deep-action { padding: 11px 12px; color: var(--ink); border-radius: 12px; background: var(--surface-2); font-size: 11.5px; line-height: 1.6; }
-    .deep-action b { display: block; margin-bottom: 3px; color: var(--blue); font-size: 11px; }
-    html[data-theme="dark"] .deep-action b { color: var(--green); }
 
     .lobster-banner { display: grid; grid-template-columns: 1.25fr .75fr; gap: 22px; align-items: center; padding: 25px; color: #fff; border-radius: 20px; background: var(--blue); box-shadow: var(--shadow); }
     .lobster-banner .strategy-label { display: inline-block; padding: 5px 9px; color: #003945; border-radius: 999px; background: var(--green); font-size: 11px; font-weight: 950; }
@@ -361,7 +351,6 @@
       .hero { width: 100%; max-width: 100%; min-width: 0; border-radius: 22px; }
       .hero-grid, .verdict, .grid-3, .grid-4, .analogy-hero { grid-template-columns: 1fr; }
       .grid-2, .swot, .capability-grid { grid-template-columns: 1fr; }
-      .deep-insight { grid-template-columns: 1fr; gap: 10px; }
       .practice-steps, .lobster-banner, .lobster-grid { grid-template-columns: 1fr; }
       .section-head { grid-template-columns: 1fr; gap: 8px; }
       .chain, .timeline { grid-template-columns: 1fr 1fr; }
@@ -662,19 +651,17 @@
 
       <section id="insights" aria-labelledby="insightsTitle">
         <div class="section-head reveal">
-          <div><p class="section-no">09 · KEY INSIGHTS</p><h2 id="insightsTitle">关键洞察：不复刻“全栈平台”，复刻“决策加速器”</h2><p class="section-summary">以下判断将 Lovable 的产品能力、企业应用的治理成本，以及林氏小龙虾的现有入口放在同一张地图上评估。</p></div>
+          <div><p class="section-no">09 · KEY INSIGHTS</p><h2 id="insightsTitle">关键洞察：Lovable 的竞争力不在单点功能</h2><p class="section-summary">它将需求、构建、数据、迭代与发布放进同一条连续链路，让应用从想法更快走到可验证的结果。</p></div>
           <a class="source-link" href="https://docs.lovable.dev/introduction/welcome" target="_blank" rel="noopener">官方定位 ↗</a>
         </div>
-        <div class="insight-verdict reveal"><b>总判断</b><p><strong>你的第 1 点适合作为“推荐采用起点”，但不应表述为产品能力上限。</strong>Lovable 官方定位覆盖从原型到生产级 Web 应用；而对小龙虾而言，优先做 Demo、轻量网站和小工具，是因为它们的验证收益高、治理成本低。<strong>你的第 2、3 点成立：</strong>不复刻完整 Cloud 运行平台，优先复刻可视化修改、隔离数据 / 数据库生成、可分享部署等单点闭环，并做得更轻、更受控。</p></div>
-        <div class="deep-insights reveal" aria-label="Lovable 到林氏小龙虾的关键产品洞察">
-          <article class="deep-insight card"><div class="deep-insight-index"><b>01</b><strong>“能上线”不等于“应上线”</strong></div><p>Lovable 已具备数据库、认证、函数、支付与安全扫描，技术上可做生产级 Web 应用；但安全扫描不能替代架构评审、权限治理、压测、合规与事故响应。对企业内部场景，越靠近真实数据和核心流程，平台责任会非线性上升。</p><div class="deep-action"><b>小龙虾动作</b>把发布分成“可分享验证链接”与“生产发布”两档。首版只承诺前者，后者必须进入研发 / 治理流程。</div></article>
-          <article class="deep-insight card"><div class="deep-insight-index"><b>02</b><strong>用户购买的不是代码生成，而是更快做出决策</strong></div><p>Lovable 的核心增益不是多生成几个页面，而是把“描述需求 → 看到可点击结果 → 收到反馈”的等待压缩到一次会话。可运行 Demo 的价值在于暴露状态、流程与边界，而非替代研发交付。</p><div class="deep-action"><b>小龙虾动作</b>北极星指标不设为“生成应用数”，而设为“首次可体验成果耗时、决策轮次、反馈采纳率与研发接管率”。</div></article>
-          <article class="deep-insight card"><div class="deep-insight-index"><b>03</b><strong>全栈能力越多，平台负担越重</strong></div><p>Lovable 的 Cloud、连接器、支付、邮件、Analytics 和 Agent 调用互相增强，但也带来账号、区域、密钥、成本、权限与数据生命周期管理。小龙虾若完整复制，会从“协作型 AI 工具”转为“应用 PaaS”，投入与风险都不匹配当前业务价值。</p><div class="deep-action"><b>小龙虾动作</b>定位为“轻构建、强衔接”：生成体验与业务成果留在小龙虾，运行底座优先接公司已有平台或研发体系。</div></article>
-          <article class="deep-insight card"><div class="deep-insight-index"><b>04</b><strong>可视化修改的本质是“降低反馈翻译损耗”</strong></div><p>选择页面元素后用自然语言修改，避免用户在“看见问题”与“说清问题”之间切换到设计稿、截图或代码。它最适合非技术用户，也最能拉开小龙虾与纯对话式生成的体验差异。</p><div class="deep-action"><b>小龙虾动作</b>做“选中元素 → 描述意图 → 展示变更前后 → 一键接受 / 回退”，并保留修改范围、历史和原因，而不只做一句 Prompt。</div></article>
-          <article class="deep-insight card"><div class="deep-insight-index"><b>05</b><strong>数据库一键部署应先是“安全沙盒”，不是生产数据库</strong></div><p>自动生成 Schema 的价值是让用户体验真实状态与数据流；一旦直接连生产库，字段误改、权限放大和测试数据污染会吞噬效率。数据库能力的正确产品化顺序是：假数据 → 隔离库 → 受控接入，而非一键连接核心系统。</p><div class="deep-action"><b>小龙虾动作</b>默认创建临时隔离数据集，支持一键重置 / 过期回收；生产数据连接只通过已审核连接器与只读权限开放。</div></article>
-          <article class="deep-insight card"><div class="deep-insight-index"><b>06</b><strong>一键部署应被定义为“验证分发”，不是运维承诺</strong></div><p>对 Demo、看板和小工具，用户真正需要的是一个可访问、可转发、可收集反馈的链接，而不是完整的运维平台。把分享、访问范围、有效期、反馈收集和版本回退做好，价值通常高于先做支付、邮件或全套监控。</p><div class="deep-action"><b>小龙虾动作</b>优先交付带访问权限、有效期和反馈入口的预览发布；沉淀有效版本后，再提供 Git / 研发接管入口。</div></article>
+        <div class="insight-verdict reveal"><b>核心判断</b><p>Lovable 的价值，在于把原本分散在多个工具和角色之间的应用构建过程，压缩为一个可连续迭代的体验闭环。</p></div>
+        <div class="grid-2 reveal" aria-label="Lovable 的整体产品洞察">
+          <article class="insight card"><strong>01 · 全链路，而非单一 Builder</strong><p>从需求澄清到前后端、数据、预览和发布，Lovable 交付的是一条完整的应用构建路径，而不只是页面或代码生成。</p></article>
+          <article class="insight card"><strong>02 · 核心壁垒是连续上下文</strong><p>需求、页面、数据和部署始终处于同一项目上下文，减少了跨工具交接、信息损耗和反复返工。</p></article>
+          <article class="insight card"><strong>03 · 最强场景是快速验证</strong><p>Demo、MVP、轻量网站和小工具最能发挥其效率；应用越接近复杂生产系统，工程与治理成本越成为关键变量。</p></article>
+          <article class="insight card"><strong>04 · 值得学习的是体验闭环</strong><p>对小龙虾而言，参考重点应是“从意图到可体验成果”的连贯交互，以及可视化修改、数据生成、预览发布等关键节点。</p></article>
         </div>
-        <p class="fineprint"><b>战略取舍：</b>暂不复刻完整 Cloud、支付、邮件、Agent integrations；先打造 <b>Plan → Build → 可视化修改 → 隔离数据验证 → 受控分享 → 研发接管</b> 的轻量闭环。官方资料支持 Lovable 覆盖生产级 Web 应用，但这份优先级判断是基于林氏小龙虾当前产品形态与企业治理成本的产品推断。</p>
+        <p class="fineprint"><b>适用边界：</b>优先服务于可验证、低复杂度的应用构建；核心生产系统与复杂企业集成仍需进入研发与治理体系。</p>
       </section>
 
       <section id="lobster" aria-labelledby="lobsterTitle">
@@ -754,11 +741,6 @@
             <li><a href="https://docs.lovable.dev/features/custom-emails" target="_blank" rel="noopener">Emails</a> 与 <a href="https://docs.lovable.dev/features/analytics" target="_blank" rel="noopener">Project analytics</a>：品牌化事务邮件、投递可见性与发布后行为数据。</li>
             <li><a href="https://lovable.dev/blog/agent-integrations" target="_blank" rel="noopener">Agent integrations</a>、<a href="https://docs.lovable.dev/features/payments" target="_blank" rel="noopener">Payments</a>、<a href="https://docs.lovable.dev/integrations/introduction" target="_blank" rel="noopener">Connectors</a>：MCP 分发、商业化和外部系统连接。</li>
             <li><a href="https://docs.lovable.dev/features/security" target="_blank" rel="noopener">Security</a> 与 <a href="https://docs.lovable.dev/features/seo-aeo" target="_blank" rel="noopener">SEO / Speed review</a>：安全扫描、依赖检查、性能、可访问性和索引审查。</li>
-          </ol></details>
-          <details><summary>关键洞察的事实边界</summary><ol>
-            <li><a href="https://docs.lovable.dev/introduction/welcome" target="_blank" rel="noopener">Welcome to Lovable</a> 与 <a href="https://docs.lovable.dev/integrations/cloud" target="_blank" rel="noopener">Lovable Cloud</a>：官方宣称支持从原型到生产级 Web 应用；“小龙虾应先做轻量闭环”是本报告的策略判断，不是对 Lovable 能力的否定。</li>
-            <li><a href="https://docs.lovable.dev/features/security" target="_blank" rel="noopener">Security overview</a>：安全扫描能发现部分风险，但官方也明确其不是完整审计，生产与敏感数据仍需额外治理。</li>
-            <li><a href="https://docs.lovable.dev/tips-tricks/deployment-hosting-ownership" target="_blank" rel="noopener">Deployment / ownership</a> 与 <a href="https://docs.lovable.dev/integrations/github" target="_blank" rel="noopener">GitHub sync</a>：验证链接与后续研发接管可以分层，而不是把所有应用都锁在同一运行底座。</li>
           </ol></details>
           <details><summary>工作区本地资料</summary><ul>
             <li>《实操过程.docx》：用于还原从注册、Plan、Approve、Build 到 Publish 的真实操作路径。</li>
