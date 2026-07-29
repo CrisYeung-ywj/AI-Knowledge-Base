@@ -235,6 +235,23 @@
     html[data-theme="dark"] .practice-source { color: var(--green); }
     html[data-theme="dark"] .practice-source.primary { color: #003945; }
 
+    .capability-callout { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; margin-bottom: 16px; padding: 18px 20px; color: #fff; border-radius: 18px; background: var(--blue); box-shadow: var(--shadow); }
+    .capability-callout b { display: inline-flex; align-items: center; justify-content: center; min-width: 86px; min-height: 34px; color: #003945; border-radius: 999px; background: var(--green); font-size: 12px; }
+    .capability-callout p { margin: 0; color: rgba(255,255,255,.82); font-size: 13px; }
+    .capability-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .capability-card { display: flex; flex-direction: column; min-height: 224px; padding: 18px; }
+    .capability-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .capability-card h3 { margin: 0; color: var(--blue); font-size: 17px; line-height: 1.3; }
+    html[data-theme="dark"] .capability-card h3 { color: var(--green); }
+    .capability-tag { flex: 0 0 auto; padding: 3px 7px; color: #003945; border-radius: 999px; background: var(--green); font-size: 10px; font-weight: 900; }
+    .capability-card > p { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.62; }
+    .capability-use { margin-top: 12px !important; padding: 10px 11px; color: var(--ink) !important; border-radius: 11px; background: var(--surface-2); font-size: 11.5px !important; }
+    .capability-use b { color: var(--blue); }
+    html[data-theme="dark"] .capability-use b { color: var(--green); }
+    .capability-stage { margin-top: auto; padding-top: 11px; color: var(--muted); border-top: 1px solid var(--line); font-size: 11px; }
+    .capability-stage b { color: var(--ink); }
+    .capability-note { margin: 14px 2px 0; color: var(--muted); font-size: 12px; }
+
     .swot { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .swot-card { padding: 20px; }
     .swot-card h3 { display: flex; align-items: center; gap: 11px; margin: 0; }
@@ -329,7 +346,7 @@
       main { overflow: hidden; padding: 22px 15px 70px; }
       .hero { width: 100%; max-width: 100%; min-width: 0; border-radius: 22px; }
       .hero-grid, .verdict, .grid-3, .grid-4, .analogy-hero { grid-template-columns: 1fr; }
-      .grid-2, .swot { grid-template-columns: 1fr; }
+      .grid-2, .swot, .capability-grid { grid-template-columns: 1fr; }
       .practice-steps, .lobster-banner, .lobster-grid { grid-template-columns: 1fr; }
       .section-head { grid-template-columns: 1fr; gap: 8px; }
       .chain, .timeline { grid-template-columns: 1fr 1fr; }
@@ -393,12 +410,13 @@
         <a href="#process"><span>03</span>流程对比</a>
         <a href="#competitors"><span>04</span>工具对比矩阵</a>
         <a href="#quickstart"><span>05</span>10 分钟上手</a>
-        <a href="#swot"><span>06</span>SWOT 分析</a>
-        <a href="#fit"><span>07</span>适合与不适合</a>
-        <a href="#lobster"><span>08</span>小龙虾产品机会</a>
-        <a href="#sources"><span>09</span>资料来源</a>
+        <a href="#capabilities"><span>06</span>扩展能力专栏</a>
+        <a href="#swot"><span>07</span>SWOT 分析</a>
+        <a href="#fit"><span>08</span>适合与不适合</a>
+        <a href="#lobster"><span>09</span>小龙虾产品机会</a>
+        <a href="#sources"><span>10</span>资料来源</a>
       </nav>
-      <p class="toc-foot">信息复核：2026-07-14<br>能力判断基于公开资料与实操记录。</p>
+      <p class="toc-foot">信息复核：2026-07-29<br>能力判断基于官方资料与实操记录。</p>
     </aside>
 
     <main id="main">
@@ -576,15 +594,35 @@
         </details>
       </section>
 
+      <section id="capabilities" aria-labelledby="capabilitiesTitle">
+        <div class="section-head reveal">
+          <div><p class="section-no">06 · OPERATE & EXTEND</p><h2 id="capabilitiesTitle">扩展能力专栏：从“做出来”到“运营起来”</h2><p class="section-summary">这组能力让 Lovable 不只生成页面，而能承接数据、用户、自动化、商业化和运营闭环；但它们也意味着治理、成本与安全责任同步上升。</p></div>
+          <a class="source-link" href="https://docs.lovable.dev/integrations/cloud" target="_blank" rel="noopener">Lovable Cloud ↗</a>
+        </div>
+        <div class="capability-callout reveal"><b>核心判断</b><p><strong>Lovable 的第二增长曲线是“应用运营底座”。</strong> Builder 负责把想法变成应用；Cloud、连接器、支付、分析与安全让这个应用能够被真实用户使用、被观测并持续演进。</p></div>
+        <div class="capability-grid reveal" aria-label="Lovable 扩展能力定义与用途">
+          <article class="capability-card card"><div class="capability-top"><h3>Cloud：数据与用户</h3><span class="capability-tag">基础底座</span></div><p>内置数据库、认证 / 用户、文件存储与权限能力；可在界面查看、编辑数据，免去单独搭建后端基础设施。</p><p class="capability-use"><b>何时有用：</b>表单、CRM、会员门户、素材库等需要登录、持久化数据或上传文件的应用。</p><p class="capability-stage"><b>对小龙虾：</b>MVP 后第一优先级；先提供隔离数据与基础权限，再扩展组织治理。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Cloud：运行与自动化</h3><span class="capability-tag">后端逻辑</span></div><p>Edge Functions 承接 API、外部调用和计算；Jobs 处理定时 / 后台任务；SQL Editor 用于直接查改数据。</p><p class="capability-use"><b>何时有用：</b>每日摘要、订单状态同步、调用外部 API、AI 处理或耗时任务。</p><p class="capability-stage"><b>对小龙虾：</b>不宜首版全做；先覆盖“生成 API + 异步任务 + 可查看执行结果”。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Cloud：运维可见性</h3><span class="capability-tag">可观测</span></div><p>Secrets 安全保存密钥；Logs 查看运行、输出与错误；Usage 按数据库、计算、存储、网络等维度展示资源消耗。</p><p class="capability-use"><b>何时有用：</b>接入第三方服务后排错、识别成本热点、避免把密钥写进代码。</p><p class="capability-stage"><b>对小龙虾：</b>最小可用为密钥托管、构建 / 运行日志；用量计费可后置。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Emails：品牌化事务邮件</h3><span class="capability-tag">触达</span></div><p>使用自有域名发送认证邮件与应用邮件，并处理 DNS 验证、SPF、DKIM、DMARC 与投递基础设施。</p><p class="capability-use"><b>何时有用：</b>注册验证、密码重置、订单确认、状态提醒；不是营销自动化的替代品。</p><p class="capability-stage"><b>对小龙虾：</b>后续公共后台模块，可复用“模板 + 事件触发 + 投递日志”。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Analytics：发布后行为数据</h3><span class="capability-tag">运营洞察</span></div><p>面向已发布应用，实时查看访问者、浏览量、停留时长、跳出率、来源、设备与页面表现。</p><p class="capability-use"><b>何时有用：</b>验证落地页 / Demo 是否有人访问、用户从哪里来、哪个页面承接差。</p><p class="capability-stage"><b>对小龙虾：</b>比“构建成功率”更接近业务价值；应作为发布后的默认看板。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Agent Integrations：应用被 AI 调用</h3><span class="capability-tag">新分发</span></div><p>为公开应用生成 MCP 服务，使 ChatGPT、Claude 等助手读取应用可执行能力并直接调用；发布更新会同步反映。</p><p class="capability-use"><b>何时有用：</b>报销、报价、报告、查询等“由 AI 发起、应用执行”的结构化任务。</p><p class="capability-stage"><b>对小龙虾：</b>战略探索项；先定义工具权限、审计与人类确认，再开放 Agent 调用。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Payments：内置变现</h3><span class="capability-tag">商业化</span></div><p>内置订阅与一次性付款，当前由 Paddle / Stripe 支持；实体商品可接 Shopify 处理库存、物流和电商运营。</p><p class="capability-use"><b>何时有用：</b>SaaS 订阅、数字产品、会员或付费解锁；支付启用后需要走真实的合规和上线流程。</p><p class="capability-stage"><b>对小龙虾：</b>不属于内部工具 MVP；适合面向外部客户的应用模板后置接入。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Connectors：外部系统连接</h3><span class="capability-tag">集成层</span></div><p>区分应用连接器、供构建时使用的个人 MCP 连接器，以及任意 API；统一把第三方数据和动作带入应用。</p><p class="capability-use"><b>何时有用：</b>连接 Notion、Linear、Google Workspace、Slack、Shopify、Stripe 或企业内部 API。</p><p class="capability-stage"><b>对小龙虾：</b>现有连接器入口可直接复用；优先做高频企业系统与权限模板。</p></article>
+          <article class="capability-card card"><div class="capability-top"><h3>Security + SEO / Speed：上线质量</h3><span class="capability-tag">发布门槛</span></div><p>安全扫描覆盖 RLS、数据库配置与依赖问题；SEO 审查覆盖索引、元数据、可访问性、性能与 AI 搜索可读性，并给出可修复项。</p><p class="capability-use"><b>何时有用：</b>每次发布前后做基本质量门禁；扫描结果不能替代人工安全审计、压测和合规验收。</p><p class="capability-stage"><b>对小龙虾：</b>MVP 至少要有发布前检查；高风险问题应阻断发布并留痕。</p></article>
+        </div>
+        <p class="capability-note"><b>界面版本提示：</b>你截图中的独立 <em>Speed</em> 入口对应性能、可访问性、最佳实践与 SEO 检查；官方当前文档说明该能力正并入 <em>Services → SEO</em>。竞品复刻时应按“上线质量审查”抽象，不应绑定某一个菜单名称。</p>
+      </section>
+
       <section id="swot" aria-labelledby="swotTitle">
         <div class="section-head reveal">
-          <div><p class="section-no">06 · SWOT</p><h2 id="swotTitle">Lovable SWOT 分析</h2><p class="section-summary">只保留影响采用决策的关键信号，以及对应动作。</p></div>
+          <div><p class="section-no">07 · SWOT</p><h2 id="swotTitle">Lovable SWOT 分析</h2><p class="section-summary">只保留影响采用决策的关键信号，以及对应动作。</p></div>
         </div>
         <div class="swot reveal">
-          <article class="swot-card card"><h3><span class="swot-letter">S</span>优势 Strengths</h3><ul><li><b>全栈闭环</b>｜提示到发布一条链</li><li><b>低门槛</b>｜PM 可直接做验证物</li><li><b>可交接</b>｜标准代码 + GitHub</li></ul></article>
+          <article class="swot-card card"><h3><span class="swot-letter">S</span>优势 Strengths</h3><ul><li><b>全栈闭环</b>｜提示到发布一条链</li><li><b>运营底座</b>｜Cloud、分析、安全、支付可续航</li><li><b>可交接</b>｜标准代码 + GitHub</li></ul></article>
           <article class="swot-card card"><h3><span class="swot-letter">W</span>弱点 Weaknesses</h3><ul><li><b>成本波动</b>｜复杂迭代消耗 Credits</li><li><b>工程债</b>｜复杂项目仍需研发接管</li><li><b>Web 优先</b>｜原生移动端较弱</li></ul></article>
           <article class="swot-card card"><h3><span class="swot-letter">O</span>机会 Opportunities</h3><ul><li><b>验证升级</b>｜静态原型转可运行</li><li><b>工具空白</b>｜轻量应用需求旺盛</li><li><b>团队沉淀</b>｜Skills / 知识 / 设计规范</li></ul></article>
-          <article class="swot-card card"><h3><span class="swot-letter">T</span>威胁 Threats</h3><ul><li><b>同质化</b>｜AI 开发能力快速趋同</li><li><b>信任风险</b>｜权限事故影响企业采用</li><li><b>生态夹击</b>｜大模型 / IDE / 云平台</li></ul></article>
+          <article class="swot-card card"><h3><span class="swot-letter">T</span>威胁 Threats</h3><ul><li><b>同质化</b>｜AI 开发能力快速趋同</li><li><b>信任风险</b>｜权限、支付与 Agent 调用扩大治理面</li><li><b>生态夹击</b>｜大模型 / IDE / 云平台</li></ul></article>
         </div>
         <div class="grid-4 actions-grid reveal">
           <article class="action-card card"><b>先试</b><p>低敏感、高不确定原型</p></article>
@@ -597,7 +635,7 @@
 
       <section id="fit" aria-labelledby="fitTitle">
         <div class="section-head reveal">
-          <div><p class="section-no">07 · FIT / NO FIT</p><h2 id="fitTitle">适合做什么、不适合做什么</h2><p class="section-summary">看三件事：失败成本、数据敏感度、研发是否能接管。</p></div>
+          <div><p class="section-no">08 · FIT / NO FIT</p><h2 id="fitTitle">适合做什么、不适合做什么</h2><p class="section-summary">看三件事：失败成本、数据敏感度、研发是否能接管。</p></div>
         </div>
         <div class="grid-2 reveal">
           <article class="fit-card good card"><h3>适合优先尝试</h3><div class="fit-grid"><span><b>验证原型</b><small>高不确定功能</small></span><span><b>交互 Demo</b><small>汇报 / 访谈 / 客户</small></span><span><b>轻量工具</b><small>低敏感内部场景</small></span><span><b>营销页面</b><small>活动页 / 落地页</small></span></div></article>
@@ -608,7 +646,7 @@
 
       <section id="lobster" aria-labelledby="lobsterTitle">
         <div class="section-head reveal">
-          <div><p class="section-no">08 · PRODUCT OPPORTUNITY</p><h2 id="lobsterTitle">林氏小龙虾：可复刻能力与最小 MVP</h2><p class="section-summary">本次调研的落点不是采购 Lovable，而是判断林氏小龙虾能否复用其方法，形成面向业务人员的 AI 应用构建能力。</p></div>
+          <div><p class="section-no">09 · PRODUCT OPPORTUNITY</p><h2 id="lobsterTitle">林氏小龙虾：可复刻能力与最小 MVP</h2><p class="section-summary">本次调研的落点不是采购 Lovable，而是判断林氏小龙虾能否复用其方法，形成面向业务人员的 AI 应用构建能力。</p></div>
         </div>
         <div class="lobster-banner reveal">
           <div>
@@ -661,7 +699,7 @@
 
       <section id="sources" aria-labelledby="sourcesTitle">
         <div class="section-head reveal">
-          <div><p class="section-no">09 · SOURCES</p><h2 id="sourcesTitle">资料来源与研究说明</h2><p class="section-summary">优先采用官方产品页、文档和定价页；本地报告用于形成假设和定位，再用一手资料复核容易变化的事实。</p></div>
+          <div><p class="section-no">10 · SOURCES</p><h2 id="sourcesTitle">资料来源与研究说明</h2><p class="section-summary">优先采用官方产品页、文档和定价页；本地报告用于形成假设和定位，再用一手资料复核容易变化的事实。</p></div>
         </div>
         <div class="sources card reveal">
           <div class="research-note">研究限制：流程角色划分基于 Lovable 官方公开能力，不等同于生产环境受控实测。正式导入前仍应使用同一业务场景，验证输出质量、返工次数、Credits、测试完整度和研发接管成本。</div>
@@ -677,6 +715,12 @@
             <li><a href="https://docs.lovable.dev/features/design-guidance" target="_blank" rel="noopener">Design guidance</a> 与 <a href="https://docs.lovable.dev/introduction/getting-started" target="_blank" rel="noopener">Visual Edits / Version history</a>：设计、预览和版本回滚。</li>
             <li><a href="https://docs.lovable.dev/features/testing" target="_blank" rel="noopener">Testing</a> 与 <a href="https://docs.lovable.dev/features/security" target="_blank" rel="noopener">Security</a>：测试、验证与安全扫描。</li>
             <li><a href="https://docs.lovable.dev/features/publish" target="_blank" rel="noopener">Publish</a> 与 <a href="https://docs.lovable.dev/tips-tricks/deployment-hosting-ownership" target="_blank" rel="noopener">Deployment / ownership</a>：发布、托管和代码所有权。</li>
+          </ol></details>
+          <details open><summary>新增扩展能力核验（2026-07-29）</summary><ol>
+            <li><a href="https://docs.lovable.dev/integrations/cloud" target="_blank" rel="noopener">Lovable Cloud</a>：Database、Users & Auth、Storage、Edge Functions、Secrets、Logs、Usage 与自动化能力。</li>
+            <li><a href="https://docs.lovable.dev/features/custom-emails" target="_blank" rel="noopener">Emails</a> 与 <a href="https://docs.lovable.dev/features/analytics" target="_blank" rel="noopener">Project analytics</a>：品牌化事务邮件、投递可见性与发布后行为数据。</li>
+            <li><a href="https://lovable.dev/blog/agent-integrations" target="_blank" rel="noopener">Agent integrations</a>、<a href="https://docs.lovable.dev/features/payments" target="_blank" rel="noopener">Payments</a>、<a href="https://docs.lovable.dev/integrations/introduction" target="_blank" rel="noopener">Connectors</a>：MCP 分发、商业化和外部系统连接。</li>
+            <li><a href="https://docs.lovable.dev/features/security" target="_blank" rel="noopener">Security</a> 与 <a href="https://docs.lovable.dev/features/seo-aeo" target="_blank" rel="noopener">SEO / Speed review</a>：安全扫描、依赖检查、性能、可访问性和索引审查。</li>
           </ol></details>
           <details><summary>工作区本地资料</summary><ul>
             <li>《实操过程.docx》：用于还原从注册、Plan、Approve、Build 到 Publish 的真实操作路径。</li>
