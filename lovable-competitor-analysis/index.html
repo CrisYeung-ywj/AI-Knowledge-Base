@@ -601,22 +601,28 @@
 
       <section id="capabilities" aria-labelledby="capabilitiesTitle">
         <div class="section-head reveal">
-          <div><p class="section-no">06 · OPERATE & EXTEND</p><h2 id="capabilitiesTitle">扩展能力专栏：从“做出来”到“运营起来”</h2><p class="section-summary">这组能力让 Lovable 不只生成页面，而能承接数据、用户、自动化、商业化和运营闭环；但它们也意味着治理、成本与安全责任同步上升。</p></div>
-          <a class="source-link" href="https://docs.lovable.dev/integrations/cloud" target="_blank" rel="noopener">Lovable Cloud ↗</a>
+          <div><p class="section-no">06 · REPLICABILITY</p><h2 id="capabilitiesTitle">能力可复刻性判断</h2><p class="section-summary">区分依赖托管产物的商业能力，与可迁移到桌面 Agent 的交互范式。</p></div>
+          <a class="source-link" href="https://docs.lovable.dev/features/plan-mode" target="_blank" rel="noopener">Plan mode ↗</a>
         </div>
-        <div class="capability-callout reveal"><b>核心判断</b><p><strong>Lovable 的第二增长曲线是“应用运营底座”。</strong> Builder 负责把想法变成应用；Cloud、连接器、支付、分析与安全让这个应用能够被真实用户使用、被观测并持续演进。</p></div>
-        <div class="capability-grid reveal" aria-label="Lovable 扩展能力定义与用途">
-          <article class="capability-card card"><div class="capability-top"><h3>Cloud：数据与用户</h3><span class="capability-tag">基础底座</span></div><p>内置数据库、认证 / 用户、文件存储与权限能力；可在界面查看、编辑数据，免去单独搭建后端基础设施。</p><p class="capability-use"><b>何时有用：</b>表单、CRM、会员门户、素材库等需要登录、持久化数据或上传文件的应用。</p><p class="capability-stage"><b>对小龙虾：</b>MVP 后第一优先级；先提供隔离数据与基础权限，再扩展组织治理。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Cloud：运行与自动化</h3><span class="capability-tag">后端逻辑</span></div><p>Edge Functions 承接 API、外部调用和计算；Jobs 处理定时 / 后台任务；SQL Editor 用于直接查改数据。</p><p class="capability-use"><b>何时有用：</b>每日摘要、订单状态同步、调用外部 API、AI 处理或耗时任务。</p><p class="capability-stage"><b>对小龙虾：</b>不宜首版全做；先覆盖“生成 API + 异步任务 + 可查看执行结果”。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Cloud：运维可见性</h3><span class="capability-tag">可观测</span></div><p>Secrets 安全保存密钥；Logs 查看运行、输出与错误；Usage 按数据库、计算、存储、网络等维度展示资源消耗。</p><p class="capability-use"><b>何时有用：</b>接入第三方服务后排错、识别成本热点、避免把密钥写进代码。</p><p class="capability-stage"><b>对小龙虾：</b>最小可用为密钥托管、构建 / 运行日志；用量计费可后置。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Emails：品牌化事务邮件</h3><span class="capability-tag">触达</span></div><p>使用自有域名发送认证邮件与应用邮件，并处理 DNS 验证、SPF、DKIM、DMARC 与投递基础设施。</p><p class="capability-use"><b>何时有用：</b>注册验证、密码重置、订单确认、状态提醒；不是营销自动化的替代品。</p><p class="capability-stage"><b>对小龙虾：</b>后续公共后台模块，可复用“模板 + 事件触发 + 投递日志”。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Analytics：发布后行为数据</h3><span class="capability-tag">运营洞察</span></div><p>面向已发布应用，实时查看访问者、浏览量、停留时长、跳出率、来源、设备与页面表现。</p><p class="capability-use"><b>何时有用：</b>验证落地页 / Demo 是否有人访问、用户从哪里来、哪个页面承接差。</p><p class="capability-stage"><b>对小龙虾：</b>比“构建成功率”更接近业务价值；应作为发布后的默认看板。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Agent Integrations：应用被 AI 调用</h3><span class="capability-tag">新分发</span></div><p>为公开应用生成 MCP 服务，使 ChatGPT、Claude 等助手读取应用可执行能力并直接调用；发布更新会同步反映。</p><p class="capability-use"><b>何时有用：</b>报销、报价、报告、查询等“由 AI 发起、应用执行”的结构化任务。</p><p class="capability-stage"><b>对小龙虾：</b>战略探索项；先定义工具权限、审计与人类确认，再开放 Agent 调用。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Payments：内置变现</h3><span class="capability-tag">商业化</span></div><p>内置订阅与一次性付款，当前由 Paddle / Stripe 支持；实体商品可接 Shopify 处理库存、物流和电商运营。</p><p class="capability-use"><b>何时有用：</b>SaaS 订阅、数字产品、会员或付费解锁；支付启用后需要走真实的合规和上线流程。</p><p class="capability-stage"><b>对小龙虾：</b>不属于内部工具 MVP；适合面向外部客户的应用模板后置接入。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Connectors：外部系统连接</h3><span class="capability-tag">集成层</span></div><p>区分应用连接器、供构建时使用的个人 MCP 连接器，以及任意 API；统一把第三方数据和动作带入应用。</p><p class="capability-use"><b>何时有用：</b>连接 Notion、Linear、Google Workspace、Slack、Shopify、Stripe 或企业内部 API。</p><p class="capability-stage"><b>对小龙虾：</b>现有连接器入口可直接复用；优先做高频企业系统与权限模板。</p></article>
-          <article class="capability-card card"><div class="capability-top"><h3>Security + SEO / Speed：上线质量</h3><span class="capability-tag">发布门槛</span></div><p>安全扫描覆盖 RLS、数据库配置与依赖问题；SEO 审查覆盖索引、元数据、可访问性、性能与 AI 搜索可读性，并给出可修复项。</p><p class="capability-use"><b>何时有用：</b>每次发布前后做基本质量门禁；扫描结果不能替代人工安全审计、压测和合规验收。</p><p class="capability-stage"><b>对小龙虾：</b>MVP 至少要有发布前检查；高风险问题应阻断发布并留痕。</p></article>
+        <div class="matrix-wrap reveal">
+          <table class="coverage-matrix" aria-label="Lovable 能力可复刻性判断表">
+            <colgroup><col style="width:22%"><col style="width:15%"><col style="width:37%"><col style="width:26%"></colgroup>
+            <thead><tr><th scope="col">能力</th><th scope="col">可复刻性</th><th scope="col">原因</th><th scope="col">对小龙虾的动作</th></tr></thead>
+            <tbody>
+              <tr><td class="matrix-tools">Cloud 数据库 / 认证 / 存储</td><td><span class="matrix-badge partial">结构上不可复刻</span></td><td>依赖 Lovable 托管产物这一前提，桌面 Agent 不托管产物，该层商业逻辑不成立</td><td class="matrix-boundary">不进入小龙虾复刻范围</td></tr>
+              <tr><td class="matrix-tools">Payments</td><td><span class="matrix-badge partial">结构上不可复刻</span></td><td>依赖 Lovable 托管产物这一前提，桌面 Agent 不托管产物，该层商业逻辑不成立</td><td class="matrix-boundary">不进入小龙虾复刻范围</td></tr>
+              <tr><td class="matrix-tools">Analytics</td><td><span class="matrix-badge partial">结构上不可复刻</span></td><td>依赖 Lovable 托管产物这一前提，桌面 Agent 不托管产物，该层商业逻辑不成立</td><td class="matrix-boundary">不进入小龙虾复刻范围</td></tr>
+              <tr><td class="matrix-tools">Emails</td><td><span class="matrix-badge partial">结构上不可复刻</span></td><td>依赖 Lovable 托管产物这一前提，桌面 Agent 不托管产物，该层商业逻辑不成立</td><td class="matrix-boundary">不进入小龙虾复刻范围</td></tr>
+              <tr><td class="matrix-tools">Agent Integrations</td><td><span class="matrix-badge partial">结构上不可复刻</span></td><td>依赖 Lovable 托管产物这一前提，桌面 Agent 不托管产物，该层商业逻辑不成立</td><td class="matrix-boundary">不进入小龙虾复刻范围</td></tr>
+              <tr><td class="matrix-tools">Plan → Approve → Build 确认门</td><td><span class="matrix-badge strong">可复刻 · 高优先级</span></td><td>对桌面 Agent 价值更高：Agent 操作的是用户本地文件与系统，执行前确认从体验优化变为安全底线</td><td class="matrix-advantage">建立执行前确认门</td></tr>
+              <tr><td class="matrix-tools">Plan 中必须包含“明确不做”清单</td><td><span class="matrix-badge strong">可复刻 · 高优先级</span></td><td>控制 Agent 跑偏的最低成本手段</td><td class="matrix-advantage">将“不做清单”设为 Plan 固定字段</td></tr>
+              <tr><td class="matrix-tools">标记对象 + 自然语言修改</td><td><span class="matrix-badge strong">可复刻 · 高优先级</span></td><td>桌面场景中的可标记对象不是 HTML 元素，而是文件、表格区域、执行步骤结果</td><td class="matrix-advantage">扩展标记对象并保持对话修改</td></tr>
+              <tr><td class="matrix-tools">版本回滚 / checkpoint</td><td><span class="matrix-badge strong">可复刻 · 高优先级</span></td><td>属于交互范式层，不依赖托管产物</td><td class="matrix-advantage">提供版本回滚 / checkpoint</td></tr>
+              <tr><td class="matrix-tools">发布前质量门禁</td><td><span class="matrix-badge strong">可复刻 · 高优先级</span></td><td>在桌面 Agent 中对应任务自检与高风险动作阻断</td><td class="matrix-advantage">完成前自检，高风险动作强制阻断</td></tr>
+            </tbody>
+          </table>
         </div>
-        <p class="capability-note"><b>界面版本提示：</b>你截图中的独立 <em>Speed</em> 入口对应性能、可访问性、最佳实践与 SEO 检查；官方当前文档说明该能力正并入 <em>Services → SEO</em>。竞品复刻时应按“上线质量审查”抽象，不应绑定某一个菜单名称。</p>
+        <p class="capability-note">证据：<a href="https://docs.lovable.dev/features/plan-mode" target="_blank" rel="noopener">Plan mode 与批准后执行</a>、<a href="https://docs.lovable.dev/introduction/faq" target="_blank" rel="noopener">版本回滚</a>、<a href="https://docs.lovable.dev/features/testing" target="_blank" rel="noopener">测试与验证</a>、<a href="https://docs.lovable.dev/features/security" target="_blank" rel="noopener">安全门禁</a>。</p>
       </section>
 
       <section id="swot" aria-labelledby="swotTitle">
